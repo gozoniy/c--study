@@ -27,8 +27,8 @@ int main(void){
             }
         
         }
-        cout<<"Макс длинна строки "<<max<<endl;
-        cout<<ans<<endl;
+        cout<<"Макс слово: "<<ans<<endl;
+
 
     }
 }
