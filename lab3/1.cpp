@@ -18,8 +18,7 @@ int main(void){
         char str[20],ans[20];
 
         int max=0,l=0;
-        while(!is.eof()){
-            is>>str;
+        while(is>>str){
             l=strlen(str);
             if (max<l){
                 max=l;
