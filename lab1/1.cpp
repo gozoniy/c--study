@@ -4,9 +4,9 @@
 #include <iostream>
 #include <ctime>
 
-#include <C:\Users\User\Desktop\prog\c\lab1\Fill.h>
-#include <C:\Users\User\Desktop\prog\c\lab1\printM.h>
-#include <C:\Users\User\Desktop\prog\c\lab1\res.h>
+#include <C:\Users\User\Desktop\labs\c--study\lab1\Fill.h>
+#include <C:\Users\User\Desktop\labs\c--study\lab1\printM.h>
+#include <C:\Users\User\Desktop\labs\c--study\lab1\res.h>
 
 int main(){
     setlocale(LC_ALL,"Rus");

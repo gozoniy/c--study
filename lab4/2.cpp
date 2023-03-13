@@ -6,47 +6,18 @@ using namespace std;
 #include <locale.h>
 #include <cstdlib>  
 
-struct product{
-    char name[20];
-    char country[20];
-    int c;
-};
-
-void setProduct(product &product1){
-    int count;
-    cout<<"Введите имя товара:"<<endl;
-    cin>>product1.name;
-    cout<<"Введите страну товара:"<<endl;
-    cin>>product1.country;
-    cout<<"Введите количество товара:"<<endl;
-    cin>>count;
-    product1.c=count;
-}
-
-void readProduct(product &product1){
-    cout<<"Имя товара: "<< product1.name<<endl;
-    cout<<"Страна товара: "<<product1.country<<endl;
-    cout<<"Количество товара: "<<product1.c<<endl;
-    system("pause");
-}
-
-void setMP(product *tovar,int N ){
-    
-    for (int i = 0; i<N ; i++){
-        cout<<"<<Укажите данные позици №"<<i+1<<">>"<<endl;
-        setProduct(tovar[i]);
-    }
-}
+#include <C:\Users\User\Desktop\labs\c--study\lab4\functions.h>
 
 int main(void){
     system("chcp 1251");
     int f=1,h=1,m=1;
     int in;
+    int N;
     while (f){
         product product1;
         int N;
         product *tovar;
-        cout<<"<<Главное меню>>"<<endl;
+        cout<<"*Главное меню*"<<endl;
         cout<<"1) Заполнить"<<endl;
         cout<<"2) Прочитать"<<endl;
         cout<<"3) Заполнить массив"<<endl;
@@ -54,49 +25,41 @@ int main(void){
         cout<<"0) Выход"<<endl;
         cin>>in;
         switch (in){
-            case 0:{
+            case 0:{        //клавиша (0) - Выход
                 f=0;
                 break;
             }
-            case 1:{
+            case 1:{        //клавиша (1) - Заполнить одну структуру
                 setProduct(product1);
                 h=0;
                 break;
-            }
-                
-            case 2:{
+            } 
+            case 2:{        //клавиша (2) - Чтените одной струтуры
                 if (h){
-                    cout<<"Заполните структуру."<<endl;
+                    cout<<"Заполните структуру."<<endl;     //проверка на существование струтуры через флаг h
                 }
                 else{
                     readProduct(product1);
                 }
                 break;
             }
-    
-            case 3:{
-                int N;
+            case 3:{        //клавиша (3) - Заполнить массив структур
                 cout<<"Сколько позиций задать?"<<endl;
                 cin>>N;
                 tovar=new product[N];
                 setMP(tovar,N);
                 m=0;
-                readProduct(tovar[0]);
                 break;
             }
-                
-            case 4:{
+            case 4:{        //клавиша (4) - Чтение массива струтур
                 if (m){
-                    cout<<"Заполните массив."<<endl;
+                    cout<<"Заполните массив."<<endl;        //проверка на существование массива через флаг m
                 }
                 else{
-                    for (int i = 0; i<N ; i++){
-                        readProduct(tovar[i]);
-                    }
+                    readMP(tovar,N);
                 }
                 break;
             }
-                
             in=0;
         }
     }
