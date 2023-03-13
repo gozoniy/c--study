@@ -15,11 +15,9 @@ struct book{
 void setBook(book &book1){
     int Y;
     cout<<"¬ведите им€ книги:"<<endl;
-    cin.getline(book1.name,20);
-
+    cin>>book1.name;
     cout<<"¬ведите автора книги:"<<endl;
-    cin.getline(book1.author,20);
-    
+    cin>>book1.author;
     cout<<"¬ведите год книги:"<<endl;
     cin>>Y;
     book1.year=Y;

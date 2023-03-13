@@ -27,7 +27,7 @@ int main(void){
                 os<<str<<endl;
             }
         }
-        cout<<"урааааааааааааа."<<endl;
+        cout<<"как же ахуенно когда работает интелисенс."<<endl;
         is.close();
         os.close();
     }
