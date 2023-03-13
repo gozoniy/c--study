@@ -30,6 +30,14 @@ void readProduct(product &product1){
     system("pause");
 }
 
+void setMP(product *tovar,int N ){
+    
+    for (int i = 0; i<N ; i++){
+        cout<<"<<Укажите данные позици №"<<i+1<<">>"<<endl;
+        setProduct(tovar[i]);
+    }
+}
+
 int main(void){
     system("chcp 1251");
     int f=1,h=1,m=1;
@@ -67,15 +75,13 @@ int main(void){
             }
     
             case 3:{
-                
+                int N;
                 cout<<"Сколько позиций задать?"<<endl;
                 cin>>N;
                 tovar=new product[N];
-                for (int i = 0; i<N ; i++){
-                    cout<<"<<Укажите данные позици №"<<i+1<<">>"<<endl;
-                    setProduct(tovar[i]);
-                }
+                setMP(tovar,N);
                 m=0;
+                readProduct(tovar[0]);
                 break;
             }
                 
@@ -84,7 +90,6 @@ int main(void){
                     cout<<"Заполните массив."<<endl;
                 }
                 else{
-                
                     for (int i = 0; i<N ; i++){
                         readProduct(tovar[i]);
                     }
