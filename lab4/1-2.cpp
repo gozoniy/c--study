@@ -46,10 +46,8 @@ int main(void){
             case 0: 
                 f=0;
             case 1:
-                
                 setBook(book1);
                 h=0;
-                break;
             case 2:
                 if (h){
                     cout<<"Заполните структуру."<<endl;
@@ -59,7 +57,6 @@ int main(void){
                     cout<<book1.author<<endl;
 
                 }
-                break;
 
         in=0;
         }
