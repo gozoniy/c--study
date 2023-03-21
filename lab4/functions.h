@@ -42,3 +42,17 @@ void readMP(product *tovar,int N){
         readProduct(tovar[i]);
     }
 }
+
+//выборка стран в которые экспортируется товар
+void COUNTRY(product *tovar,int N, char *prod){
+    cout<<"Страны экспорта этого товара:"<<endl;
+    int c=0;
+    for (int i = 0; i<N; i++){
+        if (!strcmp(tovar[i].name,prod)){
+            cout<<tovar[i].country<<" - объёмом: "<< tovar[i].c << endl;
+            c++;
+        }
+    }
+    cout<<"Всего: "<<c<<endl;
+    system("pause");
+}

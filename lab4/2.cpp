@@ -2,11 +2,11 @@
 using namespace std;
 #include <fstream>
 #include <iomanip>
-#include <string>
+#include <string.h>
 #include <locale.h>
 #include <cstdlib>  
 
-#include <C:\Users\User\Desktop\labs\c--study\lab4\functions.h>
+#include <C:\Users\User\Desktop\prog\c\lab4\functions.h>
 
 int main(void){
     system("chcp 1251");
@@ -22,6 +22,7 @@ int main(void){
         cout<<"2) Прочитать"<<endl;
         cout<<"3) Заполнить массив"<<endl;
         cout<<"4) Вывести массив"<<endl;
+        cout<<"5) Выборка стран по товару"<<endl;
         cout<<"0) Выход"<<endl;
         cin>>in;
         switch (in){
@@ -59,6 +60,18 @@ int main(void){
                     readMP(tovar,N);
                 }
                 break;
+            }
+            case 5:{
+                if (m){
+                    cout<<"Заполните массив."<<endl;        //проверка на существование массива через флаг m
+                }
+                else{
+                    cout<<"*Выборка по товару*"<<endl;
+                    char prod[20];
+                    cout<<"Введите товар для выборки:"<<endl;
+                    cin>>prod;
+                    COUNTRY(tovar,N,prod);
+                }
             }
             in=0;
         }
