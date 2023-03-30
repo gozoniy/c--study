@@ -51,12 +51,10 @@ int main(void){
     pBegin=pEnd=first();
     cout<<"Сколько элементов добавить?";
     int n;
-    cin>> n:
+    cin>> n;
     for (int i = 0; i<n ; i++){
         pEnd=add(pEnd);
     cout<<"Ваш список:\n";
 
     }
 }
-printBack
-del_spisoc

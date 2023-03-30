@@ -33,8 +33,12 @@ Node* add(Node* pEnd){
     return pv;
 }
 
-Node* print(Node* pBegin){
 
+void print(Node* pBegin){
+    Node* pv; 
+    for(pv=pBegin;pv!=0;pv=pv->Next){
+        Out(pv->P);
+    }
 }
 
 int main(void){
@@ -46,7 +50,8 @@ int main(void){
         product product1;
         int N;
         product *tovar;
-
+        int l;
+        Node *pEnd=0, *pBegin=0;
         cout<<"*Главное меню*"<<endl;
         cout<<"1) Заполнить"<<endl;
         cout<<"2) Прочитать"<<endl;
@@ -109,22 +114,23 @@ int main(void){
             }
 
             case 6:{        //клавиша (6) - Формирование двунаправленного списка
-                int l;
-                Node *pEnd=0, *pBegin=0;
+                
                 pBegin=pEnd=first();
                 cout<<"Длинна списка = ";
                 cin>>l;
                 for (int i=0; i<l; i++){
                     pEnd=add(pEnd);
+                    //..........
                 }
             }
 
             case 7:{        //клавиша (7) - добавить элемент в конец
-
+                pEnd=add(pEnd);
             }
 
             case 8:{        //клавиша (8) - прочитать список
-
+                cout<<"Ваш список:"<<endl;
+                print(pBegin);
             }
 
 
