@@ -8,6 +8,17 @@ using namespace std;
 #include "functions.h"
 #include "Pstruct.h"
 
+Node* Inverse(Node *pEnd){
+    Node* pv=pEnd;
+    Node* pv1=pv->Prev;
+    pv=pv1;
+    pv1=pEnd;
+    return pv1;
+
+}
+
+
+
 int main(void){
     system("chcp 1251");
     int f=1,h=1,m=1;
@@ -85,7 +96,8 @@ int main(void){
                         <<"3) Прочитать список\n"
                         <<"4) Прочитать в обратном порядке\n"
                         <<"5) Удалить список\n"
-                        <<"6) <------\n";
+                        <<"6) Удалить элемент по полю\n"
+                        <<"0) <------\n";
                     cin>>inp;
                     switch (inp){
                         case 1:{            //клавиша (1) - Формирование первого элемента списка
@@ -96,7 +108,6 @@ int main(void){
                         case 2:{            //клавиша (2) - добавить элемент в конец
                             if (list){
                                 pEnd=add(pEnd);
-                                cout<<"успех"<<endl;
                                 break;
                             }
                             else{
@@ -124,6 +135,7 @@ int main(void){
                             }
                             break;
                         }
+                        
                         case 5:{            //клавиша (5) - удаление списка
                             if (list){
                                 cout<<"Удаление списка...\n";
@@ -135,7 +147,12 @@ int main(void){
                             }
                             break;
                         }
-                        case 6:{            //клавиша (6) - возврат в главное меню
+                        case 6:{            //клавиша (6) - удаление по полю
+                            delP(pBegin);
+                            break;
+                        }
+
+                        case 0:{            //клавиша (0) - возврат в главное меню
                             ext=0;
                             break;
                         }

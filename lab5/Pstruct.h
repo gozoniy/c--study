@@ -56,3 +56,31 @@ void delList(Node *pBegin){
 
 }
 
+//Удаление по ключевому полю
+void delP(Node* pBegin){
+    Node* pv=pBegin;
+    char name1[20];
+    cout<<"Введите ключевое поле имени:\n";
+    cin>>name1;
+    int i=0;
+    Node *pv1, *pv2;
+    for(pv=pBegin;pv!=0;pv=pv->Next){
+        i++;
+        if (!strcmp(pv->P.name,name1)){
+            if ((pv->Prev==0)||(pv->Next==0)){
+                return;
+            }
+            pv1=pv->Prev;
+            pv2=pv->Next;
+            pv1->Next=pv2;
+            pv2->Prev=pv1;
+            delete(pv);
+            cout<<"Элемент "<<i<<" удален."<<endl;
+            break;
+
+
+        
+
+        }
+    }
+}
