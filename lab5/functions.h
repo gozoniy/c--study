@@ -56,3 +56,4 @@ void COUNTRY(product *tovar,int N, char *prod){
     cout<<"Всего: "<<c<<endl;
     system("pause");
 }
+
