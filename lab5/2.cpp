@@ -8,17 +8,6 @@ using namespace std;
 #include "functions.h"
 #include "Pstruct.h"
 
-Node* Inverse(Node *pEnd){
-    Node* pv=pEnd;
-    Node* pv1=pv->Prev;
-    pv=pv1;
-    pv1=pEnd;
-    return pv1;
-
-}
-
-
-
 int main(void){
     system("chcp 1251");
     int f=1,h=1,m=1;
