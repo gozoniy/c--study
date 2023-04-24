@@ -10,7 +10,7 @@ void date::print(){   //метод вывода даты ДД.ММ.ГГГГ
     cout<<"Дата в формате ДД.ММ.ГГГГ: \n"
     <<day<<"."<<month<<"."<<year<<endl;
 }
-long date::format(){   //метод рассчета площади
+long date::format(){   //метод вывода в формате дней
     long form = year*10000+month*100+day;
     return form;
 }
