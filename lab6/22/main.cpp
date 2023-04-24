@@ -8,7 +8,7 @@ int main(void){
     int in = 0;
     int l;
     date *D;
-    date d1;
+    date d1();
     while(x){
         cout<<"<Главное меню>\n"
         <<"1) Заполнить статическую переменную\n"
@@ -24,15 +24,18 @@ int main(void){
                 break;
             }
             case 1:{        //Заполнить
-                d1.set();
+                int d,m,y;
+                cout<<"Укажите день, месяц и год через пробел: \n";
+                cin>>d>>m>>y;
+                date d1(d,m,y);
                 break;
             }
             case 2:{        //Вывести
                 d1.print();
                 break;
             }
-            case 3:{        //Вывод в формате дней
-                cout<<"Количество дней: "<<d1.format()<<endl;
+            case 3:{        //Вывод в формате одного числа
+                cout<<"Дата в виде одного числа: "<<d1.format()<<endl;
                 break;
             }
             case 4:{
