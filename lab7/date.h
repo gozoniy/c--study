@@ -9,9 +9,9 @@ public:
     long format();
 
     //Конструкторы
-    date(){srand(time(NULL)); day=rand()%31+1; month = rand()%12+1; year = rand()%2023+1;}
-    date(int d, int m, int y){day = d; month = m; year = y;}
-    date(date &A){day = A.day; month = A.month; year = A.year;}
+    date(){srand(time(NULL)); day=rand()%31+1; month = rand()%12+1; year = rand()%2023+1;}      //По умолчанию с рандомом
+    date(int d, int m, int y){day = d; month = m; year = y;}                                    //С параметрами
+    date(date &A){day = A.day; month = A.month; year = A.year;}                                 //Копий
     //Деструктор
     ~date(){cout<<"Дата "<<day<<"."<<month<<"."<<year<<" удалена.\n";}
 };
