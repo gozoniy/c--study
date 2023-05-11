@@ -4,6 +4,9 @@
 class date{
     int day,month,year;
 public:
+
+    static int count;
+
     void set();
     void print();
     long format();
@@ -11,11 +14,11 @@ public:
     void undays(int N);
 
     //Конструкторы
-    date(){srand(time(NULL)); day=rand()%31+1; month = rand()%12+1; year = 2022+rand()%2;}
-    date(int d, int m, int y){day = d; month = m; year = y;}
-    date(date &A){day = A.day; month = A.month; year = A.year;}
+    date(){srand(time(NULL)); day=rand()%31+1; month = rand()%12+1; year = 2022+rand()%2; count++;}
+    date(int d, int m, int y){day = d; month = m; year = y; count++;}
+    date(date &A){day = A.day; month = A.month; year = A.year; count++;}
     //Деструктор
-    ~date(){}
+    ~date(){--count;}
 
 //Арифметические операторы
     const void operator = (date Date);
@@ -35,6 +38,8 @@ friend ostream& operator<<(ostream& s_out, const date& D);
 friend istream& operator>>(istream& s_in, date& D);
 };
 
+//инициализация статического поля
+int date::count = 0;
 
 
 #endif DATE_H
