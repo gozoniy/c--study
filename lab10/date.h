@@ -5,7 +5,7 @@ class date{
     int day,month,year;
 public:
 
-    static int count;
+    static int count;       //статическая переменная счётчик
 
     void set();
     void print();
