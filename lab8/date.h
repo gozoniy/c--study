@@ -7,7 +7,7 @@ public:
     void set();
     void print();
     long format();
-    int days();
+    int days()const;
     void undays(int N);
 
     //Конструкторы
@@ -18,65 +18,18 @@ public:
     ~date(){}
 
 //Арифметические операторы
-    const void operator = (date Date){
-        date curr = *this;
-        date Res;
-        undays(Date.days());
-    }
-    //оператор + (Прибавление дней к дате)
-    const date operator + (int Date){
-        date curr = *this;
-        date Res;
-        undays(curr.days() + Date);
-        Res.undays(curr.days() + Date) ;
-        return Res;
-    }
-    //оператор - (Вычитание дней из даты)
-    const date operator - (int Date){
-        date curr = *this;
-        date Res;
-        undays(curr.days() - Date);
-        Res.undays(curr.days() - Date) ;
-        return Res;
-    }
-    //оператор - (количество дней между датами)
-    const int operator - (date &Date) {
-        date curr = *this;
-        int Res;
-        Res = (curr.days() - Date.days()) ;
-        return Res;
-    }
-
+    const void operator = (const date &Date);   //опеартор = (копирование)
+    const date operator + (int Date);   //оператор + (Прибавление дней к дате)
+    const date operator - (int Date);   //оператор - (Вычитание дней из даты)
+    const int operator - (const date &Date);  //оператор - (количество дней между датами)
 //Унарные операторы
-    //оператор ++ (Завтра)
-    const date operator ++ () {
-        int N = days();
-        undays(++N);
-        return *this;
-    }
-    //оператор -- (Вчера)
-    const date operator -- () {
-        int N = days();
-        undays(--N);
-        return *this;
-    }
-
+    const date operator ++ ();    //оператор ++ (Завтра)
+    const date operator -- ();    //оператор -- (Вчера)
 //Операторы отношения
-    const bool operator == (date &Date){
-        date curr = *this;
-        if (curr.days()==Date.days()){return true;}
-        else {return false;}
-    }
-        const bool operator > (date &Date){
-        date curr = *this;
-        if (curr.days()>Date.days()){return true;}
-        else {return false;}
-    }
-    const bool operator < (date &Date){
-        date curr = *this;
-        if (curr.days()<Date.days()){return true;}
-        else {return false;}
-    }
+    const bool operator == (date &Date);
+    const bool operator > (date &Date);
+    const bool operator < (date &Date);
+
 
 };
 

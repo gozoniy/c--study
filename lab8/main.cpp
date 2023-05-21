@@ -7,13 +7,14 @@ int main(void){
 
     date d1(26,4,2023);                //по умолчанию
     d1.print();
+    date d3;
     date d2(27,4,2023);    //с параметрами
     d2.print();
     cout<<"Дней между d1 и d2: "<<d2 - d1<<endl;
     cout<<"Через 365 дней будет: "<<endl;
-    d1+365;
-    d1.print();
-    d1-365;
+    d3=d1+365;
+    d3.print();
+    d3=d1-365;
     cout<<"Завтра будет: "<<endl;
     ++d1;
     d1.print();

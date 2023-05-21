@@ -14,7 +14,7 @@ long date::format(){   //метод вывода в формате дней
     long form = year*10000+month*100+day;
     return form;
 }
-int date::days(){      //метод превращения полей класса в количество дней
+int date::days()const{      //метод превращения полей класса в количество дней
     int M = 0;
     for (int i = 1; i<month ; i++){//Счёт месяцев
         if (i == 2){M+=28;}//проверка на февраль
@@ -37,7 +37,58 @@ void date::undays(int N){   //метод превращения количества дней в поля класса
         N-=M;
     }
     day = N;
-    
 }
+//Арифметические операторы
+const void date::operator = (const date &Date){    //опеартор = (копирование)
+        undays(Date.days());
+    }
+const date date::operator + (int Date){     //оператор + (Прибавление дней к дате)
+        date curr = *this;
+        date Res;
+        Res.undays(curr.days() + Date) ;
+        return Res;
+    }
+const date date::operator - (int Date){     //оператор - (Вычитание дней из даты)
+        date curr = *this;
+        date Res;
+        //undays(curr.days() - Date);
+        Res.undays(curr.days() - Date) ;
+        return Res;
+    }
+const int date::operator - (const date &Date) {   //оператор - (количество дней между датами)
+        date curr = *this;
+        int Res;
+        Res = (curr.days() - Date.days()) ;
+        return Res;
+    }
+
+//Унарные операторы
+const date date::operator ++ () {   //оператор ++ (Завтра)
+        int N = days();
+        undays(++N);
+        return *this;
+    }
+const date date::operator -- () {   //оператор -- (Вчера)
+        int N = days();
+        undays(--N);
+        return *this;
+    }
+
+//Операторы отношения
+const bool date::operator == (date &Date){
+        date curr = *this;
+        if (curr.days()==Date.days()){return true;}
+        else {return false;}
+    }
+const bool date::operator > (date &Date){
+        date curr = *this;
+        if (curr.days()>Date.days()){return true;}
+        else {return false;}
+    }
+const bool date::operator < (date &Date){
+        date curr = *this;
+        if (curr.days()<Date.days()){return true;}
+        else {return false;}
+    }
 
 
