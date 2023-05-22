@@ -1,0 +1,82 @@
+#include "matr.h"
+
+Matr::Matr(int N, int M){                   //Конструктор с параметрами
+    n = N; 
+    m = M;
+    p = new int [n*m];
+    for (int i = 0; i<n*m; i++)
+        p[i] = 0;
+}
+Matr::Matr(const Matr &B){                        //Конструктор копий
+    n = B.n;
+    m = B.m;
+    p = new int [n*m];
+
+    for (int i = 0; i<n; i++)
+        for (int j = 0; j<m; j++)
+            (*this)(i,j) = B(i,j);
+}
+
+const Matr& Matr::operator=(Matr&B){        //Копирование
+    if (this == &B)
+        return *this;
+    n = B.n;
+    m = B.m;
+    delete []p;
+    p = new int [n*m];
+
+    for (int i = 0; i<n; i++)
+        for (int j = 0; j<m; j++)
+            (*this)(i,j) = B(i,j);
+}
+
+const Matr Matr::operator*(const Matr &B)const{        //Умножение матриц
+    if (m == B.n){
+        Matr C(n,B.m);  //Создание матрицы результата
+        for (int i = 0; i<C.n; i++)
+            for (int j = 0; j<C.m; j++)
+                for (int k = 0; k<m; k++)
+                    C(i,j)+=(*this)(i,k)*B(k,j);
+        return C;
+    }
+    else
+        return B;
+}
+
+bool Matr::operator==(const Matr &B)const{
+    Matr A = *this;
+    int i,j;
+    int flag = 1;
+    for (int i = 0; i<n; i++)
+        for (int j = 0; j<m; j++)
+            if (A(i,j)!=B(i,j))
+                flag = 0;
+    if (flag)
+        return true;
+    else
+        return false;
+}
+
+
+//перегрузка ввода-вывода
+istream& operator>>(istream& s_in, Matr& M){
+    delete []M.p;
+    M.p = new int [M.n*M.m];
+    int r;
+    int i,j;
+    for (int i = 0; i<M.n; i++)
+        for (int j = 0; j<M.m; j++){
+            cout<<"Введите элемент "<<i+1<<" x "<<j+1<<endl;
+            cin>>r;
+            M(i,j) = r;
+        }
+}
+ostream& operator<<(ostream& s_out, Matr& M){
+    int i,j;
+    for (int i = 0; i<M.n; i++)
+        for (int j = 0; j<M.m; j++){
+            s_out<<M(i,j)<<" ";
+            if (j == 2-1)
+                s_out<<"\n";
+        }
+}
