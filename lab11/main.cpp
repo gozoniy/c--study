@@ -2,21 +2,21 @@
 using namespace std;
 #include "matr.cpp"
 
-
-
 int main(void){
 	system("chcp 1251");
 
-	const int N = 2;
-	Matr A(N,N), B(N,N);
+	Matr A(3,2), B(2,3);
 	cin>>A>>B;
-	if (A==B){
-		cout<<"Yes"<<endl;
-	}
-	
-	if (A*B==B*A)		//явл€етс€ ли умножение матрицы перестановочным 
-		cout<<"Yes"<<endl;
+	cout<<A;
+	cout<<"“ранспонированна€ A\n";
+	cout<<A.tr();
+
+	if (A*B==B*A)
+		cout<<"ћатрицы перестановочные\n";
 	else
-		cout<<"No"<<endl;
+		cout<<"Ќе перестановочные\n";
+
+
+
 	
 }

@@ -16,8 +16,7 @@ Matr::Matr(const Matr &B){                        //Конструктор копий
         for (int j = 0; j<m; j++)
             (*this)(i,j) = B(i,j);
 }
-
-const Matr& Matr::operator=(Matr&B){        //Копирование
+const Matr& Matr::operator=(const Matr&B) {        //Копирование
     if (this == &B)
         return *this;
     n = B.n;
@@ -29,7 +28,6 @@ const Matr& Matr::operator=(Matr&B){        //Копирование
         for (int j = 0; j<m; j++)
             (*this)(i,j) = B(i,j);
 }
-
 const Matr Matr::operator*(const Matr &B)const{        //Умножение матриц
     if (m == B.n){
         Matr C(n,B.m);  //Создание матрицы результата
@@ -42,8 +40,7 @@ const Matr Matr::operator*(const Matr &B)const{        //Умножение матриц
     else
         return B;
 }
-
-bool Matr::operator==(const Matr &B)const{
+bool Matr::operator==(const Matr &B)const{          //Сравнение матриц
     Matr A = *this;
     int i,j;
     int flag = 1;
@@ -56,8 +53,14 @@ bool Matr::operator==(const Matr &B)const{
     else
         return false;
 }
-
-
+Matr Matr::tr(){                 //Транспонирование матрицы
+    Matr A = *this;
+    Matr C(m,n);
+    for (int i = 0; i<n; i++)
+        for (int j = 0; j<m; j++)
+            C(j,i) = A(i,j);
+    return C;
+}
 //перегрузка ввода-вывода
 istream& operator>>(istream& s_in, Matr& M){
     delete []M.p;
@@ -71,12 +74,14 @@ istream& operator>>(istream& s_in, Matr& M){
             M(i,j) = r;
         }
 }
-ostream& operator<<(ostream& s_out, Matr& M){
+ostream& operator<<(ostream& s_out, const Matr& M){
     int i,j;
     for (int i = 0; i<M.n; i++)
         for (int j = 0; j<M.m; j++){
+            if (j == 0)
+                s_out<<"| ";
             s_out<<M(i,j)<<" ";
-            if (j == 2-1)
-                s_out<<"\n";
+            if (j == M.m-1)
+                s_out<<"|\n";
         }
 }
