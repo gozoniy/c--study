@@ -7,6 +7,14 @@ Matr::Matr(int N, int M){                   //Конструктор с параметрами
     for (int i = 0; i<n*m; i++)
         p[i] = 0;
 }
+Matr::Matr(){                   //Конструктор по умолчанию
+    n = 2; 
+    m = 3;
+    p = new int [n*m];
+    for (int i = 0; i<n*m; i++)
+        p[i] = 0;
+}
+
 Matr::Matr(const Matr &B){                        //Конструктор копий
     n = B.n;
     m = B.m;
@@ -63,8 +71,6 @@ Matr Matr::tr(){                 //Транспонирование матрицы
 }
 //перегрузка ввода-вывода
 istream& operator>>(istream& s_in, Matr& M){
-    delete []M.p;
-    M.p = new int [M.n*M.m];
     int r;
     int i,j;
     for (int i = 0; i<M.n; i++)

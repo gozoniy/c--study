@@ -5,8 +5,8 @@ using namespace std;
 int main(void){
 	system("chcp 1251");
 
-	Matr A(3,2), B(2,3);
-	cin>>A>>B;
+	Matr A, B(2,3);
+	cin>>A;
 	cout<<A;
 	cout<<"Транспонированная A\n";
 	cout<<A.tr();
