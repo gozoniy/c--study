@@ -12,12 +12,13 @@ class aeroflot{
         aeroflot();
         aeroflot(int T);
         aeroflot(const aeroflot &B);
+        //~aeroflot();
     //методы
         void set();
         void print();
         void set_time(int T);
         void get_time();
-        //void AEROFLOT(*A);
+        //void DEST(aeroflot *B, int n, char *D);
 
 };
 

@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
 #include "aeroflot.h"
+
 
 aeroflot::aeroflot(){
     time = 1020;
@@ -48,3 +50,29 @@ void aeroflot::get_time(){
 
 }
 
+void DEST(aeroflot *B, int n, char *D){
+    cout<<"Для заданного пункта назначения рейсы:\n";
+    int c = 0;
+    for (int i = 0; i < n; i++){
+        if (!strcmp(B[i].destination,D)){
+            cout<<B[i].index<<"\n";
+            c++;
+        }
+    }
+    cout<<"Всего: "<<c<<"\n";
+}
+
+//Функции ввода-вывода для массивов
+void setMA(aeroflot *A, int n){
+    for (int i = 0; i < n; i++){
+        cout<<"Заполните рейс № "<<i+1<<":\n";
+        A[i].set();
+    }
+}
+
+void getMA(aeroflot *A, int n){
+    for (int i = 0; i < n; i++){
+        cout<<"Рейс № "<<i+1<<":\n";
+        A[i].print();
+    }
+}
