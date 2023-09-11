@@ -3,16 +3,12 @@
 б) списка рейсов самолетов указанного типа;
 в) списка рейсов для заданного дня недели, время вылета которых находится в заданном интервале.
 */ 
-#include <string.h>
-
 #include "aeroflot.cpp"
 
 
 int main(void){
     system("chcp 1251");
-    aeroflot A[3];
-    setMA(A,3);
-    DEST(A,3,"moscow");
-    cout<<"ok";
-    
+    aeroflot A[2];
+    importA("test.txt",A,2);
+    getMA(A,2);
 }
