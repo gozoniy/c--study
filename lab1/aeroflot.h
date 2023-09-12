@@ -13,7 +13,7 @@ class aeroflot{
         aeroflot();
         aeroflot(int T);
         aeroflot(const aeroflot &B);
-        //~aeroflot();
+        ~aeroflot() {}
     //методы
         void set();
         void print();
@@ -30,7 +30,7 @@ class aeroflot{
         friend istream& operator>>(istream& s_in, aeroflot& D);
     //Работа с файлами
         friend void importA(char *F, aeroflot *B, int n);
-        friend void exportA(char *F, aeroflot *B, int n)
+        friend void exportA(char *F, aeroflot *B, int n);
 };
 
 #endif AEROFLOT_H

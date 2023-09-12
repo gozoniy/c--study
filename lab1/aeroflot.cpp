@@ -118,7 +118,7 @@ void TIME(aeroflot *B, int n, char *D, int t1, int t2){
 void SORT(aeroflot *B, int n){
     for (int i = 0; i < n; i++) {
         bool flag = true;
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < n-1; j++) {
             if (B[j].time > B[j+1].time) {
                 flag = false;
                 aeroflot b; // создали дополнительную переменную
@@ -138,6 +138,7 @@ void SORT(aeroflot *B, int n){
 istream& operator>>(istream& s_in, aeroflot& D){                //ввод
     cout<<"Укажите назначение, номер, тип, время вылета и день недели через пробел: \n";
     s_in >> D.destination >> D.index >> D.type >> D.time >> D.day;
+    
 }
 ostream& operator<<(ostream& s_out, const aeroflot& D){         //вывод
     s_out << 
@@ -163,13 +164,12 @@ void importA(char *F, aeroflot *B, int n){
             cout<<"Массив задан неверно!\n";
             }
         else {
-            //while(fin>>n){
             for (int i = 0; i < c; i++){
                     fin>>B[i].destination>>B[i].index>>B[i].type>>B[i].time>>B[i].day;
                 }
             }
     }
-    cout<<"Запись закончена."<<endl;
+    cout<<"Чтение закончено."<<endl;
     fin.close();
 }
 
