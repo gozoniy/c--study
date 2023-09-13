@@ -33,4 +33,4 @@ class aeroflot{
         friend istream& operator>>(istream& s_in, aeroflot& D);
 };
 
-#endif AEROFLOT_H
+#endif //AEROFLOT_H
