@@ -49,7 +49,7 @@ int main(void){
                     cout<<"Массив не создан!\n";
                 }
                 else{
-                    SORTer(A,n);
+                    SORT(A,n);
                     cout<<"Массив отсортирован по времени вылета.\n";
                 }
                 break;

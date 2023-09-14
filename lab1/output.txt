@@ -1,4 +1,3 @@
-3
-Moscow 90 eco 1040 monday
-Krsk 102 eco 2030 monday
-Krsk 102 eco 2150 monday
+2
+krsk 101 eco 1020 fri
+moscow 103 comfort 1230 sat

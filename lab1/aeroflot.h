@@ -9,20 +9,21 @@ class aeroflot{
         string day;
     public:
     //конструкторы
-        aeroflot() {};
-        aeroflot(int T);
-        aeroflot(const aeroflot &B);
-        ~aeroflot() {}
-    //методы
+        aeroflot() {}; //по-молчанию
+        aeroflot(int T); //с параметрами
+        aeroflot(const aeroflot &B); //копий
+    //деструктор
+        ~aeroflot() {} 
+    //методы ввода-вывода
         void set();
         void print()const;
         void set_time(const int T);
         void get_time()const;
+    //Выборки
         friend void DEST(aeroflot *B, int n, string D);
         friend void TYPE(aeroflot *B, int n, string T);
         friend void TIME(aeroflot *B, int n, string D, int t1, int t2);
-        friend void SORT(aeroflot *B, int n);
-    //операторы
+    //операторы сравнения
         const void operator = (const aeroflot B);
         const bool operator == (const aeroflot &B);
         const bool operator > (const aeroflot &B)const;

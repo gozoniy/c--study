@@ -5,7 +5,7 @@ using namespace std;
 #include "aeroflot.h"
 
 // конструкторы
-// онструктор по-умолчанию
+// онструктор с параметрами
 aeroflot::aeroflot(int T){
     time = T;
 }
@@ -128,30 +128,8 @@ void TIME(aeroflot *B, int n, string D, int t1, int t2){
 }
 
 // сортировка
-//—тандартна€ сортировка
-void SORT(aeroflot *B, int n){
-    for (int i = 0; i < n; i++)
-    {
-        bool flag = true;
-        for (int j = 0; j < n - 1; j++)
-        {
-            if (B[j].time > B[j + 1].time)
-            {
-                flag = false;
-                aeroflot b; // создали дополнительную переменную
-                b = B[j];
-                B[j] = B[j + 1]; // мен€ем местами значени€
-                B[j + 1] = b;
-            }
-        }
-        if (flag)
-        {
-            break;
-        }
-    }
-}
 //—ортировка через перегрузку сравнени€
-void SORTer(aeroflot *B, int n){
+void SORT(aeroflot *B, int n){
     for (int i = 0; i < n; i++)
     {
         bool flag = true;
