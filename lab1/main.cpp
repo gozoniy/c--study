@@ -2,9 +2,16 @@
 
 int main(void){
     system("chcp 1251");
+    /*aeroflot A[3];
+    importA("test.txt",A,3);
+    bool F = A[0]<A[1];
+    cout<<F;*/
+
+
     bool f = true, M = false;
     int sw,n;
     aeroflot* A;
+    
     while (f){
         cout<<"*Главное меню*\n"
         <<"1) Создать массив\n"
@@ -16,7 +23,7 @@ int main(void){
         <<"0) Закончить работу с программой\n";
         cin>>sw;
         switch (sw){
-            case 1:{
+            case 1:{//Создание массива
                 cout<<"Введите длину массива: ";
                 cin>>n;
                 M = true;
@@ -24,13 +31,13 @@ int main(void){
                 break;
             }
             case 2:{//Запись
-            if (!M){
-                    cout<<"Массив не создан!\n";
-                }
-                else{
-                    setMA(A,n);
-                    break;
-                }
+                if (!M){
+                        cout<<"Массив не создан!\n";
+                    }
+                    else{
+                        setMA(A,n);
+                        break;
+                    }
             }
             case 3:{//Чтение
                 if (!M){
@@ -98,8 +105,9 @@ int main(void){
                     switch (sw3){
                         case 1:{
                             cout<<"Введите имя файла: ";
-                            char F[20];
+                            string F;
                             cin>>F;
+                            if (F == "1"){F = "test.txt";}
                             importA(F,A,n);
                             break;
                         }

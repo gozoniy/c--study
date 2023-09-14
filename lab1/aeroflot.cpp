@@ -5,29 +5,19 @@ using namespace std;
 #include "aeroflot.h"
 
 // конструкторы
-aeroflot::aeroflot()
-{
-    time = 1010;
-}
-aeroflot::aeroflot(int T)
-{
+aeroflot::aeroflot(int T){
     time = T;
 }
-aeroflot::aeroflot(const aeroflot &B)
-{
+aeroflot::aeroflot(const aeroflot &B){
     time = B.time;
-    for (int i = 0; i < 20; i++)
-    {
-        destination[i] = B.destination[i];
-        index[i] = B.index[i];
-        type[i] = B.type[i];
-        day[i] = B.day[i];
-    }
+    destination = B.destination;
+    index = B.index;
+    type = B.type;
+    day = B.day;
 }
 
 // методы
-void aeroflot::set()
-{
+void aeroflot::set(){
     cout << "Укажите назначение рейса:\n";
     cin >> destination;
     cout << "Укажите номер:\n";
@@ -39,8 +29,7 @@ void aeroflot::set()
     cout << "Укажите день недели:\n";
     cin >> day;
 }
-void aeroflot::print() const
-{
+void aeroflot::print() const{
     cout << "-----------\n";
     cout << "Назначение: " << destination << "\n";
     cout << "Номер: " << index << "\n";
@@ -48,26 +37,22 @@ void aeroflot::print() const
     cout << "Время: " << time / 100 << ":" << time % 100 << "\n";
     cout << "День недели: " << day << "\n";
 }
-void aeroflot::set_time(const int T)
-{
+void aeroflot::set_time(const int T){
     time = T;
 }
-void aeroflot::get_time() const
-{
+void aeroflot::get_time() const{
     cout << "Время рейса: " << time << "\n";
 }
 
 // Функции ввода-вывода для массивов
-void setMA(aeroflot *A, int n)
-{
+void setMA(aeroflot *A, int n){
     for (int i = 0; i < n; i++)
     {
         cout << "Заполните рейс № " << i + 1 << ":\n";
         A[i].set();
     }
 }
-void getMA(aeroflot *A, int n)
-{
+void getMA(aeroflot *A, int n){
     for (int i = 0; i < n; i++)
     {
         cout << "Рейс № " << i + 1 << ":\n";
@@ -76,47 +61,33 @@ void getMA(aeroflot *A, int n)
 }
 
 // Операторы
-const void aeroflot::operator=(const aeroflot B)
-{
+const void aeroflot::operator=(const aeroflot B){
     time = B.time;
-    for (int i = 0; i < 20; i++)
-    {
-        destination[i] = B.destination[i];
-        index[i] = B.index[i];
-        type[i] = B.type[i];
-        day[i] = B.day[i];
-    }
+    destination = B.destination;
+    index = B.index;
+    type = B.type;
+    day = B.day;
 }
-const bool aeroflot::operator==(const aeroflot &B)
-{
-    aeroflot A = *this;
-    bool answ;
-    answ = ((B.destination == A.destination) and (B.index == A.index) and (B.type == A.type) and (B.time == A.time) and (B.day == A.day));
+const bool aeroflot::operator==(const aeroflot &B){
+    bool answ = ((B.destination == destination) and (B.index == index) and (B.type == type) and (B.time == time) and (B.day == day));
     return answ;
 }
-const bool aeroflot::operator>(const aeroflot &B)
-{
-    aeroflot A = *this;
-    bool answ;
-    answ = B.time > time;
+const bool aeroflot::operator>(const aeroflot &B)const{
+    bool answ = B.time > time;
     return answ;
 }
-const bool aeroflot::operator<(const aeroflot &B)
-{
-    aeroflot A = *this;
-    bool answ;
-    answ = B.time < time;
+const bool aeroflot::operator<(const aeroflot &B)const{
+    bool answ = B.time < time;
     return answ;
 }
     
 // Выборки
-void DEST(aeroflot *B, int n, char *D)
-{
+void DEST(aeroflot *B, int n, string D){
     cout << "Для заданного пункта назначения рейсы с номерами:\n";
     int c = 0;
     for (int i = 0; i < n; i++)
     {
-        if (!strcmp(B[i].destination, D))
+        if ((B[i].destination == D))
         {
             cout << B[i].index << "\n";
             c++;
@@ -124,13 +95,12 @@ void DEST(aeroflot *B, int n, char *D)
     }
     cout << "Всего: " << c << "\n";
 }
-void TYPE(aeroflot *B, int n, char *T)
-{
+void TYPE(aeroflot *B, int n, string T){
     cout << "Для заданного типа рейсы с номерами:\n";
     int c = 0;
     for (int i = 0; i < n; i++)
     {
-        if (!strcmp(B[i].type, T))
+        if (B[i].type == T)
         {
             cout << B[i].index << "\n";
             c++;
@@ -138,13 +108,12 @@ void TYPE(aeroflot *B, int n, char *T)
     }
     cout << "Всего: " << c << "\n";
 }
-void TIME(aeroflot *B, int n, char *D, int t1, int t2)
-{
+void TIME(aeroflot *B, int n, string D, int t1, int t2){
     cout << "Для заданного дня недели и диапазона времени назначения рейсы с номерами:\n";
     int c = 0;
     for (int i = 0; i < n; i++)
     {
-        if ((!strcmp(B[i].day, D) && (t1 <= B[i].time) && (B[i].time <= t2)))
+        if ((B[i].day == D) && (t1 <= B[i].time) && (B[i].time <= t2))
         {
             cout << B[i].index << "\n";
             c++;
@@ -154,8 +123,7 @@ void TIME(aeroflot *B, int n, char *D, int t1, int t2)
 }
 
 // сортировка
-void SORT(aeroflot *B, int n)
-{
+void SORT(aeroflot *B, int n){
     for (int i = 0; i < n; i++)
     {
         bool flag = true;
@@ -176,8 +144,7 @@ void SORT(aeroflot *B, int n)
         }
     }
 }
-void SORTer(aeroflot *B, int n)
-{
+void SORTer(aeroflot *B, int n){
     for (int i = 0; i < n; i++)
     {
         bool flag = true;
@@ -200,21 +167,18 @@ void SORTer(aeroflot *B, int n)
 }
 
 // перегрузка операций ввода/вывода
-ostream &operator<<(ostream &s_out, const aeroflot &D)
-{
+ostream &operator<<(ostream &s_out, const aeroflot &D){
     s_out << D.destination << " " << D.index << " " << D.type << " " << D.time << " " << D.day << "\n";
     return s_out;
 }
-istream &operator>>(istream &s_in, aeroflot &D)
-{
+istream &operator>>(istream &s_in, aeroflot &D){
     // cout<<"Укажите назначение, номер, тип, время вылета и день недели через пробел: \n";
     s_in >> D.destination >> D.index >> D.type >> D.time >> D.day;
     return s_in;
 }
 
 // Работа с файлами
-void importA(const char *F, aeroflot *B, const int n)
-{
+void importA(const string F, aeroflot *B, const int n){
     ifstream fin(F);
     if (!fin.is_open())
     {
@@ -240,8 +204,7 @@ void importA(const char *F, aeroflot *B, const int n)
     cout << "Чтение закончено." << endl;
     fin.close();
 }
-void exportA(const char *F, const aeroflot *B, const int n)
-{
+void exportA(const string F, const aeroflot *B, const int n){
     ofstream fin(F);
     if (!fin.is_open())
     {
