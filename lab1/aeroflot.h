@@ -7,7 +7,6 @@ class aeroflot{
         string type;
         int time;
         string day;
-        
     public:
     //конструкторы
         aeroflot() {};

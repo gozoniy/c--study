@@ -2,12 +2,6 @@
 
 int main(void){
     system("chcp 1251");
-    /*aeroflot A[3];
-    importA("test.txt",A,3);
-    bool F = A[0]<A[1];
-    cout<<F;*/
-
-
     bool f = true, M = false;
     int sw,n;
     aeroflot* A;

@@ -5,9 +5,11 @@ using namespace std;
 #include "aeroflot.h"
 
 // конструкторы
+//Конструктор по-умолчанию
 aeroflot::aeroflot(int T){
     time = T;
 }
+//Конструктор копий
 aeroflot::aeroflot(const aeroflot &B){
     time = B.time;
     destination = B.destination;
@@ -16,7 +18,6 @@ aeroflot::aeroflot(const aeroflot &B){
     day = B.day;
 }
 
-// методы
 void aeroflot::set(){
     cout << "Укажите назначение рейса:\n";
     cin >> destination;
@@ -44,7 +45,8 @@ void aeroflot::get_time() const{
     cout << "Время рейса: " << time << "\n";
 }
 
-// Функции ввода-вывода для массивов
+//Функции ввода-вывода для массивов
+//Заполнение массива
 void setMA(aeroflot *A, int n){
     for (int i = 0; i < n; i++)
     {
@@ -52,6 +54,7 @@ void setMA(aeroflot *A, int n){
         A[i].set();
     }
 }
+//Вывод массива
 void getMA(aeroflot *A, int n){
     for (int i = 0; i < n; i++)
     {
@@ -61,6 +64,7 @@ void getMA(aeroflot *A, int n){
 }
 
 // Операторы
+//Оператор присваивания
 const void aeroflot::operator=(const aeroflot B){
     time = B.time;
     destination = B.destination;
@@ -68,6 +72,7 @@ const void aeroflot::operator=(const aeroflot B){
     type = B.type;
     day = B.day;
 }
+//Оператор равенства
 const bool aeroflot::operator==(const aeroflot &B){
     bool answ = ((B.destination == destination) and (B.index == index) and (B.type == type) and (B.time == time) and (B.day == day));
     return answ;
@@ -123,6 +128,7 @@ void TIME(aeroflot *B, int n, string D, int t1, int t2){
 }
 
 // сортировка
+//Стандартная сортировка
 void SORT(aeroflot *B, int n){
     for (int i = 0; i < n; i++)
     {
@@ -144,6 +150,7 @@ void SORT(aeroflot *B, int n){
         }
     }
 }
+//Сортировка через перегрузку сравнения
 void SORTer(aeroflot *B, int n){
     for (int i = 0; i < n; i++)
     {
@@ -166,11 +173,12 @@ void SORTer(aeroflot *B, int n){
     }
 }
 
-// перегрузка операций ввода/вывода
+// Перегрузка ввода в поток
 ostream &operator<<(ostream &s_out, const aeroflot &D){
     s_out << D.destination << " " << D.index << " " << D.type << " " << D.time << " " << D.day << "\n";
     return s_out;
 }
+// Перегрузка вывода из потока
 istream &operator>>(istream &s_in, aeroflot &D){
     // cout<<"Укажите назначение, номер, тип, время вылета и день недели через пробел: \n";
     s_in >> D.destination >> D.index >> D.type >> D.time >> D.day;
@@ -178,6 +186,7 @@ istream &operator>>(istream &s_in, aeroflot &D){
 }
 
 // Работа с файлами
+//Импорт данных из файла
 void importA(const string F, aeroflot *B, const int n){
     ifstream fin(F);
     if (!fin.is_open())
@@ -204,6 +213,7 @@ void importA(const string F, aeroflot *B, const int n){
     cout << "Чтение закончено." << endl;
     fin.close();
 }
+//Экспорт данных в файл
 void exportA(const string F, const aeroflot *B, const int n){
     ofstream fin(F);
     if (!fin.is_open())
