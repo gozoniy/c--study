@@ -97,7 +97,7 @@ int main(void){
                     int sw3;
                     cin>>sw3;
                     switch (sw3){
-                        case 1:{
+                        case 1:{//Чтение
                             cout<<"Введите имя файла: ";
                             string F;
                             cin>>F;
@@ -111,10 +111,11 @@ int main(void){
                                 cout << "Файл открыт." << endl;
                                 importA(fin,A,n);
                                 fin.close();
+                                cout << "Чтение закончено." << endl;
                             }
                             break;
                         }
-                        case 2:{
+                        case 2:{//Запись
                             cout<<"Введите имя файла: ";
                             char F[20];
                             cin>>F;
@@ -128,6 +129,7 @@ int main(void){
                                 cout << "Файл открыт." << endl;
                                 exportA(fout,A,n);
                                 fout.close();
+                                cout << "Запись закончена." << endl;
                             }
                             break;
                         }

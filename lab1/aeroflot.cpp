@@ -188,22 +188,19 @@ istream &operator>>(istream &s_in, aeroflot &D){
 // Работа с файлами
 //Импорт данных из файла
 void importA(istream &fin, aeroflot *B, const int n){
-        int c;
-        fin >> c;
-        if (c != n)
+    int c;
+    fin >> c;
+    if (c != n)
+    {
+        cout << "Массив задан неверно!\n";
+    }
+    else
+    {
+        for (int i = 0; i < c; i++)
         {
-            cout << "Массив задан неверно!\n";
+            fin >> B[i];
         }
-        else
-        {
-            for (int i = 0; i < c; i++)
-            {
-                fin >> B[i];
-            }
-        }
-    
-    cout << "Чтение закончено." << endl;
-    
+    }
 }
 //Экспорт данных в файл
 void exportA(ostream &fout, const aeroflot *B, const int n){
@@ -212,6 +209,4 @@ void exportA(ostream &fout, const aeroflot *B, const int n){
     {
         fout << B[i];
     }
-    cout << "Запись закончена." << endl;
-    
 }
