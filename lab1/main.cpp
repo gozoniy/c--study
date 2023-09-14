@@ -102,17 +102,33 @@ int main(void){
                             string F;
                             cin>>F;
                             if (F == "1"){F = "test.txt";}
-                            importA(F,A,n);
+                            ifstream fin(F);
+                            if (!fin.is_open()){
+                                cout << "Ошибка открытия файла ввода!" << endl;
+                            }
+                            else
+                            {
+                                cout << "Файл открыт." << endl;
+                                importA(fin,A,n);
+                                fin.close();
+                            }
                             break;
                         }
                         case 2:{
                             cout<<"Введите имя файла: ";
-                            if (!M){
-                                
-                            }
                             char F[20];
                             cin>>F;
-                            exportA(F,A,n);
+                            ofstream fout(F);
+                            if (!fout.is_open())
+                            {
+                                cout << "Ошибка открытия файла ввода!" << endl;
+                            }
+                            else
+                            {
+                                cout << "Файл открыт." << endl;
+                                exportA(fout,A,n);
+                                fout.close();
+                            }
                             break;
                         }
                         sw3 = 0;

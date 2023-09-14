@@ -187,15 +187,7 @@ istream &operator>>(istream &s_in, aeroflot &D){
 
 // Работа с файлами
 //Импорт данных из файла
-void importA(const string F, aeroflot *B, const int n){
-    ifstream fin(F);
-    if (!fin.is_open())
-    {
-        cout << "Ошибка открытия файла ввода!" << endl;
-    }
-    else
-    {
-        cout << "Файл открыт." << endl;
+void importA(istream &fin, aeroflot *B, const int n){
         int c;
         fin >> c;
         if (c != n)
@@ -209,26 +201,17 @@ void importA(const string F, aeroflot *B, const int n){
                 fin >> B[i];
             }
         }
-    }
+    
     cout << "Чтение закончено." << endl;
-    fin.close();
+    
 }
 //Экспорт данных в файл
-void exportA(const string F, const aeroflot *B, const int n){
-    ofstream fin(F);
-    if (!fin.is_open())
+void exportA(ostream &fout, const aeroflot *B, const int n){
+    fout << n << "\n";
+    for (int i = 0; i < n; i++)
     {
-        cout << "Ошибка открытия файла ввода!" << endl;
-    }
-    else
-    {
-        fin << n << "\n";
-        cout << "Файл открыт." << endl;
-        for (int i = 0; i < n; i++)
-        {
-            fin << B[i];
-        }
+        fout << B[i];
     }
     cout << "Запись закончена." << endl;
-    fin.close();
+    
 }

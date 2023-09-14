@@ -1,3 +1,4 @@
-2
+3
 Moscow 90 eco 1040 monday
-Krsk 102 eco 1050 monday
+Krsk 102 eco 2030 monday
+Krsk 102 eco 2150 monday
