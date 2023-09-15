@@ -140,6 +140,7 @@ int main(void){
             }
             case 0:{//Выход
                 f = false;
+                delete [] A;
                 break;
             }
             sw = 0;
