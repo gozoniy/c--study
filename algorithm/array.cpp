@@ -24,11 +24,15 @@ array<T>::array(const array &A){
 }
 
 template<typename T>
-void array<T>::set(){
+void array<T>::fill(){
     for (int i = 0; i < size; i++){
         cout<<"¬ведите элемент є"<<i+1<<": \n";
         cin>>arr[i];
     }
+}
+template<typename T>
+void array<T>::setS(int S){
+    size = S;
 }
 
 template<typename T>
@@ -41,10 +45,24 @@ void array<T>::get(){
 }
 
 template<typename T>
-void array<T>::setR(int n1, int n2){
+void array<T>::fillR(int n1, int n2){
     srand(time(0));
     for (int i = 0; i < size; i++){
         arr[i] = n1 + rand()%(n2-n1+1);
+    }
+}
+//”пор€доченные
+template<typename T>
+void array<T>::fillU(){
+    for (int i = 0; i < size; i++){
+        arr[i] = i;
+    }
+}
+//”пор€доченные в обратном пор€дке
+template<typename T>
+void array<T>::fillUr(){
+    for (int i = 0; i < size; i++){
+        arr[i] = size-i;
     }
 }
 
@@ -61,7 +79,7 @@ void array<T>::shakerSort() {
   long j, k = size-1;
   long lb=1, ub = size-1; // границы неотсортированной части массива
   T x;
-
+  cout<<"tut2\n";
   do {
 	// проход снизу вверх 
     for( j=ub; j>0; j-- ) {
@@ -83,4 +101,21 @@ void array<T>::shakerSort() {
 
     ub = k-1;
   } while ( lb < ub );
+}
+
+template<class T>
+void array<T>::insertSort() {
+  T x;
+  long i, j;
+
+  for ( i=0; i < size; i++) {  // цикл проходов, i - номер прохода
+    x = arr[i];
+		
+	// поиск места элемента в готовой последовательности 
+    for ( j=i-1; j>=0 && arr[j] > x; j--)
+      arr[j+1] = arr[j];  	// сдвигаем элемент направо, пока не дошли
+
+	// место найдено, вставить элемент
+    arr[j+1] = x;
+  }
 }

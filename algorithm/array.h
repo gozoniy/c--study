@@ -11,12 +11,15 @@ class array{
         array(const array &A);
         ~array(){delete[]arr;}
 
-        void set();
-        void setR(int n1, int n2);
-        void get();
+        void setS(int S);                       //Задать длину
+        void fill();                             //Ввод с клавиатуры
+        void fillR(int n1, int n2);             //Рандомные в диапазоне
+        void fillU();                           //Упорядоченные
+        void fillUr();                          //Упорядоченные в обратном порядке
+        void get();     
         void get_file(ofstream &fin);
         void shakerSort();
-        void insert_sort();
+        void insertSort();
 
 
 
