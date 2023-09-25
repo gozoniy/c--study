@@ -12,7 +12,7 @@ aeroflot::aeroflot(int T){
 //Конструктор копий
 aeroflot::aeroflot(const aeroflot &B){
     time = B.time;
-    destination = B.destination;
+    destination = B.destination;  
     index = B.index;
     type = B.type;
     day = B.day;
