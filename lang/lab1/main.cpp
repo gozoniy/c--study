@@ -88,33 +88,37 @@ int main(void){
                 break;
             }
             case 6:{//Файл
-                if (!M){
+                cout<<"1) Чтение из файла\n"
+                <<"2) Запись в файл\n";
+                int sw3;
+                cin>>sw3;
+                switch (sw3){
+                    case 1:{//Чтение
+                        cout<<"Введите имя файла: ";
+                        string F;
+                        cin>>F;
+                        if (F == "1"){F = "test.txt";}
+                        ifstream fin(F);
+                        if (!fin.is_open()){
+                            cout << "Ошибка открытия файла ввода!" << endl;
+                        }
+                        else
+                        {
+                            fin>>n;
+                            cout << "Файл открыт." << endl;
+                            delete [] A;
+                            A = new aeroflot[n];
+                            M = 1;
+                            importA(fin,A,n);
+                            fin.close();
+                            cout << "Чтение закончено." << endl;
+                        }
+                        break;
+                    }
+                    if (!M){
                         cout<<"Массив не создан!\n";
                     }
-                else{
-                    cout<<"1) Чтение из файла\n"
-                    <<"2) Запись в файл\n";
-                    int sw3;
-                    cin>>sw3;
-                    switch (sw3){
-                        case 1:{//Чтение
-                            cout<<"Введите имя файла: ";
-                            string F;
-                            cin>>F;
-                            if (F == "1"){F = "test.txt";}
-                            ifstream fin(F);
-                            if (!fin.is_open()){
-                                cout << "Ошибка открытия файла ввода!" << endl;
-                            }
-                            else
-                            {
-                                cout << "Файл открыт." << endl;
-                                importA(fin,A,n);
-                                fin.close();
-                                cout << "Чтение закончено." << endl;
-                            }
-                            break;
-                        }
+                    else{
                         case 2:{//Запись
                             cout<<"Введите имя файла: ";
                             char F[20];
