@@ -18,6 +18,7 @@ aeroflot::aeroflot(const aeroflot &B){
     day = B.day;
 }
 
+//Задание полей
 void aeroflot::set(){
     cout << "Укажите назначение рейса:\n";
     cin >> destination;
@@ -30,6 +31,8 @@ void aeroflot::set(){
     cout << "Укажите день недели:\n";
     cin >> day;
 }
+
+//Вывод полей с форматированием
 void aeroflot::print() const{
     cout << "-----------\n";
     cout << "Назначение: " << destination << "\n";
@@ -38,9 +41,11 @@ void aeroflot::print() const{
     cout << "Время: " << time / 100 << ":" << time % 100 << "\n";
     cout << "День недели: " << day << "\n";
 }
+//Задание поля времени
 void aeroflot::set_time(const int T){
     time = T;
 }
+//Возврат поля времени
 void aeroflot::get_time() const{
     cout << "Время рейса: " << time << "\n";
 }
@@ -87,6 +92,7 @@ const bool aeroflot::operator<(const aeroflot &B)const{
 }
     
 // Выборки
+//Выборка по пункту назначения
 void DEST(aeroflot *B, int n, string D){
     cout << "Для заданного пункта назначения рейсы с номерами:\n";
     int c = 0;
@@ -100,6 +106,7 @@ void DEST(aeroflot *B, int n, string D){
     }
     cout << "Всего: " << c << "\n";
 }
+//Выборка по типу
 void TYPE(aeroflot *B, int n, string T){
     cout << "Для заданного типа рейсы с номерами:\n";
     int c = 0;
@@ -113,6 +120,7 @@ void TYPE(aeroflot *B, int n, string T){
     }
     cout << "Всего: " << c << "\n";
 }
+//Выборка по дню недели и диапазону времени
 void TIME(aeroflot *B, int n, string D, int t1, int t2){
     cout << "Для заданного дня недели и диапазона времени назначения рейсы с номерами:\n";
     int c = 0;
@@ -163,7 +171,7 @@ istream &operator>>(istream &s_in, aeroflot &D){
     return s_in;
 }
 
-// Работа с файлами
+//Работа с файлами
 //Импорт данных из файла
 void importA(istream &fin, aeroflot *B, const int n){
     for (int i = 0; i < n; i++)
