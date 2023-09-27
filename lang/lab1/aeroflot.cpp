@@ -188,3 +188,5 @@ void exportA(ostream &fout, const aeroflot *B, const int n){
         fout << B[i];
     }
 }
+
+
