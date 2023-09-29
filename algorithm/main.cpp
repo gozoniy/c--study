@@ -49,8 +49,8 @@ int main(void){
                 cin>>in2;
                  cout<<"Введите диапазон (от _ до _) и шаг через пробел:\n";
                 cin>>a1>>b1>>l;
-                cout<<"1) Cортировка прямыми обменами\n"
-                <<"2) Cортировка прямыми включениями.\n";
+                cout<<"1) Cортировка прямыми обменами shaker sort\n"
+                <<"2) Cортировка прямыми включениями insert sort.\n";
                 cin>>in3;
                 array<int> *A;
                 int N = (b1-a1)/l;
@@ -58,50 +58,55 @@ int main(void){
 
                 switch (in2){
                     case 1:{
-                        for (int i = 0; i<N; i++){
+                        for (int i = 1; i<N; i++){
                             A[i].setS(i*l);
                             A[i].fillR(1,20);
+                            A[i].get();
                             if (in3 == 1){
-                                cout<<"tut\n";
                                 A[i].shakerSort();
                             }
-                            else{
+                            else if (in3 == 2){
                                 A[i].insertSort();
                             }
-
+                            A[i].get();
                         }
                         break;
                     }
                     case 2:{
-                        for (int i = 0; i<N; i++){
+                        for (int i = 1; i<N; i++){
                             A[i].setS(i*l);
                             A[i].fillU();
+                            A[i].get();
                             if (in3 == 1){
                                 A[i].shakerSort();
                             }
-                            else{
+                            else if (in3 == 2){
                                 A[i].insertSort();
                             }
+                            A[i].get();
                         }
 
                         break;
                     }
                     case 3:{
-                        for (int i = 0; i<N; i++){
+                        for (int i = 1; i<N; i++){
                             A[i].setS(i*l);
                             A[i].fillUr();
+                            A[i].get();
+
                             if (in3 == 1){
                                 A[i].shakerSort();
                             }
-                            else{
+                            else if (in3 == 2){
                                 A[i].insertSort();
                             }
+                            A[i].get();
                         }
                         
                         break;
                     }
                 }
-                A[3].get();
+                A[1].get();
                 break;
             }
             case 0:{

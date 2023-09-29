@@ -55,7 +55,7 @@ void array<T>::fillR(int n1, int n2){
 template<typename T>
 void array<T>::fillU(){
     for (int i = 0; i < size; i++){
-        arr[i] = i;
+        arr[i] = i+1;
     }
 }
 //”пор€доченные в обратном пор€дке
@@ -79,7 +79,6 @@ void array<T>::shakerSort() {
   long j, k = size-1;
   long lb=1, ub = size-1; // границы неотсортированной части массива
   T x;
-  cout<<"tut2\n";
   do {
 	// проход снизу вверх 
     for( j=ub; j>0; j-- ) {
