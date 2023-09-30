@@ -9,10 +9,11 @@ class array{
         array();
         array(int n);
         array(const array &A);
-        ~array(){delete[]arr;}
+        ~array(){delete arr;}
 
         void setS(int S);                       //Задать длину
-        void fill();                             //Ввод с клавиатуры
+        int getS();                             //Вернуть длину
+        void fill();                            //Ввод с клавиатуры
         void fillR(int n1, int n2);             //Рандомные в диапазоне
         void fillU();                           //Упорядоченные
         void fillUr();                          //Упорядоченные в обратном порядке

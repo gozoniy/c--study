@@ -44,7 +44,6 @@ int main(void){
             case 2:{
                 int in2,in3;
                 int a1,b1,l;
-                
                 cout<<"1) Заполнение случайными значениями\n"
                 <<"2) Заполнение упорядоченными значениями\n"
                 <<"3) Заполнение обратноупорядоченными значениями\n";
@@ -52,9 +51,8 @@ int main(void){
                 cout<<"Введите диапазон (от _ до _) и шаг через пробел:\n";
                 cin>>a1>>b1>>l;
                 array<int> *A;
-                int N = (b1-a1)/l;
+                int N = (b1-a1)/l+1;
                 A = new array<int> [N];
-                cout<<"Массив массивов длинной "<<N<<"\n";
                 switch (in2){
                     case 1:{
                         for (int i = 1; i<N; i++){
@@ -78,28 +76,37 @@ int main(void){
                         break;
                     }
                 }
-                
-                A[2].get();
-                cout<<"\n";
+                cout<<"Всего заполнено "<<N-1<<" массивов.\n";
+
                 cout<<"1) Cортировка прямыми обменами shaker sort\n"
                 <<"2) Cортировка прямыми включениями insert sort\n";
-
                 cin>>in2;
-                cout<<"ok\n";
+                int t1 = clock();
                 switch (in2){
                     case 1:{
                         for (int i = 1; i<N; i++){
+                            int t_1 = clock();
                             A[i].shakerSort();
+                            int t_2 = clock();
+                            int ans = t_2 - t_1;
+                            cout<<A[i].getS()<<" эл отсортированы за "<<ans<<"ms\n";
                         }
                         break;
                     }
                     case 2:{
                         for (int i = 1; i<N; i++){
+                            int t_1 = clock();
                             A[i].insertSort();
+                            int t_2 = clock();
+                            int ans = t_2 - t_1;
+                            cout<<A[i].getS()<<" эл отсортированы за "<<ans<<"ms\n";
                         }
                         break;
                     }
                 }
+                int t2 = clock();
+                int answ = (t2-t1);
+                cout<<"Общее время: "<<answ<<"ms\n";
                 break;
             }
             case 0:{

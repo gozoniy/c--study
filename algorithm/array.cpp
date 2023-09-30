@@ -33,6 +33,11 @@ void array<T>::fill(){
 template<typename T>
 void array<T>::setS(int S){
     size = S;
+    arr = new T[size];
+}
+template<typename T>
+int array<T>::getS(){
+    return size;
 }
 
 template<typename T>
@@ -79,6 +84,7 @@ void array<T>::shakerSort() {
   long j, k = size-1;
   long lb=1, ub = size-1; // границы неотсортированной части массива
   T x;
+  
   do {
 	// проход снизу вверх 
     for( j=ub; j>0; j-- ) {
