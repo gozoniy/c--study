@@ -1,6 +1,6 @@
 //21. сортировка прямыми обменами; сортировка прямыми включениями. 
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 #include "array.cpp"
 
@@ -55,22 +55,22 @@ int main(void){
                 A = new array<int> [N];
                 switch (in2){
                     case 1:{
-                        for (int i = 1; i<N; i++){
-                            A[i].setS(i*l);
+                        for (int i = 0; i<N-1; i++){
+                            A[i].setS(((i)*l)+a1);
                             A[i].fillR(1,20);
                         }
                         break;
                     }
                     case 2:{
-                        for (int i = 1; i<N; i++){
-                            A[i].setS(i*l);
+                        for (int i = 0; i<N-1; i++){
+                            A[i].setS(((i)*l)+a1);
                             A[i].fillU();
                         }
                         break;
                     }
                     case 3:{
-                        for (int i = 1; i<N; i++){
-                            A[i].setS(i*l);
+                        for (int i = 0; i<N-1; i++){
+                            A[i].setS(((i)*l)+a1);
                             A[i].fillUr();
                         }
                         break;
@@ -81,25 +81,28 @@ int main(void){
                 cout<<"1) Cортировка прямыми обменами shaker sort\n"
                 <<"2) Cортировка прямыми включениями insert sort\n";
                 cin>>in2;
+                ofstream fout("results.txt");
                 int t1 = clock();
                 switch (in2){
                     case 1:{
-                        for (int i = 1; i<N; i++){
+                        for (int i = 0; i<N-1; i++){
                             int t_1 = clock();
                             A[i].shakerSort();
                             int t_2 = clock();
                             int ans = t_2 - t_1;
                             cout<<A[i].getS()<<" эл отсортированы за "<<ans<<"ms\n";
+                            fout<<A[i].getS()<<" "<<ans<<"\n";
                         }
                         break;
                     }
                     case 2:{
-                        for (int i = 1; i<N; i++){
+                        for (int i = 0; i<N-1; i++){
                             int t_1 = clock();
                             A[i].insertSort();
                             int t_2 = clock();
                             int ans = t_2 - t_1;
                             cout<<A[i].getS()<<" эл отсортированы за "<<ans<<"ms\n";
+                            fout<<A[i].getS()<<" "<<ans<<"\n";
                         }
                         break;
                     }
@@ -107,7 +110,9 @@ int main(void){
                 int t2 = clock();
                 int answ = (t2-t1);
                 cout<<"Общее время: "<<answ<<"ms\n";
+                fout.close();
                 break;
+
             }
             case 0:{
                 f = 0;
