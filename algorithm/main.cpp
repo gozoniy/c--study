@@ -4,6 +4,7 @@
 using namespace std;
 #include "arr.cpp"
 
+
 int main(void){
     system("chcp 1251");
     int f = 1;
