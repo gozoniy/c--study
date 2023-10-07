@@ -1,15 +1,15 @@
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef ARR_H
+#define ARR_H
 
 template<typename T>
-class array{
+class arr{
         int size;
-        T *arr;
+        T *a;
     public:
-        array();
-        array(int n);
-        array(const array &A);
-        ~array(){delete arr;}
+        arr();
+        arr(int n);
+        arr(const arr &A);
+        ~arr(){delete a;}
 
         void setS(int S);                    //Задать длину
         int getS();                          //Вернуть длину
@@ -22,4 +22,4 @@ class array{
         void shakerSort();                   //Сортировка объекта прямыми обменами
         void insertSort();                   //Сортировка объекта прямыми включениями
 };
-#endif //ARRAY_H
+#endif //ARR_H

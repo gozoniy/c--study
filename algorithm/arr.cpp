@@ -2,85 +2,85 @@
 #include <string.h>
 #include <fstream>
 using namespace std;
-#include "array.h"
+#include "arr.h"
 template<typename T>
-array<T>::array(){
+arr<T>::arr(){
     size = 10;
-    arr = new T[size];
+    a = new T[size];
 
 }
 template<typename T>
-array<T>::array(int n){
+arr<T>::arr(int n){
     size = n;
-    arr = new T[size];
+    a = new T[size];
 }
 template<typename T>
-array<T>::array(const array &A){
+arr<T>::arr(const arr &A){
     size = A.size;
-    arr = new T[size];
+    a = new T[size];
     for (int i = 0; i < size; i++){
-        arr[i] = A.arr[i];
+        a[i] = A.a[i];
     }
 }
 
 template<typename T>
-void array<T>::fill(){
+void arr<T>::fill(){
     for (int i = 0; i < size; i++){
         cout<<"Введите элемент №"<<i+1<<": \n";
-        cin>>arr[i];
+        cin>>a[i];
     }
 }
 template<typename T>
-void array<T>::setS(int S){
+void arr<T>::setS(int S){
     size = S;
-    arr = new T[size];
+    a = new T[size];
 }
 template<typename T>
-int array<T>::getS(){
+int arr<T>::getS(){
     return size;
 }
 
 template<typename T>
-void array<T>::get(){
+void arr<T>::get(){
     cout<<"Массив длинной "<<size<<":\n";
     for (int i = 0; i < size; i++){
-        cout<<arr[i]<<" ";
+        cout<<a[i]<<" ";
     }
     cout<<"\n";
 }
 
 template<typename T>
-void array<T>::fillR(int n1, int n2){
+void arr<T>::fillR(int n1, int n2){
     srand(time(0));
     for (int i = 0; i < size; i++){
-        arr[i] = n1 + rand()%(n2-n1+1);
+        a[i] = n1 + rand()%(n2-n1+1);
     }
 }
 //Упорядоченные
 template<typename T>
-void array<T>::fillU(){
+void arr<T>::fillU(){
     for (int i = 0; i < size; i++){
-        arr[i] = i+1;
+        a[i] = i+1;
     }
 }
 //Упорядоченные в обратном порядке
 template<typename T>
-void array<T>::fillUr(){
+void arr<T>::fillUr(){
     for (int i = 0; i < size; i++){
-        arr[i] = size-i;
+        a[i] = size-i;
     }
 }
 
 template<typename T>
-void array<T>::get_file(ofstream &fin){
+void arr<T>::get_file(ofstream &fin){
     for (int i = 0; i < size; i++){
-        fin<<arr[i]<<" ";
+        fin<<a[i]<<" ";
     }
     fin<<"\n";
 }
 
 template<class T>
-void array<T>::shakerSort() {
+void arr<T>::shakerSort() {
   long j, k = size-1;
   long lb=1, ub = size-1; // границы неотсортированной части массива
   T x;
@@ -89,8 +89,8 @@ void array<T>::shakerSort() {
 	// проход снизу вверх 
     for( j=ub; j>0; j-- ) {
         cmp++;
-        if ( arr[j-1] > arr[j] ) {
-            x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
+        if ( a[j-1] > a[j] ) {
+            x=a[j-1]; a[j-1]=a[j]; a[j]=x;
             k=j;
             rmv++;
       }
@@ -99,8 +99,8 @@ void array<T>::shakerSort() {
     // проход сверху вниз 
     for (j=1; j<=ub; j++) {
         cmp++;
-        if ( arr[j-1] > arr[j] ) {
-            x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
+        if ( a[j-1] > a[j] ) {
+            x=a[j-1]; a[j-1]=a[j]; a[j]=x;
             k=j;
             rmv++;
         }
@@ -113,20 +113,20 @@ void array<T>::shakerSort() {
 }
 
 template<class T>
-void array<T>::insertSort() {
+void arr<T>::insertSort() {
   T x;
   long i, j;
   int rmv = 0, cmp = 0;
   for ( i=0; i < size; i++) {  // цикл проходов, i - номер прохода
-    x = arr[i];
+    x = a[i];
     // поиск места элемента в готовой последовательности 
-    for ( j=i-1; j>=0 && arr[j] > x; j--){
+    for ( j=i-1; j>=0 && a[j] > x; j--){
         cmp++;
-        arr[j+1] = arr[j];  	// сдвигаем элемент направо, пока не дошли
+        a[j+1] = a[j];  	// сдвигаем элемент направо, пока не дошли
         rmv++;
     }
     // место найдено, вставить элемент
-    arr[j+1] = x;
+    a[j+1] = x;
     }
     cout<<rmv<<" перестановок.\n";
     cout<<cmp<<" сравнений.\n";

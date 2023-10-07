@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-#include "array.cpp"
+#include "arr.cpp"
 
 int main(void){
     system("chcp 1251");
@@ -18,13 +18,13 @@ int main(void){
                 int n,in2;
                 cout<<"Задайте размер массива: ";
                 cin>>n;
-                array<int> A(n);
+                arr<int> A(n);
                 cout<<"Введите диапозон генерации от n1 до n2 (n1_n2):";
                 int n1, n2;
                 cin>>n1>>n2;
                 A.fillR(n1,n2);
                 A.get();
-                array<int> B(A);
+                arr<int> B(A);
                 cout<<"1) Cортировка прямыми обменами shaker sort\n"
                 <<"2) Cортировка прямыми включениями insert sort\n";
                 cin>>in2;
@@ -65,9 +65,9 @@ int main(void){
                 cin>>in2;
                 cout<<"Введите диапазон (от _ до _) и шаг через пробел:\n";
                 cin>>a1>>b1>>l;
-                array<int> *A;
+                arr<int> *A;
                 int N = (b1-a1)/l+1;
-                A = new array<int> [N];
+                A = new arr<int> [N];
                 switch (in2){
                     case 1:{
                         for (int i = 0; i<N-1; i++){
