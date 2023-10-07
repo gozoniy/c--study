@@ -84,43 +84,50 @@ void array<T>::shakerSort() {
   long j, k = size-1;
   long lb=1, ub = size-1; // границы неотсортированной части массива
   T x;
-  
+  int rmv = 0, cmp = 0;
   do {
 	// проход снизу вверх 
     for( j=ub; j>0; j-- ) {
-      if ( arr[j-1] > arr[j] ) {
-        x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
-        k=j;
+        cmp++;
+        if ( arr[j-1] > arr[j] ) {
+            x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
+            k=j;
+            rmv++;
       }
     }
-
     lb = k+1;
-
     // проход сверху вниз 
     for (j=1; j<=ub; j++) {
-      if ( arr[j-1] > arr[j] ) {
-        x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
-        k=j;
-      }
+        cmp++;
+        if ( arr[j-1] > arr[j] ) {
+            x=arr[j-1]; arr[j-1]=arr[j]; arr[j]=x;
+            k=j;
+            rmv++;
+        }
     }
-
     ub = k-1;
   } while ( lb < ub );
+    cout<<rmv<<" перестановок.\n";
+    cout<<cmp<<" сравнений.\n";
+
 }
 
 template<class T>
 void array<T>::insertSort() {
   T x;
   long i, j;
-
+  int rmv = 0, cmp = 0;
   for ( i=0; i < size; i++) {  // цикл проходов, i - номер прохода
     x = arr[i];
-		
-	// поиск места элемента в готовой последовательности 
-    for ( j=i-1; j>=0 && arr[j] > x; j--)
-      arr[j+1] = arr[j];  	// сдвигаем элемент направо, пока не дошли
-
-	// место найдено, вставить элемент
+    // поиск места элемента в готовой последовательности 
+    for ( j=i-1; j>=0 && arr[j] > x; j--){
+        cmp++;
+        arr[j+1] = arr[j];  	// сдвигаем элемент направо, пока не дошли
+        rmv++;
+    }
+    // место найдено, вставить элемент
     arr[j+1] = x;
-  }
+    }
+    cout<<rmv<<" перестановок.\n";
+    cout<<cmp<<" сравнений.\n";
 }
