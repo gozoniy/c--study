@@ -4,9 +4,6 @@
 using namespace std;
 #include "Line.h"
 
-int main(void){
-    system("chcp 1251");
-    Line m;
-    cout<<"Ok\n";
+Line::Line(Line &B){
 
 }
