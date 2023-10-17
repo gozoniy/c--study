@@ -12,47 +12,13 @@ class Line{
         
         virtual float length();
         virtual string myName(){return "Line\n";}
+        //¬вод-вывод
+        virtual void set();
+        virtual void get() const;
+        void operator=(const Line B);
         
-        void setL();
-        void getL() const;
-        
+        //дописать сюда функцию заполнени€ массива указателей объектов лайн
 };
-class ColoredLine : public Line{
-        int r,g,b;
-    public:
-        ColoredLine(){}
-        ColoredLine(float L) : Line(L) {}
-        ColoredLine(ColoredLine &B);
-        virtual ~ColoredLine(){}
 
-        string myName() override {return "ColoredLine\n";}
-
-        void setColor();
-        void getColor();
-
-};
-class PolyLine : public Line{
-        int n;
-        float *L;
-    public:
-        PolyLine(){}
-        PolyLine(float L){l = L;}
-        PolyLine(PolyLine &B);
-        virtual ~PolyLine(){delete[] L;}
-
-        string myName() override {return "PolyLine\n";}
-        float length() override {
-            float LM = 0;
-            for (int i = 0; i<n; i++){
-                LM+=L[i];
-            }
-            LM += Line::length();
-            return LM;
-        }
-};
-/*class Picture{
-    int n;
-    int *p;
-};*/
 
 #endif //AEROFLOT_H
