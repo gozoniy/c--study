@@ -9,9 +9,9 @@ using namespace std;
 
 int main(void){
     system("chcp 1251");
-    PolyLine my(2);
-    my.set();
-    my.get();
+    PolyLine A(3);
+    A.set();
+    cout<<A;
 
 
 }

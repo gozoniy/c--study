@@ -16,8 +16,14 @@ class Line{
         virtual void set();
         virtual void get() const;
         void operator=(const Line B);
-        
+        bool operator>(const Line B);
+        bool operator<(const Line B);
+
+        friend ostream& operator<<(ostream& s_out, const Line& D);//~
+        friend istream& operator>>(istream& s_in, Line& D);//~
+
         //дописать сюда функцию заполнения массива указателей объектов лайн
+        //virtual void () = 0;
 };
 
 

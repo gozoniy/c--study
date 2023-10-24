@@ -2,11 +2,11 @@
 #define POLYLINE_H
 
 class PolyLine : public Line{
-        int n;
+        int n = 0;
         float *L;
     public:
         PolyLine(){}
-        PolyLine(float L){l = L;}
+        PolyLine(int N){n = N;}
         PolyLine(PolyLine &B);
         virtual ~PolyLine(){delete[] L;}
 
@@ -24,6 +24,9 @@ class PolyLine : public Line{
 
         void set() override;
         void get() const override;
+        void operator=(const PolyLine B);
+        friend ostream& operator<<(ostream& s_out, const PolyLine& D);//~
+        friend istream& operator>>(istream& s_in, PolyLine& D);//~
 
 };
 

@@ -1,1 +1,2 @@
-ColoredLine
+
+    system("chcp 1251");

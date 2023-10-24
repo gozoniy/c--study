@@ -14,6 +14,11 @@ class ColoredLine : public Line{
         void setColor();
         void getColor();
 
+        virtual void operator=(const ColoredLine B) ;
+        friend ostream& operator<<(ostream& s_out, const ColoredLine& D);//~
+        friend istream& operator>>(istream& s_in, ColoredLine& D);//~
+
+
 };
 
 #endif //COLOREDLINE_H
