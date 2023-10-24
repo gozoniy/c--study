@@ -1,11 +1,24 @@
-#ifndef LINE.H
-#define LINE.H
+#ifndef LINE_H
+#define LINE_H
 
-class line{
-        int l;
+class Line{
+    protected:
+        float l;
     public:
-        virtual int 
+        Line(){}
+        Line(float L){l = L;}
+        Line(Line &B);
+        virtual ~Line(){}
+        
+        virtual float length();
+        virtual string myName(){return "Line\n";}
+        //¬вод-вывод
+        virtual void set();
+        virtual void get() const;
+        void operator=(const Line B);
+        
+        //дописать сюда функцию заполнени€ массива указателей объектов лайн
+};
 
-}
 
-#endif //AEROFLOT.H
+#endif //AEROFLOT_H
