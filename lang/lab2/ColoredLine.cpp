@@ -19,7 +19,14 @@ ColoredLine::ColoredLine(ColoredLine &B){
     l = B.l;
     r = B.r;
     g = B.g;
-    b = B.b;
+    b = B.
+    b;
+}
+
+void ColoredLine::get() const{
+    cout<<"ƒлина линии: "<<l<<"\n";
+    cout<<"÷вет линии r g b: \n"
+    << r <<" "<<g<<" "<<b<<"\n";
 }
 
 //ќператоры

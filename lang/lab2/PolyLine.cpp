@@ -123,10 +123,12 @@ ostream &operator<<(ostream &s_out, const PolyLine &D){
     s_out<<"\n";
     return s_out;
 }
-// Перегрузка вывода из потока
+
 istream &operator>>(istream &s_in, PolyLine &D){
     s_in >> D.l;
     s_in >> D.n;
+    D.L = new float [D.n];
+    cout<<D.n<<"\n";
     for (int i = 0; i < D.n; i++){
         s_in>>D.L[i];
     }

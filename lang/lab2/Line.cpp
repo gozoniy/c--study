@@ -96,7 +96,7 @@ void getS(Line *A, int n){
 
 // Перегрузка ввода в поток
 ostream &operator<<(ostream &s_out, const Line &D){
-    s_out << D.l<<"\n";
+    s_out << D.l<<" ";
     return s_out;
 }
 // Перегрузка вывода из потока

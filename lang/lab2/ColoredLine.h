@@ -13,6 +13,7 @@ class ColoredLine : public Line{
         //ввод-вывод
         void setColor();
         void getColor();
+        void get() const override;
 
         virtual void operator=(const ColoredLine B) ;
         friend ostream& operator<<(ostream& s_out, const ColoredLine& D);//~

@@ -14,7 +14,10 @@ class Picture{
         //¬вод-вывод
         void set();
         void get();
-
+        void getS();
+        void getAl(float l1, float l2);
+        void f_in(string filename);
+        void f_out(string filename);
 };
 
 #endif //PICTURE_H

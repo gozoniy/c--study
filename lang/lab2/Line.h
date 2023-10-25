@@ -22,7 +22,6 @@ class Line{
         friend ostream& operator<<(ostream& s_out, const Line& D);//~
         friend istream& operator>>(istream& s_in, Line& D);//~
 
-        //дописать сюда функцию заполнения массива указателей объектов лайн
         //virtual void () = 0;
 };
 
