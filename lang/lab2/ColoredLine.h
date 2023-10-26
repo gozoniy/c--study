@@ -13,13 +13,10 @@ class ColoredLine : public Line{
         //ввод-вывод
         void setColor();
         void getColor();
-        void get() const override;
+        void set(istream& s_in) override;
+        ostream& get(ostream& s_out) const override;
 
         virtual void operator=(const ColoredLine B) ;
-        friend ostream& operator<<(ostream& s_out, const ColoredLine& D);//~
-        friend istream& operator>>(istream& s_in, ColoredLine& D);//~
-
-
 };
 
 #endif //COLOREDLINE_H

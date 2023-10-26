@@ -11,7 +11,6 @@ class PolyLine : public Line{
         virtual ~PolyLine(){delete[] L;}
 
         string myName() override {return "PolyLine\n";}
-        
         //ввод-вывод
         float length() override {
             float LM = 0;
@@ -21,13 +20,9 @@ class PolyLine : public Line{
             LM += Line::length();
             return LM;
         }
-
-        void set() override;
-        void get() const override;
+        void set(istream& s_in) override;
+        ostream& get(ostream& s_out) const override;
         void operator=(const PolyLine B);
-        friend ostream& operator<<(ostream& s_out, const PolyLine& D);//~
-        friend istream& operator>>(istream& s_in, PolyLine& D);//~
-
 };
 
 #endif //POLYLINE_H

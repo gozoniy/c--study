@@ -7,23 +7,23 @@ class Line{
     public:
         Line(){}
         Line(float L){l = L;}
-        Line(Line &B);
+        Line(const Line &B);
         virtual ~Line(){}
         
         virtual float length();
         virtual string myName(){return "Line\n";}
         //¬вод-вывод
-        virtual void set();
-        virtual void get() const;
+        virtual void set(istream& s_in);
+        virtual ostream& get(ostream& s_out) const;
         void operator=(const Line B);
         bool operator>(const Line B);
         bool operator<(const Line B);
 
-        friend ostream& operator<<(ostream& s_out, const Line& D);//~
-        friend istream& operator>>(istream& s_in, Line& D);//~
+        virtual Line* getCopy() const;
 
-        //virtual void () = 0;
+        
 };
-
+ostream& operator<<(ostream& s_out, const Line& D);
+istream& operator>>(istream& s_in, Line& D);
 
 #endif //AEROFLOT_H

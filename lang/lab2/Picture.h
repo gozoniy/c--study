@@ -4,7 +4,7 @@
 
 class Picture{
         int size;   
-        Line *objects;
+        Line **objects;
     public:
         Picture(){}
         Picture(int S);
@@ -12,9 +12,9 @@ class Picture{
         ~Picture(){delete[] objects;}
 
         //¬вод-вывод
-        void set();
-        void get();
-        void getS();
+        istream& set(istream& s_in);
+        ostream& get(ostream& s_out);
+        void sort();
         void getAl(float l1, float l2);
         void f_in(string filename);
         void f_out(string filename);

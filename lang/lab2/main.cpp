@@ -11,7 +11,6 @@ int main(void){
     system("chcp 1251");
     bool f = true, M = false;
     int sw,sw2,sw3,n;
-    //Line* A;
     while (f){
         cout<<"*Главное меню*\n"
         <<"1) Работа с объектом\n"
@@ -45,9 +44,6 @@ int main(void){
                         break;
                     }
                 }
-                
-
-
                 break;
             }
             case 2:{//Массив указателей
@@ -67,9 +63,7 @@ int main(void){
                     <<"5) Заполнить из файла\n"
                     <<"6) Вывести в файл\n"
                     <<"0) <<<<<<<\n";
-                    
                     cin>>sw3;
-                
                     switch (sw3){
                         case 1:{
                             P.set();
@@ -109,9 +103,6 @@ int main(void){
                     }
                     
                 }
-                
-
-
                 break;
             }
             case 0:{
