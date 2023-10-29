@@ -10,7 +10,7 @@ class PolyLine : public Line{
         PolyLine(PolyLine &B);
         virtual ~PolyLine(){delete[] L;}
 
-        string myName() override {return "PolyLine\n";}
+        string myName() override {return "PolyLine";}
         //ввод-вывод
         float length() override {
             float LM = 0;

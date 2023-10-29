@@ -1,2 +1,2 @@
 
-    system("chcp 1251");
+    Picture A;

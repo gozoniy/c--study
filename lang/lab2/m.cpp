@@ -9,9 +9,9 @@ using namespace std;
 
 int main(void){
     system("chcp 1251");
-    Picture A;
+    Picture A(2);
     A.set(cin);
-
-
+    A.Sort();
+    A.get(cout);
 
 }

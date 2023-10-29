@@ -11,7 +11,7 @@ class Line{
         virtual ~Line(){}
         
         virtual float length();
-        virtual string myName(){return "Line\n";}
+        virtual string myName(){return "Line";}
         //¬вод-вывод
         virtual void set(istream& s_in);
         virtual ostream& get(ostream& s_out) const;

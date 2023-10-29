@@ -26,21 +26,21 @@ int main(void){
                 switch (sw2){
                     case 1:{
                         Line A;
-                        A.set();
-                        A.get();
+                        A.set(cin);
+                        A.get(cout);
                         break;
                     }
                     case 2:{
                         ColoredLine A;
-                        A.set();
+                        A.set(cin);
                         A.setColor();
-                        A.get();
+                        A.get(cout);
                         break;
                     }
                     case 3:{
                         PolyLine A;
-                        A.set();
-                        A.get();
+                        A.set(cin);
+                        A.get(cout);
                         break;
                     }
                 }
@@ -58,7 +58,7 @@ int main(void){
                     cout
                     <<"1) Заполнить массив указателей\n"
                     <<"2) Вывести массив указателей\n"
-                    <<"3) Вывести по возрастанию\n"
+                    <<"3) Отсортировать по возрастанию\n"
                     <<"4) Вывести в диапазоне\n"
                     <<"5) Заполнить из файла\n"
                     <<"6) Вывести в файл\n"
@@ -66,15 +66,15 @@ int main(void){
                     cin>>sw3;
                     switch (sw3){
                         case 1:{
-                            P.set();
+                            P.set(cin);
                             break;
                         }
                         case 2:{
-                            P.get();
+                            P.get(cout);
                             break;
                         }
                         case 3:{
-                            P.getS();
+                            P.Sort();
                             break;
                         }
                         case 4:{

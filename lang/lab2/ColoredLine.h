@@ -9,7 +9,7 @@ class ColoredLine : public Line{
         ColoredLine(ColoredLine &B);
         virtual ~ColoredLine(){}
 
-        string myName() override {return "ColoredLine\n";}
+        string myName() override {return "ColoredLine";}
         //ввод-вывод
         void setColor();
         void getColor();
