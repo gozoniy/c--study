@@ -5,6 +5,7 @@
 class Picture{
         int size = 0;   
         Line **objects;
+        bool exists = false;
     public:
         Picture(){}
         Picture(int S);

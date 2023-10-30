@@ -1,2 +1,1 @@
-
-    Picture A;
+t

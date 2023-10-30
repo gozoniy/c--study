@@ -22,21 +22,33 @@ Picture::~Picture(){
 }
 
 void Picture::Clear(){
+    cout<<"!\n";
+
     for (int i = 0; i < size; i++){
-        delete [] objects[i];
+
+        delete objects[i];
+        cout<<"!\n";
     }
-    delete [] objects;
+    delete[] objects;
     size = 0;
+    objects = nullptr;
 
 }
 
 istream& Picture::set(istream& s_in){
+    
+    if (exists){
+        Clear();
+    }
     if (&s_in == &cin){
+        
         if (size == 0){
+            cout<<"ниче\n";
             cout<<"Укажите кол-во элементов:\n";
             cin>>size;
             objects = new Line*[size];
         }
+        
         for (int i = 0; i < size; i++){
             cout<<"Линия "<<i<<":\n";
             cout<<"Укажите тип:\n";
@@ -70,6 +82,7 @@ istream& Picture::set(istream& s_in){
             objects[i]->set(s_in);
         }
     }
+    exists = true;
     return s_in;
 }
 
@@ -116,6 +129,9 @@ void Picture::getAl(float l1, float l2){
 
 //Работа с файлами
 void Picture::f_in(string filename){
+    if (exists){
+        Clear();
+    }
     ifstream fin(filename);
     fin>>size;
     for (int i = 0; i < size; i++){
@@ -133,6 +149,7 @@ void Picture::f_in(string filename){
         fin>>*objects[i];
     }
     cout<<"Запись завершена.\n";
+    exists = true;
 }
 void Picture::f_out(string filename){
     ofstream fout(filename);
@@ -153,11 +170,7 @@ void Picture::Sort(){
             if (*objects[j] < *objects[j + 1])
             {
                 flag = false;
-                swap(objects[j],objects[j+1]);/*
-                Line b; // ??????? ?????????????? ??????????
-                b = B[j];
-                B[j] = B[j + 1]; // ?????? ??????? ????????
-                B[j + 1] = b;*/
+                swap(objects[j],objects[j+1]);
             }
         }
         if (flag)
