@@ -33,13 +33,40 @@ class TMatrix{
                 delete[] matrix[i];
             }
         }
-        //Оператор индексирования
+        //Операторы
+        //Индексирование
         Type& operator ()(int A,int B) const{
             return matrix[A][B];
         }
+        //присваивание
+        TMatrix operator = (const TMatrix& B){
+            for(int i = 0; i<a; i++){
+                for (int j = 0; j<b; j++){
+                    matrix[i][j] = B.matrix[i][j];
+                }
+            }
+            return *this;
+        }
+        //сравнение
+        bool operator<(TMatrix B){
+            if (this->Psum()<B.Psum()){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        bool operator>(TMatrix B){
+            if (this->Psum()>B.Psum()){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
 
         //сетеры
-        void setR(int min, int max){
+        void GenerateRandomValues(int min, int max){
             srand(time(NULL));
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
@@ -50,6 +77,7 @@ class TMatrix{
         void SetRandomValue(int I, int J,int min, int max){
             matrix[I][J] = min + rand()%(max-min+1);
         }
+
         istream& set(istream& in){
             if (&in == &cin){
                 cout<<"Введите элементы через пробел:\n";
@@ -116,7 +144,19 @@ class TMatrix{
                     }
                 }
             }
-            cout<<c2<<"\n";
+            return c2;
+        }
+
+        Type Psum(){
+            Type sum;
+            for(int i = 0; i<a; i++){
+                for (int j = 0; j<b; j++){
+                    if (matrix[i][j]>0){
+                        sum+=matrix[i][j];
+                    }
+                }
+            }
+            return sum;
         }
 
         
