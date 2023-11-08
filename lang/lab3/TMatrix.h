@@ -179,4 +179,5 @@ istream& operator >>(istream& in, TMatrix<Type>& Matr){
     return in;
 }
 
+
 #endif //TMATRIX_H
