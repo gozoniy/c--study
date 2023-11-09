@@ -41,7 +41,7 @@ ostream& PolyLine::get(ostream& s_out) const{
                 s_out<<L[i]<<"\n";
             }
             else{
-                s_out<<L[i]<<" ";
+                s_out<<L[i]<<"\n";
             }
         }
     }

@@ -8,6 +8,7 @@ using namespace std;
 Line::Line(const Line &B){
     l = B.l;
 }
+
 float Line::length(){
     return l;
 }
@@ -24,10 +25,10 @@ void Line::set(istream& s_in){
 ostream& Line::get(ostream& s_out) const{
     if (&s_out == &cout){
         cout<<"Длина линии:\n";
-		s_out<<l;
+		s_out<<l<<"\n";
     }
 	else{
-		s_out<<l<<" ";
+		s_out<<l<<"\n";
     }
     return s_out;
 }

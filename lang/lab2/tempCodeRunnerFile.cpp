@@ -1,2 +1,1 @@
-
-    system("chcp 1251");
+t
