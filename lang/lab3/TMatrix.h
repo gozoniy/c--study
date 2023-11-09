@@ -1,5 +1,7 @@
 #pragma once
 #ifndef TMATRIX_H
+#define TMATRIX_H
+
 #include <iostream>
 #include <time.h>
 using namespace std;
@@ -20,7 +22,8 @@ class TMatrix{
             }
         }
         //Конструктор копирования
-        TMatrix(const TMatrix& B) : TMatrix(B.a,B.b){
+        TMatrix(const TMatrix& B) {
+            Clear();
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
                     matrix[i][j] = B.matrix[i][j];
@@ -29,26 +32,39 @@ class TMatrix{
         }
         //Деструктор
         ~TMatrix(){
+            Clear();
+        }
+        void Clear(){
             for (int i = 0; i<a; i++){
                 delete[] matrix[i];
             }
+            delete[] matrix;
+            matrix=nullptr;
+            a = b = 0;
         }
+
         //Операторы
         //Индексирование
         Type& operator ()(int A,int B) const{
             return matrix[A][B];
         }
         //присваивание
-        TMatrix operator = (const TMatrix& B){
+        void operator = (TMatrix& B){
+            Clear();
+            a = B.a;
+            b = B.b;
+            matrix = new Type * [a];
+            for(int i = 0; i<a; i++){
+                matrix[i] = new Type [b];
+            }
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
                     matrix[i][j] = B.matrix[i][j];
                 }
             }
-            return *this;
         }
         //сравнение
-        bool operator<(TMatrix B){
+        bool operator<(const TMatrix& B){
             if (this->Psum()<B.Psum()){
                 return 1;
             }
@@ -56,7 +72,7 @@ class TMatrix{
                 return 0;
             }
         }
-        bool operator>(TMatrix B){
+        bool operator>(const TMatrix& B){
             if (this->Psum()>B.Psum()){
                 return 1;
             }
@@ -66,6 +82,8 @@ class TMatrix{
         }
 
         //сетеры
+        void setA(int A){a = A;}
+        void setB(int B){b = B;}
         void GenerateRandomValues(int min, int max){
             srand(time(NULL));
             for(int i = 0; i<a; i++){
@@ -79,6 +97,15 @@ class TMatrix{
         }
 
         istream& set(istream& in){
+            Clear();
+            if (&in == &cin){
+                cout<<"Введите размерность _ x _\n";
+            }
+            in>>a>>b;
+            matrix = new Type * [a];
+            for(int i = 0; i<a; i++){
+                matrix[i] = new Type [b];
+            }
             if (&in == &cin){
                 cout<<"Введите элементы через пробел:\n";
             }
@@ -148,7 +175,7 @@ class TMatrix{
         }
 
         Type Psum(){
-            Type sum;
+            Type sum=0;
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
                     if (matrix[i][j]>0){
@@ -175,6 +202,7 @@ ostream& operator <<(ostream& out, TMatrix<Type>& Matr){
 }
 template<class Type>
 istream& operator >>(istream& in, TMatrix<Type>& Matr){
+    
     Matr.set(in);
     return in;
 }

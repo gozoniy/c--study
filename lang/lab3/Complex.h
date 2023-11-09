@@ -8,11 +8,14 @@ private:
     double real, img; 
 public:  
     complex() { real = 0; img = 0; }
-    complex(double r, double i) { real = r; img = i; }  
+    complex(double r, double i=0.0) { real = r; img = i; }  
     complex(const complex &ob){ real = ob.real; img = ob.img; };      
     complex& operator = (complex); 
+    complex& operator = (const float I);
+    
     complex operator + (complex);
     complex operator - (complex);
+
     complex& operator += (complex); 
     complex& operator -= (complex); 
     bool operator == (complex& com);  
@@ -25,7 +28,8 @@ public:
 
     bool operator < (const float I);
     bool operator > (const float I);
-    complex& operator = (const float I); 
+    
+    
     friend float operator+= (float &I, complex& comp);
     
 };   
