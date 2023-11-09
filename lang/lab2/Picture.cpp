@@ -37,7 +37,7 @@ void Picture::Clear(){
 
 istream& Picture::set(istream& s_in){
     
-    if (exists){
+    if (objects){
         Clear();
     }
     if (&s_in == &cin){
@@ -67,6 +67,8 @@ istream& Picture::set(istream& s_in){
         }
     }
     else{
+        s_in>>size;
+        objects = new Line*[size];
         for (int i = 0; i < size; i++){
             string type;
             s_in >> type;

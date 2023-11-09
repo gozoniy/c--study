@@ -4,7 +4,7 @@
 
 class Picture{
         int size = 0;   
-        Line **objects;
+        Line **objects = nullptr;
         bool exists = false;
     public:
         Picture(){}
@@ -22,5 +22,5 @@ class Picture{
         void f_out(string filename);
         void Clear();
 };
-
+//выделение, конст и копии вывода в файл, убрать экзистс и второй сорт
 #endif //PICTURE_H
