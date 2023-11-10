@@ -19,7 +19,7 @@ class arr{
         void fillUr();                       //Упорядоченные в обратном порядке
         void get();                          //Вывод на экран
         void get_file(ofstream &fin);        //Вывод в поток
-        void mergeSort();                    //Сортировка прямым слиянием
+        arr& mergeSort();                    //Сортировка прямым слиянием
         void polyphaseMergeSort();           //Многофазная сортировка
 };
 #endif //ARR_H

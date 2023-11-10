@@ -80,7 +80,11 @@ void arr<T>::get_file(ofstream &fin){
 }
 
 template<class T>
-void arr<T>::mergeSort(){
+arr<T>& arr<T>::mergeSort(){
+    if (size == 1 or size == 0){
+        return *this;
+    }
+
     int n1 = size/2;
     arr<T> B(n1);
     arr<T> C(size - n1);
@@ -92,8 +96,10 @@ void arr<T>::mergeSort(){
     for (int i = 0; i<(size - n1); i++){
         C.a[i] = a[i*2];
     }
-    int o, p;
-    o = p = 0;
+    B.get();
+    C.get();
+    
+    
     for (int i = 0; i < size; i++){
         
         if (B.a[o]<C.a[p]){
@@ -105,6 +111,7 @@ void arr<T>::mergeSort(){
             p++;
         }
     }
+    return *this;
 }
 
 template<class T>
