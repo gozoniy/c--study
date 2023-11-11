@@ -1,6 +1,6 @@
-//21. сортировка прямыми обменами; сортировка прямыми включениями. 
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 void fillR(int *A, int size, int n1, int n2){
@@ -21,109 +21,96 @@ void copy(int *A, int *B, int size){
         B[i] = A[i];
     }
 }
-template<typename T>
-void mergeSort(T a[], int l)
-{
-	int BlockSizeIterator;
-	int BlockIterator;
-	int LeftBlockIterator;
-	int RightBlockIterator;
-	int MergeIterator;
 
-	int LeftBorder;
-	int MidBorder;
-	int RightBorder;
-	for (BlockSizeIterator = 1; BlockSizeIterator < l; BlockSizeIterator *= 2)
-	{
-		for (BlockIterator = 0; BlockIterator < l - BlockSizeIterator; BlockIterator += 2 * BlockSizeIterator)
-		{
-			//Производим слияние с сортировкой пары блоков начинающуюся с элемента BlockIterator
-			//левый размером BlockSizeIterator, правый размером BlockSizeIterator или меньше
-			LeftBlockIterator = 0;
-			RightBlockIterator = 0;
-			LeftBorder = BlockIterator;
-			MidBorder = BlockIterator + BlockSizeIterator;
-			RightBorder = BlockIterator + 2 * BlockSizeIterator;
-			RightBorder = (RightBorder < l) ? RightBorder : l;
-			int* SortedBlock = new int[RightBorder - LeftBorder];
+void MergeS(string inp){
 
-			//Пока в обоих массивах есть элементы выбираем меньший из них и заносим в отсортированный блок
-			while (LeftBorder + LeftBlockIterator < MidBorder && MidBorder + RightBlockIterator < RightBorder)
-			{
-				if (a[LeftBorder + LeftBlockIterator] < a[MidBorder + RightBlockIterator])
-				{
-					SortedBlock[LeftBlockIterator + RightBlockIterator] = a[LeftBorder + LeftBlockIterator];
-					LeftBlockIterator += 1;
-				}
-				else
-				{
-					SortedBlock[LeftBlockIterator + RightBlockIterator] = a[MidBorder + RightBlockIterator];
-					RightBlockIterator += 1;
-				}
-			}
-			//После этого заносим оставшиеся элементы из левого или правого блока
-			while (LeftBorder + LeftBlockIterator < MidBorder)
-			{
-				SortedBlock[LeftBlockIterator + RightBlockIterator] = a[LeftBorder + LeftBlockIterator];
-				LeftBlockIterator += 1;
-			}
-			while (MidBorder + RightBlockIterator < RightBorder)
-			{
-				SortedBlock[LeftBlockIterator + RightBlockIterator] = a[MidBorder + RightBlockIterator];
-				RightBlockIterator += 1;
-			}
+    ifstream in(inp);
+    int t = 0;
+    int size = 0;
 
-			for (MergeIterator = 0; MergeIterator < LeftBlockIterator + RightBlockIterator; MergeIterator++)
-			{
-				a[LeftBorder + MergeIterator] = SortedBlock[MergeIterator];
-			}
-			delete SortedBlock;
-		}
-	}
-}
-
-void MergeS(int *A, int size, string buffer_filename_1, string buffer_filename_2, string buffer_filename_out){
+    //Возвраты по длине
+    while(in>>t){
+        size++;
+    }
+    cout<<size;
     if (size <= 1){
         return;
     }
     if (size == 2){
-        if (A[0]>A[1])
-            swap(A[0], A[1]);
+        int a,b;
+        in>>a;
+        in>>b;
+        if (a>b){
+            in.close();
+            ofstream out(inp);
+            out<<b<<" "<<a;
+            out.close();
+        }
+        else
+            in.close();
         return;
     }
-    int n1 = size / 2;
-    int *B = new int [n1];
-    int *C = new int [size - n1];
-    //Делим на два массива
-    for (int i = 0; i<n1; i++){
-        B[i] = A[i*2+1];
+    
+    //Деление файла
+    ofstream out1("buffer1.txt");
+    ofstream out2("buffer2.txt");
+    int c = 0;
+    int temp = 0;
+    in>>temp;
+    while(!in.eof()){
+        if (c%2==0)
+            out1<<temp<<" ";
+        else
+            out2<<temp<<" ";
+        in>>temp;
+        c++;
     }
-    for (int i = 0; i<(size - n1); i++){
-        C[i] = A[i*2];
-    }
-    MergeS(B,n1);
-    MergeS(C,size-n1);
+    in.close();
+    out1.close();
+    out2.close();
+    MergeS("buffer1.txt");
+    MergeS("buffer2.txt");
 
-    //Слияние двух отсортированных частей
+    //Перезапуск потоков
+    ifstream in1("buffer1.txt");
+    ifstream in2("buffer2.txt");
+    int size1, size2;
+    size1 = size2 = 0;
+    int t1;
+    while(in1>>t1){
+        size1++;
+    }
+    while(in2>>t1){
+        size2++;
+    }
+    //Слияние
+    ofstream os(inp);
     int o, p;
     o = p = 0;
+    int temp1, temp2;
+    in1>>temp1;
+    in2>>temp2;
+    
     for (int i = 0; i < size; i++){
-        if (p>=(size-n1)||(o<n1 && B[o]<C[p])){
-            A[i] = B[o];
+        if (p>=(size2)||(o<size1 && temp1<temp2)){
+            os<<temp1;
             o++;
+            in1>>temp1;
         }
         else{
-            A[i] = C[p];
+            os<<temp2;
             p++;
+            in2>>temp2;
         }
     }
-    delete[] B;
-    delete[] C;
+    os.close();
+    remove("buffer1.txt");
+    remove("buffer2.txt");
+
 }
 
 void getFile(string filename, int size, int n1, int n2){
     ofstream out(filename);
-
     srand(time(0));
     for (int i = 0; i < size; i++){
         out << n1 + rand()%(n2-n1+1)<<" ";
@@ -131,16 +118,87 @@ void getFile(string filename, int size, int n1, int n2){
     out.close();
 }
 
-void MergeSort(string filename,int size){
+void MergeSort(string filename){
+    ifstream in(filename);
+    int t = 0;
+    int size = 0;
+    //Возвраты по длине
+    while(in>>t){
+        size++;
+    }
+    cout<<size;
+    if (size <= 1){
+        return;
+    }
+    if (size == 2){
+        int a,b;
+        in>>a;
+        in>>b;
+        if (a>b){
+            in.close();
+            ofstream out(filename);
+            out<<b<<" "<<a;
+            out.close();
+        }
+        else
+            in.close();
+        return;
+    }
     //Делим на два файла
-    for (int i = 0; i<n1; i++){
-        B[i] = A[i*2+1];
+    ofstream out1("buffer1.txt");
+    ofstream out2("buffer2.txt");
+    int c = 0;
+    int temp = 0;
+    in>>temp;
+    while(!in.eof()){
+        if (c%2==0)
+            out1<<temp<<" ";
+        else
+            out2<<temp<<" ";
+        in>>temp;
+        c++;
     }
-    //как подготовить (поделить) в субфункции половинки файлов к передаче в сортирующую функцию
-    for (int i = 0; i<(size - n1); i++){
-        C[i] = A[i*2];
+    in.close();
+    out1.close();
+    out2.close();
+    MergeSort("buffer1.txt");
+    MergeSort("buffer2.txt");
+
+    //Перезапуск потока для чтения
+    ifstream in1("buffer1.txt");
+    ifstream in2("buffer2.txt");
+    int size1, size2;
+    size1 = size2 = 0;
+    int t1;
+    while(in1>>t1){
+        size1++;
     }
+    while(in2>>t1){
+        size2++;
+    }
+    //Слияние
+    ofstream os(filename);
+    int o, p;
+    o = p = 0;
+    int temp1, temp2;
+    in1>>temp1;
+    in2>>temp2;
+    
+    for (int i = 0; i < size; i++){
+        if (p>=(size2)||(o<size1 && temp1<temp2)){
+            os<<temp1;
+            o++;
+            in1>>temp1;
+        }
+        else{
+            os<<temp2;
+            p++;
+            in2>>temp2;
+        }
+    }
+    os.close();
 }
+
 int main(void){
     system("chcp 1251");
     int f = 1;
@@ -160,6 +218,7 @@ int main(void){
                 cout<<"Введите диапозон генерации от n1 до n2 (n1_n2):";
                 int n1, n2;
                 cin>>n1>>n2;
+                fillR(A,n,n1,n2);
                 getFile("numbers.txt", n, n1, n2);
                 get(A, n);
                 int *B = new int [n];
@@ -169,7 +228,7 @@ int main(void){
                 cin>>in2;
                 switch (in2){
                     case 1:{
-                        MergeS(B, n);
+                        MergeSort("numbers.txt");
                         break;
                     }
                     case 2:{
