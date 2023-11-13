@@ -91,7 +91,9 @@ int main(){
         <<"4) Модифицировать элемент\n"
         <<"5) Кол-во чисел меньше среднего четных строк - minAvg()\n"
         <<"6) Сумма положительных элементов массива - Psum()\n"
-        <<"7) Выход\n";
+        <<"7) Вывести в файл\n"
+        <<"8) Прочитать из файла\n"
+        <<"9) <<< Выход\n";
             cin>>sw2;
             switch (sw2){
                 case 1:{
@@ -123,6 +125,21 @@ int main(){
                     break;
                 }
                 case 7:{
+                    string file_name;
+                    cout<<"Введите имя файла:\n";
+                    cin>>file_name;
+                    A.f_out(file_name);
+                    break;
+                }
+                case 8:{
+                    string file_name;
+                    cout<<"Введите имя файла:\n";
+                    cin>>file_name;
+                    A.f_in(file_name);
+                    break;
+                    break;
+                }
+                case 9:{
                     f = 0;
                     break;
                 }
