@@ -6,13 +6,13 @@ class PolyLine : public Line{
         float *L;
     public:
         PolyLine(){}
-        PolyLine(int N){n = N;}
-        PolyLine(PolyLine &B);
+        PolyLine(const int N):n(N){};
+        PolyLine(const PolyLine &B);
         virtual ~PolyLine(){delete[] L;}
 
-        string myName() override {return "PolyLine";}
+        string myName() const override {return "PolyLine";}
         //ввод-вывод
-        float length() override {
+        float length() const override {
             float LM = 0;
             for (int i = 0; i<n; i++){
                 LM+=L[i];

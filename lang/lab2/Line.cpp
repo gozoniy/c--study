@@ -5,14 +5,6 @@
 using namespace std;
 #include "Line.h"
 
-Line::Line(const Line &B){
-    l = B.l;
-}
-
-float Line::length(){
-    return l;
-}
-
 void Line::set(istream& s_in){
     if (&s_in == &cin){
         cout<<"¬ведите длину линии:\n";
@@ -37,13 +29,11 @@ ostream& Line::get(ostream& s_out) const{
 void Line::operator=(const Line B){
     l = B.l;
 }
-bool Line::operator>(const Line B){
-    bool a = B.l > l;
-    return a;
+bool Line::operator>(const Line B)const{
+    return B.l > l;
 }
-bool Line::operator<(const Line B){
-    bool a = B.l < l;
-    return a;
+bool Line::operator<(const Line B)const{
+    return B.l < l;
 }
 
 Line* Line::getCopy() const {

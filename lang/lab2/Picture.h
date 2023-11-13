@@ -5,22 +5,19 @@
 class Picture{
         int size = 0;   
         Line **objects = nullptr;
-        bool exists = false;
     public:
         Picture(){}
-        Picture(int S);
-        Picture(Picture &B);
-        ~Picture();
+        Picture(const int S): size(S), objects(new Line * [size]){};
+        Picture(const Picture &B);
+        ~Picture(){Clear();};
 
         //¬вод-вывод
         istream& set(istream& s_in);
-        ostream& get(ostream& s_out);
+        ostream& get(ostream& s_out) const;
+        void getL(const float l1, const float l2);
         void Sort();
-        void sort();
-        void getAl(float l1, float l2);
         void f_in(string filename);
-        void f_out(string filename);
+        void f_out(string filename) const;
         void Clear();
 };
-//выделение, конст и копии вывода в файл, убрать экзистс и второй сорт
 #endif //PICTURE_H

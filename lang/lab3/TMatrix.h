@@ -85,6 +85,14 @@ class TMatrix{
         void setA(int A){a = A;}
         void setB(int B){b = B;}
         void GenerateRandomValues(int min, int max){
+            if (a==0||b==0){
+                cout<<"Введите размерность _ x _\n";
+                cin>>a>>b;
+                matrix = new Type * [a];
+                for(int i = 0; i<a; i++){
+                    matrix[i] = new Type [b];
+                }
+            }
             srand(time(NULL));
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
@@ -97,7 +105,7 @@ class TMatrix{
         }
 
         istream& set(istream& in){
-            Clear();
+            //Clear();
             if (&in == &cin){
                 cout<<"Введите размерность _ x _\n";
             }
@@ -185,7 +193,19 @@ class TMatrix{
             }
             return sum;
         }
-
+        
+    //Работа с файлами
+    void f_in(string filename){
+        Clear();
+        ifstream fin(filename);
+        set(fin);
+        cout<<"Запись завершена.\n";
+    }
+    void f_out(string filename){
+        ofstream fout(filename);
+        get(fout);
+        cout<<"Запись завершена.\n";
+    }
         
 };
 
@@ -206,6 +226,7 @@ istream& operator >>(istream& in, TMatrix<Type>& Matr){
     Matr.set(in);
     return in;
 }
+
 
 
 #endif //TMATRIX_H

@@ -11,11 +11,11 @@ void ColoredLine::setColor(){
     cout<<"”кажите цвет r g b:\n";
     cin>>r>>g>>b;
 }
-void ColoredLine::getColor(){
+void ColoredLine::getColor()const {
     cout<<r<<" "<<g<<" "<<b<<"\n";
 }
 
-ColoredLine::ColoredLine(ColoredLine &B){
+ColoredLine::ColoredLine(const ColoredLine &B){
     l = B.l;
     r = B.r;
     g = B.g;
@@ -40,7 +40,6 @@ ostream& ColoredLine::get(ostream& s_out) const{
     return s_out;
 }
 
-//ќператоры
 void ColoredLine::operator=(const ColoredLine B){
     l = B.l;
     r = B.r;

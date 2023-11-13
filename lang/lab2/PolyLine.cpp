@@ -6,7 +6,7 @@ using namespace std;
 #include "Line.h"
 #include "PolyLine.h"
 
-PolyLine::PolyLine(PolyLine &B){
+PolyLine::PolyLine(const PolyLine &B){
     l = B.l;
     n = B.n;
     L = new float[n];
@@ -48,7 +48,6 @@ ostream& PolyLine::get(ostream& s_out) const{
     return s_out;
 }
 
-//Операторы
 void PolyLine::operator=(const PolyLine B){
     l = B.l;
     n = B.n;

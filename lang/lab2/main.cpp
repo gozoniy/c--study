@@ -33,7 +33,6 @@ int main(void){
                     case 2:{
                         ColoredLine A;
                         A.set(cin);
-                        A.setColor();
                         A.get(cout);
                         break;
                     }
@@ -50,10 +49,7 @@ int main(void){
                 bool f2 = true;
                 int N;
                 string filename;
-                cout<<"Укажите длину массива указетелей: ";
-                cin>>N;
-                Picture P(N);
-                
+                Picture P;
                 while (f2){
                     cout
                     <<"1) Заполнить массив указателей\n"
@@ -81,7 +77,7 @@ int main(void){
                             float l1,l2;
                             cout<<"Укажите диапазон от_ до_:\n";
                             cin>>l1>>l2;
-                            P.getAl(l1,l2);
+                            P.getL(l1,l2);
                             break;
                         }
                         case 5:{

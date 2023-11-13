@@ -5,14 +5,14 @@ class ColoredLine : public Line{
         int r,g,b;
     public:
         ColoredLine(){}
-        ColoredLine(float L) : Line(L) {}
-        ColoredLine(ColoredLine &B);
+        ColoredLine(const float L) : Line(L) {}
+        ColoredLine(const ColoredLine &B);
         virtual ~ColoredLine(){}
 
-        string myName() override {return "ColoredLine";}
+        string myName() const override  {return "ColoredLine";}
         //ввод-вывод
         void setColor();
-        void getColor();
+        void getColor() const;
         void set(istream& s_in) override;
         ostream& get(ostream& s_out) const override;
 
