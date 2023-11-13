@@ -105,7 +105,7 @@ class TMatrix{
         }
 
         istream& set(istream& in){
-            //Clear();
+            Clear();
             if (&in == &cin){
                 cout<<"Введите размерность _ x _\n";
             }
@@ -129,6 +129,12 @@ class TMatrix{
         int getA(){return a;}
         int getB(){return b;}
         ostream& get(ostream& out){
+            if (&out == &cout){
+                cout<<"Матрица размером "<<a<<" x "<<b<<":\n";
+            }
+            else{
+                out<<a<<" "<<b<<"\n";
+            }
             for(int i = 0; i<a; i++){
                 for (int j = 0; j<b; j++){
                     out<<matrix[i][j]<<" ";
@@ -211,18 +217,11 @@ class TMatrix{
 
 template<class Type>
 ostream& operator <<(ostream& out, TMatrix<Type>& Matr){
-    if (&out == &cout){
-        out<<"Матрица размером "<<Matr.getA()<<" x "<<Matr.getB()<<"\n";
-    }
-    else{
-        out<<Matr.getA()<<" "<<Matr.getB()<<"\n";
-    }
     Matr.get(out);
     return out;
 }
 template<class Type>
 istream& operator >>(istream& in, TMatrix<Type>& Matr){
-    
     Matr.set(in);
     return in;
 }

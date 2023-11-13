@@ -94,10 +94,15 @@ bool complex::operator > (const float I)
 
 ostream& operator << (std::ostream& out, const complex& com) 
 {  
-    if(com.img < 0) 
-        out << com.real << " + i(" << com.img << ")"; 
-    else 
-        out << com.real << " + i" << com.img ; 
+    if (&out == &cout){
+        if(com.img < 0) 
+            out << com.real << " + i(" << com.img << ")"; 
+        else 
+            out << com.real << " + i" << com.img ; 
+    }
+    else{
+            out << com.real <<" " << com.img; 
+    }
     return out;
 } 
  
