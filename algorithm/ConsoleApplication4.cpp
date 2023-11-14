@@ -9,15 +9,18 @@ private:
 	const char* Name;
 
 	void directMerge(string in1, string in2, string out, int step, int& mergesCount) {					//Прямое слияние
+		//пришло 2 делённых файла
 		ifstream inFile1(in1), inFile2(in2);
 		ofstream outFile(out);
 		int a, b, i, j;
 		inFile1 >> a;
 		inFile2 >> b;
 		while (!inFile1.eof() && !inFile2.eof()) {
+			//пока в них есть элементы
 			i = 0;
 			j = 0;
 			while (i < step && j < step && !inFile1.eof() && !inFile2.eof()) {
+				//слияние файлов в один по размеру
 				if (a < b) {
 					outFile << a << " ";
 					inFile1 >> a;
@@ -177,8 +180,10 @@ public:
 		while (out >> elem) {
 			size++;
 		}
+		cout<<size<<" N\n";
 		out.close();
 		for (int step = 1; step < size; step *= 2) {
+			//создаем делённые потоки для прямого слияния
 			ifstream out(Name);
 			ofstream temp1("temp1.txt"), temp2("temp2.txt");
 			out >> elem;
