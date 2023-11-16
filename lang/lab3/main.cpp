@@ -14,10 +14,8 @@ int main(){
     <<"2) complex\n";
     cin>>sw;
     int a,b;
-    cout<<"Введите размерность _ x _\n";
-    cin>>a>>b;
     if (sw == 1){
-        TMatrix<double> A(a,b);
+        TMatrix<double> A;
         int f = 1;
         while(f){
         cout<<"1) Заполнить матрицу с консоли\n"
@@ -48,7 +46,7 @@ int main(){
                     int I,J;
                     cout<<"Укажите i,j элемента: _ x _ \n";
                     cin>>I>>J;
-                    A.modify(I,J);
+                    A.modify(I-1,J-1);
                     break;
                 }
                 case 5:{

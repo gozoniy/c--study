@@ -82,8 +82,6 @@ class TMatrix{
         }
 
         //сетеры
-        void setA(int A){a = A;}
-        void setB(int B){b = B;}
         void GenerateRandomValues(int min, int max){
             if (a==0||b==0){
                 cout<<"Введите размерность _ x _\n";
@@ -126,8 +124,6 @@ class TMatrix{
         }
 
         //гетеры
-        int getA(){return a;}
-        int getB(){return b;}
         ostream& get(ostream& out){
             if (&out == &cout){
                 cout<<"Матрица размером "<<a<<" x "<<b<<":\n";
