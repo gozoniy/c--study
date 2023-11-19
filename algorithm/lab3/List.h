@@ -42,13 +42,18 @@ public:
 
     //Потоковый ввод
     void set(istream& input, int size){
-        int value;
-        if (&input == &cin){
-            cout<<"Введите элементы через пробел:\n";
+        if (size< 0 ){
+            cout<<"Неверный размер.\n";
         }
-        for (int i = 0; i < size; i++){
-            input >> value;
-            setEnd(value);
+        else{
+            int value;
+            if (&input == &cin){
+                cout<<"Введите элементы через пробел:\n";
+            }
+            for (int i = 0; i < size; i++){
+                input >> value;
+                setEnd(value);
+            }
         }
     }
 
@@ -122,54 +127,74 @@ public:
 
     //Добавить по индексу
 	void setIndex(int index, T _value){
-		if (index == size_){
-			setEnd(_value);
-			return;
-		}
-		if (index == 0){
-			setBegin(_value);
-			return;
-		}
-        Node<T>* itemPrev = getIndex(index - 1);
-        Node<T>* item = getIndex(index);
-        Node<T>* t = new Node<T>;
-        t->Set(_value);
-        t->SetNext(item);
-        t->SetPrev(itemPrev);
-        itemPrev->SetNext(t);
-        item->SetPrev(t);
-        size_++;
+        if (index > size_ || index<0){
+            cout<<"Неверный индекс\n";
+        }
+        else{
+            if (index == size_){
+                setEnd(_value);
+                return;
+            }
+            if (index == 0){
+                setBegin(_value);
+                return;
+            }
+            Node<T>* itemPrev = getIndex(index - 1);
+            Node<T>* item = getIndex(index);
+            Node<T>* t = new Node<T>;
+            t->Set(_value);
+            t->SetNext(item);
+            t->SetPrev(itemPrev);
+            itemPrev->SetNext(t);
+            item->SetPrev(t);
+            size_++;
+        }
 	}
 
     //Доступ к элементу по индексу
 	Node<T>* getIndex(int index){
-		Node<T>* t = begin_;
-		for (int i = 0; i < index; i++)
-			t = t->Next();
-		return t;
+        if (index > size_ || index<0){
+            cout<<"Неверный индекс\n";
+        }
+        else{
+            Node<T>* t = begin_;
+            for (int i = 0; i < index; i++)
+                t = t->Next();
+            return t;
+        }
 	}
 
     //Доступ к значению элемента по индексу
 	T GetValue(int index){
-		Node<T>* t = getIndex(index);
-		return t->Value();
+        if (index > size_ || index<0){
+            cout<<"Неверный индекс\n";
+        }
+        else{
+            Node<T>* t = getIndex(index);
+            return t->Value();
+        }
 	}
 
     //Удалить элемент по индексу
 	void DelIndex(int index){
-		Node<T>* item = getIndex(index);
-		Node<T>* itemPrev = item->Prev();
-		Node<T>* itemNext = item->Next();
-		if ((size_ > 1) && (itemPrev != nullptr))
-			itemPrev->SetNext(itemNext);
-		if ((itemNext != nullptr) && (size_ > 1))
-			itemNext->SetPrev(itemPrev);
-		if (index == 0)
-			begin_ = itemNext;
-		if (index == size_ - 1)
-			end_ = itemPrev;
-		delete item;
-		size_--;
+        if (index > size_ || index<0){
+            cout<<"Неверный индекс\n";
+        }
+        else{
+            Node<T>* item = getIndex(index);
+            Node<T>* itemPrev = item->Prev();
+            Node<T>* itemNext = item->Next();
+            if ((size_ > 1) && (itemPrev != nullptr))
+                itemPrev->SetNext(itemNext);
+            if ((itemNext != nullptr) && (size_ > 1))
+                itemNext->SetPrev(itemPrev);
+            if (index == 0)
+                begin_ = itemNext;
+            if (index == size_ - 1)
+                end_ = itemPrev;
+            delete item;
+            size_--;
+        }
 	}
 	
     //Удалить начальный элемент
