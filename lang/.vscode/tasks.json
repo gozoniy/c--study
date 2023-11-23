@@ -1,6 +1,20 @@
 {
+  "windows": {
+    "options": {
+      "shell": {
+        "executable": "cmd.exe",
+        "args": [
+          "/C",
+          // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+          "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+          "&&"
+        ]
+      }
+    }
+  },
     "tasks": [
         {
+            
             "type": "cppbuild",
             "label": "C/C++: cl.exe сборка активного файла",
             "command": "cl.exe",
