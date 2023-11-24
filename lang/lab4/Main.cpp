@@ -5,13 +5,49 @@
 #include <map>
 #include <algorithm>
 
-#include "cars.h"
+#include "dealer.cpp"
 
 using namespace std;
 
-void main(){
+int main(void){
     system("chcp 1251");
-    cars A;
-    A.set("input.txt", 2);
-    A.get("output.txt");
+    bool f = true;
+    int sw;
+    dealer A;
+    while (f){
+        cout<<"Главное меню\n"
+        <<"1) Прочитать каталог из файла input.txt\n"
+        <<"2) Прочитать каталог из консоли\n"
+        <<"3) Вывести каталог в файл output.txt\n"
+        <<"4) Вывести каталог в консоль\n"
+        <<"5) Вывести 5 самых быстрых автомобилей каждой категории\n"
+        <<"0) <<< Выход\n";
+        cin>>sw;
+        switch(sw){
+            case 1:{
+                ifstream in("input.txt");
+                A.set(in);
+                in.close();
+                break;
+            }
+            case 2:{
+                A.set(cin);
+                break;
+            }
+            case 3:{
+                ofstream out("output.txt");
+                A.get(out);
+                break;
+            }
+            case 4:{
+                A.get(cout);
+                break;
+            }
+            case 5:{
+                A.top5(cout);
+                break;
+            }
+        }
+
+    }
 }
