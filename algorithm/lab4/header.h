@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//корень бинарного дерева
 template<class T>
 class Node
 {
@@ -12,7 +13,7 @@ private:
 	Node* left;
 	Node* right;
 public:
-	Node() : _value(nullptr), left(nullptr), right(nullptr) {}
+	Node() : _value(T()), left(nullptr), right(nullptr) {}
 	Node(T value)
 	{
 		_value = value;
@@ -30,6 +31,7 @@ public:
 
 };
 
+//бинарное дерево (поисковое)
 template<class T>
 class Tree
 {
@@ -160,7 +162,8 @@ Tree<T>* Tree<T>::scan_file(string path)
 	return this;
 }
 
-//рекурсия идет сначала до левого нижнего узла, потом до правого нижнего узла, далее поднимается в корень
+//рекурсия идет сначала до левого нижнего узла, потом до правого нижнего узла,
+//далее поднимается в корень
 //и пока поднимается в корень, удаляет все узлы.
 template<class T>
 void Tree<T>::delete_tree(Node<T>* t)
@@ -428,22 +431,23 @@ istream& operator >> (istream& in, Tree<T>& obj)
 template<class T>
 Node<T>* Tree<T>::keyLengthRemoveRec(Node<T>* node, int length)
 {
-	if(node == nullptr)
+	if (node == nullptr)
 		return nullptr;
+
 	node->SetLeft(keyLengthRemoveRec(node->GetLeft(), length));
 	node->SetRight(keyLengthRemoveRec(node->GetRight(), length));
 
 	if (node->GetValue().length() > length)
 	{
-		delete node;
-		return nullptr;
+		return RemoveNode(node, node->GetValue());
 	}
 
 	return node;
 }
 
 
-//СБАЛАНСИРОВАННОЕ ДЕРЕВО
+
+//сбалансированный корень с коэфом выравнивания
 
 template<class T>
 class BalancedNode : public Node<T>
@@ -464,6 +468,8 @@ public:
 	BalancedNode* GetLeft() { return static_cast<BalancedNode*>(Node<T>::GetLeft()); }
 	BalancedNode* GetRight() { return static_cast<BalancedNode*>(Node<T>::GetRight()); }
 };
+
+//сбалансированное дерево
 
 template<class T>
 class BalancedTree : public Tree<BalancedNode<T>>
@@ -496,6 +502,7 @@ public:
 
 };
 
+//малый левый поворот
 template<class T>
 BalancedNode<T>* BalancedTree<T>::LeftRotation(BalancedNode<T>* node)
 {
@@ -505,6 +512,8 @@ BalancedNode<T>* BalancedTree<T>::LeftRotation(BalancedNode<T>* node)
 	return temp;
 }
 
+
+//малый правый поворот
 template<class T>
 BalancedNode<T>* BalancedTree<T>::RightRotation(BalancedNode<T>* node)
 {
@@ -517,16 +526,96 @@ BalancedNode<T>* BalancedTree<T>::RightRotation(BalancedNode<T>* node)
 template<class T>
 BalancedNode<T>* BalancedTree<T>::LeftRightRotation(BalancedNode<T>* node)
 {
-	node->SetLeft(RightRotation(node->GetLeft()));
-	return LeftRotation(node);
+	if (node == nullptr || node->GetLeft() == nullptr)
+	{
+		return node;
+	}
+
+	node->SetLeft(LeftRotation(node->GetLeft()));
+	return RightRotation(node);
 }
 
 template<class T>
 BalancedNode<T>* BalancedTree<T>::RightLeftRotation(BalancedNode<T>* node)
 {
-	node->SetRight(LeftRotation(node->GetRight()));
-	return RightRotation(node);
+	if (node == nullptr || node->GetRight() == nullptr)
+	{
+		return node;
+	}
+
+	node->SetRight(RightRotation(node->GetRight()));
+	return LeftRotation(node);
 }
+
+////большой левый поворот
+//template<class T>
+//BalancedNode<T>* BalancedTree<T>::LeftRightRotation(BalancedNode<T>* node)
+//{
+//	if (node == nullptr || node->GetLeft() == nullptr)
+//	{
+//		return node;
+//	}
+//
+//	BalancedNode<T>* temp = node->GetLeft()->GetRight();
+//	node->GetLeft()->SetRight(temp->GetLeft());
+//	temp->SetLeft(node->GetLeft());
+//
+//	if (temp->GetBalanceFactor() < 0)
+//	{
+//		node->SetBalanceFactor(1);
+//	}
+//	else
+//	{
+//		node->SetBalanceFactor(0);
+//	}
+//	if (temp->GetBalanceFactor() > 0)
+//	{
+//		node->GetLeft()->SetBalanceFactor(-1);
+//	}
+//	else
+//	{
+//		node->GetLeft()->SetBalanceFactor(0);
+//	}
+//
+//	temp->SetBalanceFactor(0);
+//	node->SetLeft(temp);
+//	return RightRotation(node);
+//}
+//
+////большой правый поворот
+//template<class T>
+//BalancedNode<T>* BalancedTree<T>::RightLeftRotation(BalancedNode<T>* node)
+//{
+//	if (node == nullptr || node->GetRight() == nullptr)
+//	{
+//		return node;
+//	}
+//
+//	BalancedNode<T>* temp = node->GetRight()->GetLeft();
+//	node->GetRight()->SetLeft(temp->GetRight());
+//	temp->SetRight(node->GetRight());
+//
+//	if (temp->GetBalanceFactor() > 0)
+//	{
+//		node->SetBalanceFactor(-1);
+//	}
+//	else
+//	{
+//		node->SetBalanceFactor(0);
+//	}
+//	if (temp->GetBalanceFactor() < 0)
+//	{
+//		node->GetRight()->SetBalanceFactor(1);
+//	}
+//	else
+//	{
+//		node->GetRight()->SetBalanceFactor(0);
+//	}
+//
+//	temp->SetBalanceFactor(0);
+//	node->SetRight(temp);
+//	return LeftRotation(node);
+//}
 
 template<class T>
 void BalancedTree<T>::UpdateBalanceFactor(BalancedNode<T>* node)

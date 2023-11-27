@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "header.h"
-#include <string>
+#include<string>
 
 enum Menu
 {
@@ -31,8 +31,8 @@ enum Menu2
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	Tree<int> p;
-	Tree<int> p1;
+	Tree<string> p;
+	Tree<string> p1;
 	BalancedTree<int> p3;
 	int ans;
 	do
@@ -88,9 +88,9 @@ int main()
 				/*ordered_print - единственный вариант вывода, при котором правильно
 				сканируется из этого же файла, так как при выводе корень дерева идет первый, а
 				метод scan берет первый элемент за корень*/
-				<< ordered_print << " - Прямой вывод в файл: " << endl
-				<< unordered_print << " - Обратный вывод в файл: " << endl
-				<< koncevoe_print << " - Концевой вывод в файл: " << endl;
+				<< ordered_print << " - Прямой вывод в файл" << endl
+				<< unordered_print << " - Обратный вывод в файл" << endl
+				<< koncevoe_print << " - Концевой вывод в файл" << endl;
 				cin >> ans2;
 
 				switch (ans2)
@@ -121,7 +121,7 @@ int main()
 		}
 		case add_node:
 		{
-			int value;
+			string value;
 			cout << "Введите ключ для добавления узла: ";
 			cin >> value;
 			p.add(value);
@@ -129,7 +129,7 @@ int main()
 		}
 		case delete_node:
 		{
-			int value;
+			string value;
 			cout << "Введите ключ для удаления узла: ";
 			cin >> value;
 			p.RemoveNode(value);
@@ -137,7 +137,7 @@ int main()
 		}
 		case poisk_node_key:
 		{
-			int value;
+			string value;
 			cout << "Введите ключ для поиска узла: ";
 			cin >> value;
 			if (p.search(value))
@@ -147,12 +147,12 @@ int main()
 			break;
 		}
 		case excersise:
-		{/*
+		{
 			int length;
 			cout << "Введите число для задания: " << endl;
 			cin >> length;
 			p.keyLengthRemove(length);
-			break;*/
+			break;
 		}
 		case comparison_trees:
 		{
@@ -176,7 +176,7 @@ int main()
 
 			/*создаем дерево p3 отличное от p, чтобы показать,
 			что перегрузка "==" работает верно*/
-			Tree<int> p3;
+			Tree<string> p3;
 			cin >> p3;
 
 			cout << "\nСравнение деревьев p и p3: ";
@@ -194,9 +194,13 @@ int main()
 		}
 		case AVL_tree:
 		{
-			for (int i = 0; i < 5; i++)
+			int size;
+			int value;
+			cout << "Введите количество узлов в дереве: " << endl;
+			cin >> size;
+			for (int i = 0; i < size; i++)
 			{
-				int value;
+				cout << "Введите значение узла: ";
 				cin >> value;
 				p3.Add(value);
 			}
@@ -205,13 +209,16 @@ int main()
 		case add_AVL_tree:
 		{
 			int value;
+			cout << "Введите элемент, который хотите добавить в дерево: ";
 			cin >> value;
 			p3.Add(value);
 			break;
 		}
 		case cout_AVL_tree:
 		{
+			cout << "Дерево, выведенное обратным обходом (лево-корень-право)" << endl;
 			p3.PrintTree();
+			cout << endl;
 			break;
 		}
 		}
