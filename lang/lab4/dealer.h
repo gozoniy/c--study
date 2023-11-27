@@ -1,4 +1,6 @@
-#pragma once
+//#pragma once
+#ifndef DEALER_H
+#define DEALER_H
 
 class car{
     private:
@@ -33,4 +35,5 @@ class dealer{
         
 };
 
+#endif //DEALER_H
 

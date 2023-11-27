@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <vector>
 using namespace std;
-
 #include "dealer.h"
 
 void car::set(istream& in){
@@ -72,9 +71,9 @@ istream& dealer::set(istream& in){
     Clear();
     if (&in == &cin){
         int size;
-        cout<<"Укажите длину каталога:\n";
+        cout<<"Введите размер каталога:\n";
         cin >> size;
-        cout<<"Введите "<<size<<" авто - марку, модель, скорость и тип трансмиссии:\n";
+        cout<<"Каталог из "<<size<<" авто - марка, модель,  максимальную скорость и коробку передач:\n";
         car temp;
         for (int i = 0; i < size; i++){
             in>>temp;
@@ -105,14 +104,14 @@ istream& dealer::set(istream& in){
 
 ostream& dealer::get(ostream& out){
     if (&out == &cout){
-        cout<<"Каталог автомобилей:\n";
-        cout<<"Автоматическая трансмиссия:\n";
+        cout<<"Каталог:\n";
+        cout<<"Автомобили с автоматической коробкой передач:\n";
     }
     for (int i = 0; i < catalogA.size(); i++){
         out<<catalogA[i]<<"\n";
     }
     if (&out == &cout)
-        cout<<"Механическая трансмиссия:\n";
+        cout<<"Автомобили с механической коробкой передач:\n";
     for (int i = 0; i < catalogM.size(); i++){
         out<<catalogM[i]<<"\n";
     }
@@ -156,7 +155,7 @@ void dealer::sortS(){
 
 ostream& dealer::top5(ostream& out){
     if (&out == &cout){
-        cout<<"5 самых быстрых автомобилей каталога на автомате:\n";
+        cout<<"5 самых быстрых авто на автоматической коробке передач:\n";
     }
     sortS();
     car temp;
@@ -166,7 +165,7 @@ ostream& dealer::top5(ostream& out){
         c++;
     }
     if (&out == &cout){
-        cout<<"5 самых быстрых автомобилей каталога на механике:\n";
+        cout<<"5 самых быстрых авто на механической коробке передач:\n";
     }
     c = 0;
     for (int i = 0; i < catalogM.size() && c<5; i++){
