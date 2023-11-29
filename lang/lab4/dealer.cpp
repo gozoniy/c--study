@@ -12,14 +12,14 @@ void car::set(istream& in){
         in>>speed;
         in>>GearBox;
 }
-void car::get(ostream& out){
+void car::get(ostream& out)const{
     out<<brand<<" ";
     out<<model<<" ";
     out<<speed<<" ";
     out<<GearBox<<" ";
 }
 
-ostream& operator<<(ostream& out, car& B){
+ostream& operator<<(ostream& out, const car& B){
     B.get(out);
     return out;
 }
@@ -35,7 +35,7 @@ void car::copy(const car& B){
     GearBox = B.GearBox;
 }
 
-bool car::operator<(const car& B){
+bool car::operator<(const car& B)const{
     if (GearBox < B.GearBox)
         return true;
     else if (GearBox == B.GearBox){
@@ -59,12 +59,6 @@ bool car::operator<(const car& B){
     }
     else
         return false;
-}
-char car::getT(){
-    return GearBox;
-}
-int car::getS(){
-    return speed;
 }
 
 istream& dealer::set(istream& in){
@@ -102,7 +96,7 @@ istream& dealer::set(istream& in){
     return in;
 }
 
-ostream& dealer::get(ostream& out){
+ostream& dealer::get(ostream& out)const{
     if (&out == &cout){
         cout<<"Каталог:\n";
         cout<<"Автомобили с автоматической коробкой передач:\n";
