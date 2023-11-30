@@ -16,6 +16,3 @@ while (True):
                 break
             else:
                 n+=1
-
-
-
