@@ -1,0 +1,3 @@
+Flight A123 to New York with Boeing 747 departs at 10:30 on Monday
+Flight B456 to Paris with Airbus A320 departs at 15:45 on Tuesday
+Flight C789 to London with Boeing 737 departs at 08:15 on Wednesday
