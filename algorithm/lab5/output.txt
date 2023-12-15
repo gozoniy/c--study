@@ -1,0 +1,21 @@
+0 : Ldore -> Eldor -> Elrod -> Ledro -> Rodel -> Droel -> Rleod -> Ldreo -> Lrdoe -> Lored -> Odler -> Loder -> Dlore -> Olrde -> Rldoe -> Odrle -> Ldroe -> Rodle -> Lorde -> Doler -> Odlre -> Dleor -> Lroed -> Rdleo -> Orlde -> Olred -> Dreol
+1 : 
+2 : Wrold
+3 : Rwelo -> Wroel -> Wloer -> Lwore -> Rlewo -> Rwleo -> Wleor -> Rleow -> Orlwe -> Wlroe -> Lreow -> Rwoel
+4 : 
+5 : 
+6 : Ldowe -> Dowel -> Wodle -> Wloed -> Wdloe -> Edwol -> Dleow -> Dwelo -> Owdel
+7 : 
+8 : LrweoD
+9 : Word -> Wrod -> Rodw -> RwoD -> Drow -> Wdor -> OrwD
+10 : Lwder -> Rldwe -> Lwred -> Dlwre
+11 : 
+12 : 
+13 : 
+14 : OrweD -> Doerw -> RwoeD -> Edwro -> Rewod -> Dorwe -> Erwod -> Dewor -> Odrwe -> Drweo -> Rewdo -> Wdreo -> Orewd -> Wreod -> Dwore -> Weord -> Redwo -> Dwoer -> Wdore -> Redow -> Dower -> Dreow -> Dowre -> Wrdoe -> Rweod -> Wrode
+15 : 
+16 : 
+17 : 
+18 : 
+19 : 
+Среднее число сравнений: 10.875
