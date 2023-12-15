@@ -8,29 +8,29 @@ int main(void){
 	size_t ans;
 	bool f = true;
 	size_t size;
-	cout<<"Ââåäèòå ðàçìåð ñïèñêà:\n";
+	cout<<"Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÐ¿Ð¸ÑÐºÐ°:\n";
 	cin>>size;
 	hashtab p(size);
 	while (f){
-		cout << "Ãëàâíîå ìåíþ\n"
-			<< "1) Âñòàâèòü ýëåìåíò\n"
-			<< "2) Âñòàâèòü èç ôàéëà\n"
-			<< "3) Óäàëèòü êëþ÷\n"
-			<< "4) Íàéòè êëþ÷\n"
-			<< "5) Âûâîä â êîíñîëü\n"
-			<< "6) Âûâîä â ôàéë\n"
-			<< "0) <<< Âûõîä\n";
+		cout << "Ð“Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ\n"
+			<< "1) Ð’ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚\n"
+			<< "2) Ð’ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°\n"
+			<< "3) Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÐºÐ»ÑŽÑ‡\n"
+			<< "4) ÐÐ°Ð¹Ñ‚Ð¸ ÐºÐ»ÑŽÑ‡\n"
+			<< "5) Ð’Ñ‹Ð²Ð¾Ð´ Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ\n"
+			<< "6) Ð’Ñ‹Ð²Ð¾Ð´ Ð² Ñ„Ð°Ð¹Ð»\n"
+			<< "0) <<< Ð’Ñ‹Ñ…Ð¾Ð´\n";
 		cin >> ans;
 		switch (ans){
 			case 1:{
 				string key;
-				cout << "Ââåäèòå ýëåìåíò: ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚: ";
 				cin >> key;
 				if(p.search(key)){
-					cout << "Ýòîò ýëåìåíò óæå íàõîäèòñÿ â òàáëèöå.\n";
+					cout << "Ð­Ñ‚Ð¾Ñ‚ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÑƒÐ¶Ðµ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ.\n";
 				}
 				size_t collisions = p.insert(key);
-				cout<<"Âñåãî êîëëèçèé: "<< collisions<<"\n";
+				cout<<"Ð’ÑÐµÐ³Ð¾ ÐºÐ¾Ð»Ð»Ð¸Ð·Ð¸Ð¹: "<< collisions<<"\n";
 				break;
 			}
 			case 2:{
@@ -38,7 +38,7 @@ int main(void){
 				string key_insert_file;
 				ifstream fin("input.txt");
 				if (!fin){
-					cout << "Îøèáêà îòêðûòèÿ ôàéëà.\n";
+					cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð°.\n";
 				}
 				else{
 					while (getline(fin, key_insert_file)){
@@ -47,27 +47,27 @@ int main(void){
 						}
 					}
 					fin.close();
-					cout << "×òåíèå çàâåðøåíî.\n";
+					cout << "Ð§Ñ‚ÐµÐ½Ð¸Ðµ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¾.\n";
 				}
 				break;
 			}
 			case 3:{
 				string key_delete;
-				cout << "Ââåäèòå ýëåìåíò: ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚: ";
 				cin >> key_delete;
 				p.remove(key_delete);
 				break;
 			}
 			case 4:{
 				string key;
-				cout << "Ââåäèòå êëþ÷: ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ»ÑŽÑ‡: ";
 				cin >> key;
 				size_t comparisons = p.search(key);
 				if (comparisons){
-					cout << "Ýëåìåíò íàéäåí.\n"
-					<<"Âñåãî ñðàâíåíèé: "<<comparisons<<"\n";
+					cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð½Ð°Ð¹Ð´ÐµÐ½.\n"
+					<<"Ð’ÑÐµÐ³Ð¾ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ð¹: "<<comparisons<<"\n";
 					}
-				else{cout << "ýëåìåíò ÍÅ íàéäåí.\n";}
+				else{cout << "ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÐÐ• Ð½Ð°Ð¹Ð´ÐµÐ½.\n";}
 				break;
 			}
 			case 5:{
@@ -77,12 +77,12 @@ int main(void){
 			case 6:{
 				ofstream fout("output.txt");
 				if (!fout){
-					cout << "Îøèáêà îòêðûòèÿ ôàéëà.\n";
+					cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð°.\n";
 				}
 				else{
 					p.print(fout);
 					fout.close();
-					cout << "Çàïèñü çàâåðøåíà.\n";
+					cout << "Ð—Ð°Ð¿Ð¸ÑÑŒ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð°.\n";
 				}
 				break;
 			}

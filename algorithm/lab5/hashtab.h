@@ -9,36 +9,36 @@ private:
     size_t table_size;
     vector<vector<string>> table;
 
-//случайное число в диапазоне от 0 до 1 для работы мультипликативной хеш-функции
+//СЃР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ РІ РґРёР°РїР°Р·РѕРЅРµ РѕС‚ 0 РґРѕ 1 РґР»СЏ СЂР°Р±РѕС‚С‹ РјСѓР»СЊС‚РёРїР»РёРєР°С‚РёРІРЅРѕР№ С…РµС€-С„СѓРЅРєС†РёРё
     const double hash = 0.618033; 
 public:
-    //Конструктор
+    //РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     hashtab() : table(table_size) {}
     hashtab(size_t size) : table_size(size), table(table_size) {}
 
-    //Хеш-функция
+    //РҐРµС€-С„СѓРЅРєС†РёСЏ
     int HashFunction(string key){
         double f = hash;
         f = f / 10;
         int hash = 0;
-        // умножить ключ на случайное число из диапазона 0...1
+        // СѓРјРЅРѕР¶РёС‚СЊ РєР»СЋС‡ РЅР° СЃР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ РёР· РґРёР°РїР°Р·РѕРЅР° 0...1
         for (char ch : key){
             hash += ch;
         }
         f = hash * f;
-        // взять дробную часть
+        // РІР·СЏС‚СЊ РґСЂРѕР±РЅСѓСЋ С‡Р°СЃС‚СЊ
         f = f - int(f);
-        // возвратить число в диапазоне 0...n-1
+        // РІРѕР·РІСЂР°С‚РёС‚СЊ С‡РёСЃР»Рѕ РІ РґРёР°РїР°Р·РѕРЅРµ 0...n-1
         return table_size*f;
     }
 
-    //Вставка ключа / возвращает число коллизий
+    //Р’СЃС‚Р°РІРєР° РєР»СЋС‡Р° / РІРѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ РєРѕР»Р»РёР·РёР№
     int insert(const std::string& key){
         int index = HashFunction(key);
         table[index].push_back(key);
         return table[index].size();
     }
-    //Поиск ключа / возвращает число сравнений
+    //РџРѕРёСЃРє РєР»СЋС‡Р° / РІРѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ СЃСЂР°РІРЅРµРЅРёР№
     int search(const std::string& key){
         int index = HashFunction(key);
         int count = 1;
@@ -47,12 +47,12 @@ public:
         for (string value : chain) {
             comparisons++;
             if (value == key) {
-                return comparisons; // Элемент найден
+                return comparisons; // Р­Р»РµРјРµРЅС‚ РЅР°Р№РґРµРЅ
             }
         }
-        return 0; // Элемент не найден
+        return 0; // Р­Р»РµРјРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ
     }
-    //Удаление ключа / возвращает число сравнений
+    //РЈРґР°Р»РµРЅРёРµ РєР»СЋС‡Р° / РІРѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ СЃСЂР°РІРЅРµРЅРёР№
     int remove(const std::string& key){
         int index = HashFunction(key);
         int count = 1;
@@ -61,14 +61,14 @@ public:
             comparisons++;
             if (*i == key){
                 table[index].erase(i);
-                cout<<"Ключ удалён.\n";
+                cout<<"РљР»СЋС‡ СѓРґР°Р»С‘РЅ.\n";
                 return comparisons;
             }
         }
-        cout<<"Ключ не найден.\n";
+        cout<<"РљР»СЋС‡ РЅРµ РЅР°Р№РґРµРЅ.\n";
         return comparisons;
     }
-    //Вывод в поток
+    //Р’С‹РІРѕРґ РІ РїРѕС‚РѕРє
     ostream& print(std::ostream& out) const{
         size_t c = 0;
         size_t size = table_size;
@@ -87,12 +87,12 @@ public:
             out<<"\n";
         }
         if(size!=0){
-            out<<"Среднее число сравнений: "<<static_cast<double>(c) / size<< "\n";
+            out<<"РЎСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ СЃСЂР°РІРЅРµРЅРёР№: "<<static_cast<double>(c) / size<< "\n";
             }
         return out;
 
     }
-    //Очистка таблицы
+    //РћС‡РёСЃС‚РєР° С‚Р°Р±Р»РёС†С‹
     void clear(){
         for (int i = 0; i < table_size; ++i){
             table[i].clear();
