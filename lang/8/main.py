@@ -1,7 +1,7 @@
 from armstrong import *
 
 if __name__ == "__main__":
-    k = int(input())
+    k = int(input("Введите k: "))
     answ = ''
     for i in range(1,k+1):
         if isArm(i):

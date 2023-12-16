@@ -4,7 +4,4 @@ def isArm(n):
     S = 0
     for i in digits:
         S += i**l
-    if S == n:
-        return True
-    else:
-        return False
+    return S == n
