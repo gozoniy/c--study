@@ -55,6 +55,12 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "complex": "cpp",
+        "cstring": "cpp",
+        "list": "cpp",
+        "ios": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp"
     }
 }
