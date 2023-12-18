@@ -4,9 +4,10 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include <queue>
 using namespace std;
 
-#include "maze.cpp"
+#include "maze.h"
 
 int main(void){
     system("chcp 1251");
@@ -53,6 +54,7 @@ int main(void){
                                     break;
                                 }
                             }
+                            cout<<A.isValid(1,5)<<"\n";
                             break;
                         }
                         case 2:{
@@ -107,6 +109,7 @@ int main(void){
                 maze *B;
                 int N = (b1-a1)/l+1;
                 B = new maze [N];
+                
                 switch (sw_1){
                     case 1:{
                         for (int i = 0; i < N-1; i++){

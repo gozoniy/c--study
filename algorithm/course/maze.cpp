@@ -32,6 +32,7 @@ void maze::get(ostream& out){
         cout<<"\n";
     }
 }
+//СОЗДАНИЕ
 //Алгоритм северо-восточного смещения
 void maze::set_Northeast_alg(){
     srand(time(0));
@@ -112,6 +113,8 @@ void maze::set_Sidewinder_alg(){
         }
     }
 }
+
+//РЕШЕНИЕ
 //A*
 void maze::A_star(){
 
@@ -141,13 +144,14 @@ void maze::A_star(){
             }
         }
     }
-    
-    
 }
-void maze::DFS(){}
-void maze::BFS(){}
+void A_star(){};
+void DFS(){};
+void BFS(){};
+
+/*
 //DFS
-/*void maze::DFS(){
+void maze::DFS(){
 
     int f = 1;
     //Начальные x y:
@@ -167,12 +171,11 @@ void maze::BFS(){}
         Frontier.erase(Frontier.begin());
         dot child;
         cout<<"("<<x<<","<<y<<")\n";
-        if (matrix[y][x] == -1){
+        if (false){//matrix[y][x] == -1){
             cout<<"Путь найден.\n";
             break;
         }
         else {
-            
             bool Up,Do,Le,Ri;
             Up = !matrix[y-1][x];
             Do = !matrix[y+1][x];
