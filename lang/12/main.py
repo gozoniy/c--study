@@ -1,59 +1,43 @@
-class Aeroflot:
-    def __init__(self, destination, number, Type, time, day):
-        self.__destination = destination
-        self.__number = number
-        self.__Type = Type
-        self.__time = time
-        self.__day = day
-    def Set(self):
-        self.__destination = input("Введите назначение: ")
-    def get(self):
-        return f"Рейс {self.__number} в {self.__destination} самолётом {self.__Type} прилетает в {self.__time} по {self.__day}"
-    def get_des(self):
-        return self.__destination
-    def get_type(self):
-        return self.__Type
-    def get_time(self):
-        return (self.__time,self.__day)
-class Flights:
-    def __init__(self):
-        self.__aeroflot = []
-    def set_file(self,filename):
-        self.__aeroflot = []
-        with open(filename, 'r') as file:
-            lines = file.readlines()
-        for line in lines:
-            flight_data = line.strip().split('\t')
-            destination = flight_data[0]
-            flight_number = flight_data[1]
-            aircraft_type = flight_data[2]
-            departure_time = flight_data[3]
-            weekday = flight_data[4]
-            flight = Aeroflot(destination, flight_number, aircraft_type, departure_time, weekday)
-            self.add_flight(flight)
-    def add(self, A):
-        self.__aeroflot.append(A)
-    def get(self):
-        for i in self.__aeroflot:
-            print(i.get())
-    def get_dest(self, dest):
-        for i in self.__aeroflot:
-            if i.get_des() == dest:
-                print(i.get())
-    def get_type(self, Type):
-        for i in self.__aeroflot:
-            if i.get_type() == Type:
-                print(i.get())
-    def get_time(self, day, time1, time2):
-        for i in self.__aeroflot:
-            if int(i.get_time()[0]) > int(time1) and int(i.get_time()[0]) < int(time2) and i.get_time()[1] == day:
-                print(i.get())
-    
-            
-a = Flights()
-a.add(Aeroflot("Moscow", "SU123", "Boeing 737", "1230", "Monday"))
-a.add(Aeroflot("New York", "SU123", "Boeing 737", "1200", "Monday"))
-a.get_time("Monday","1215","1245")
+from master import *
+if __name__ == "__main__":
+    a = Flights()
+    while True:
+        print("Главное меню")
+        print("1) Добавить с консоли")
+        print("2) Добавить из файла")
+        print("3) Вывести в консоль")
+        print("4) Вывести в файл")
+        print("5) Выборка по назначению")
+        print("6) Выборка по типу")
+        print("7) Выборка по времени")
+        print("8) Отсортировать по времени")
+        print("0) <<< Выход")
+        ans = int(input())
+        match ans:
+            case 1:
+                des, num, ty, t1, day = input("Введите назначение, номер, тип, время вылета и день через пробел: ").split()
+                m = Aeroflot(des,num,ty,t1,day)
+                a.add(m)
+            case 2:
+                a.read("input.txt")
+            case 3:
+                a.get()
+            case 4:
+                a.save("output.txt")
+            case 5:
+                des = input("Введите назначение: ")
+                a.get_dest(des)
+            case 6:
+                ty = input("Введите тип: ")
+                a.get_type(ty)
+            case 7:
+                d,t1,t2 = input("Введите день, время от и до через пробел d_t1_t2: ").split()
+                a.get_time(d,t1,t2)
+            case 8:
+                a.sort_by_time()
+            case 0:
+                break
+                
 
 
 
