@@ -37,9 +37,3 @@ if __name__ == "__main__":
                 a.sort_by_time()
             case 0:
                 break
-                
-
-
-
-
-

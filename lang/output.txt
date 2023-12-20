@@ -1,2 +1,3 @@
-New York	SU123	Boeing 737	1200	Monday
-Moscow	SU123	Boeing 737	1230	Monday
+Moscow	SU123	737	1230	Monday
+New York	SU123	737	1200	Monday
+Krsk	SU520	747	1845	Понедельник

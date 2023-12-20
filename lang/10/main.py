@@ -1,7 +1,6 @@
-
 if __name__ == "__main__":
     A = []
-    s = input("Введите строку: ").lower().split()
+    s = list(map(lambda i: i.strip(",.:"), input("Введите строку: ").lower().split()))
     for i in range(len(s)):
         c = s.count(s[i])
         if c>1:
@@ -11,7 +10,5 @@ if __name__ == "__main__":
     answ.reverse()
     for i in answ:
         print(f"|{i[1]:^10}|{str(i[0]):^10}|")
-        
-    
-    #""", table
+
     
