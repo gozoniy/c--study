@@ -1,19 +1,15 @@
 #Рейс
 class Aeroflot:
     #Конструктор с параметрами
-    def __init__(self, destination, number, Type, time, day):
+    def __init__(self, destination ="", number ="", Type ="", time ="", day =""):
         self.__destination = destination
         self.__number = number
         self.__Type = Type
         self.__time = time
         self.__day = day
-    #Сетеры
-    def Set(self):
-        self.__destination = input("Введите назначение: ")
-        self.__number = input("Введите номер: ")
-        self.__Type = input("Введите тип: ")
-        self.__time = input("Введите время: ")
-        self.__day = input("Введите день: ")
+    #Сетер из строки
+    def set_st(self, st):
+        self.__destination,self.__number,self.__Type,self.__time,self.__day = st.strip().split('\t')
     #Гетеры
     def get(self):
         return f"Рейс №{self.__number} в {self.__destination} самолётом {self.__Type} прилетает в {self.__time} по {self.__day}"
@@ -24,7 +20,7 @@ class Aeroflot:
     def get_type(self):
         return self.__Type
     def get_time(self):
-        return (self.__time,self.__day)
+        return (int(self.__time),self.__day)
 
 #Класс массива рейсов
 class Flights:
@@ -37,13 +33,8 @@ class Flights:
         with open(filename, 'r') as file:
             lines = file.readlines()
         for line in lines:
-            flight_data = line.strip().split('\t')
-            destination = flight_data[0]
-            flight_number = flight_data[1]
-            aircraft_type = flight_data[2]
-            departure_time = flight_data[3]
-            weekday = flight_data[4]
-            flight = Aeroflot(destination, flight_number, aircraft_type, departure_time, weekday)
+            flight = Aeroflot()
+            flight.set_st(line)
             self.add(flight)
     #Вывод в файл
     def save(self, filename):
@@ -70,7 +61,7 @@ class Flights:
     #в) списка рейсов для заданного дня недели, время вылета которых находится в заданном интервале
     def get_time(self, day, time1, time2):
         for i in self.__aeroflot:
-            if int(i.get_time()[0]) > int(time1) and int(i.get_time()[0]) < int(time2) and i.get_time()[1] == day:
+            if i.get_time()[1] == day and int(i.get_time()[0]) > int(time1) and int(i.get_time()[0]) < int(time2):
                 print(i.get())
                 
     #Сортировка по полю времени вылета

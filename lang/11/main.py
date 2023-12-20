@@ -1,4 +1,4 @@
-from module import read_file, process_list, save_result
+from module import *
 if __name__ == "__main__":
     input_file_path = "input.txt"
     output_file_path = "output.txt"

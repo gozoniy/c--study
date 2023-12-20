@@ -1,4 +1,4 @@
-from master import *
+from aero import *
 if __name__ == "__main__":
     a = Flights()
     while True:

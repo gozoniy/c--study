@@ -7,9 +7,7 @@ def read_file(file_path):
 def process_list(original_list):
     nZ = 1
     aboveAvg = 0
-    total_sum = 0
     for element in original_list:
-        total_sum += element
         if element != 0:
             nZ *= element
         if element > sum(original_list) / len(original_list):
