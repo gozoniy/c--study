@@ -37,6 +37,7 @@ class PolyLine(Line):
     def __init__(self, lengths = [0,0]):
         super().__init__(float(lengths[0]))
         self._segment_lengths = map(float,lengths[1:])
+        
 
     def Lenght(self):
         return self._length + sum(self._segment_lengths)
@@ -48,6 +49,7 @@ class PolyLine(Line):
 
     def to_string(self):
         return f"{self._length}   {' '.join(map(str,self._segment_lengths))}"
+        
 
 
 class Picture:
