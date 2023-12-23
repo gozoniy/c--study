@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Line(ABC):
+class Line():
     def __init__(self, length = 0):
         self._length = float(length)
 

@@ -61,6 +61,8 @@
         "list": "cpp",
         "ios": "cpp",
         "xmemory": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }

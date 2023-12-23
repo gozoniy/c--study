@@ -2,255 +2,380 @@
 #define MAZE_H
 
 struct Point {
+    public:
     int x, y;
-    Point(int _x, int _y) : x(_x), y(_y) {}
+    Point(int _y, int _x) : x(_x), y(_y) {}
+    bool operator<(const Point& other) const {
+        // В данном случае, сравниваем по x, а затем по y
+        if (x == other.x) {
+            return y < other.y;
+        }
+        return x < other.x;
+    }
 };
 
 class maze{
-        int sX,sY;
-        int **matrix;   //2 - Внешняя стена, 1 - Внутренняя стена, 0 - Пустая клетка
-        int **visited;
+        int Col,Row;
+        char **matrix;   //2 - Внешняя стена, 1 - Внутренняя стена, 0 - Пустая клетка
     public:
-        maze() : sX(0), sY(0), matrix(nullptr),visited(nullptr){}
-        maze(int X,int Y) : sX(X),sY(Y),matrix(new int * [sX]){
-            for (int i = 0; i<sX; i++){
-                matrix[i] = new int [sY];
+        maze() : Col(0), Row(0), matrix(nullptr){}
+        maze(int X,int Y) : Col(X),Row(Y),matrix(new char * [Row]){
+            for (int i = 0; i<Row; i++){
+                matrix[i] = new char [Col];
             }
             //Поле внутренних стен
-            for(int i = 0; i<sX; i++){
-                for (int j = 0; j<sY; j++){
-                    matrix[i][j] = 2; 
+            for(int i = 0; i<Row; i++){
+                for (int j = 0; j<Col; j++){
+                    matrix[i][j] = 'H'; 
                 }
             }
             //Создание внутренних стен
-            for(int i = 1; i<sX-1; i++){
-                for (int j = 1; j<sY-1; j++){
+            for(int i = 1; i<Row-1; i++){
+                for (int j = 1; j<Col-1; j++){
                     if (i%2 == 0 || j%2 == 0){
-                        matrix[i][j] = 1;
+                        matrix[i][j] = 'X';
                     }
                     else{
-                        matrix[i][j] = 0;
+                        matrix[i][j] = ' ';
                     }
                 }
             }
         }
-        
 
-        maze(const maze& B);
+        //Копирование
+        maze(const maze& B){
+            copy(B);
+        };
+        void copy(const maze& B){
+            Col = B.Col;
+            Row = B.Row;
+            matrix = new char * [Row];
+            for (int i = 0; i<Row; i++){
+                matrix[i] = new char [Col];
+            }
+            for(int i = 0; i<Row; i++){
+                for (int j = 0; j<Col; j++){
+                    matrix[i][j] = B.matrix[i][j];
+                }
+            }
+        }
+        maze& operator=(const maze& B) {
+            copy(B);
+            return *this;
+        }
         ~maze(){Clear();}
         void Clear(){
-            for (int i = 0; i<sX; i++){
+            for (int i = 0; i<Row; i++){
                 delete[] matrix[i];
             }
             delete[] matrix;
             matrix=nullptr;
-            sX = sY = 0;
+            Col = Row = 0;
         }
+
         void get(ostream& out){
-            out<<"Лабиринт размером "<<sX<<" x "<<sY<<":\n";
-            for(int i = 0; i<sX; i++){
-                for (int j = 0; j<sY; j++){
-                    if (matrix[i][j] == 2){
-                        cout<<"H ";
-                    }
-                    else if (matrix[i][j] == 1){
-                        cout<<"X ";
-                    }
-                    else if (matrix[i][j] == -1){
-                        cout<<"* ";
-                    }
-                    else if (matrix[i][j] == 0){
-                        cout<<"  ";
-                    }
-                    else if (matrix[i][j] == -5){
-                        cout<<"@ ";
-                    }
-                    else if (matrix[i][j] == 3){
-                        cout<<". ";
-                    }
-                    else{
+            out<<"Лабиринт размером "<<Col<<" x "<<Row<<":\n";
+            for(int i = 0; i<Row; i++){
+                for (int j = 0; j<Col; j++){
+                    if (isdigit(matrix[i][j]))
+                        cout<< "\033[;90m"<<matrix[i][j]<< "\033[0m"<<" ";
+                    else if ((matrix[i][j]) == '$')
+                        cout<< "\033[33m"<<matrix[i][j]<< "\033[0m"<<" ";
+                    else
                         cout<<matrix[i][j]<<" ";
-                    }
                 }
                 cout<<"\n";
             }
         };
         void setS(int _x,int _y){
-            sX = _x;
-            sY = _y;
-            matrix = new int * [sX];
-            for (int i = 0; i<sX; i++){
-                matrix[i] = new int [sY];
+            Col = _x;
+            Row = _y;
+            matrix = new char * [Row];
+            for (int i = 0; i<Row; i++){
+                matrix[i] = new char [Col];
             }
             //Поле внутренних стен
-            for(int i = 0; i<sX; i++){
-                for (int j = 0; j<sY; j++){
-                    matrix[i][j] = 2; 
+            for(int i = 0; i<Row; i++){
+                for (int j = 0; j<Col; j++){
+                    matrix[i][j] = 'H'; 
                 }
             }
             //Создание внутренних стен
-            for(int i = 1; i<sX-1; i++){
-                for (int j = 1; j<sY-1; j++){
+            for(int i = 1; i<Row-1; i++){
+                for (int j = 1; j<Col-1; j++){
                     if (i%2 == 0 || j%2 == 0){
-                        matrix[i][j] = 1;
+                        matrix[i][j] = 'X';
                     }
                     else{
-                        matrix[i][j] = 0;
+                        matrix[i][j] = ' ';
                     }
                 }
             }
         }
         void setCords(){
-            for(int i = 1; i<sX-1; i++){
-                for (int j = 1; j<sY-1; j++){
+            for(int i = 1; i<Row-1; i++){
+                for (int j = 1; j<Col-1; j++){
                     cin>>matrix[i][j];
                 }
             }
         }
-        //void getS(){return sX;}
+        //void getS(){return Col;}
         //Создание лабиринта
         void set_Northeast_alg(){
+
             srand(time(0));
-            for(int i = 1; i<sX-1; i+=2){
-                for (int j = 1; j<sY-1; j+=2){
+            for(int i = 1; i<Row-1; i+=2){
+                for (int j = 1; j<Col-1; j+=2){
                     int a = rand()%2;
-                    if ((a || matrix[i-1][j] == 2) && matrix[i][j+1] != 2){
-                        matrix[i][j+1] = 0;
+                    if ((a || matrix[i-1][j] == 'H') && matrix[i][j+1] != 'H'){
+                        matrix[i][j+1] = ' ';
                     }
                     else{
-                        matrix[i-1][j] = 0;
+                        matrix[i-1][j] = ' ';
                     }
+                }
+            }
+            for(int i = 1; i<Row; i++){
+                for (int j = 1; j<Col; j++){
+                    if (i == 0 || j == 0 || i == Col-1 || j == Row-1)
+                        matrix[i][j] = 'H';
                 }
             }
         };
         void set_Westeast_alg(){
             srand(time(0));
-            for(int i = 1; i<sX-1; i+=2){
-                for (int j = 1; j<sY-1; j+=2){
+            for(int i = 1; i<Row-1; i+=2){
+                for (int j = 1; j<Col-1; j+=2){
                     if (i%16 > 8){
                         int a = rand()%2;
-                        if ((a || matrix[i-1][j] == 2) && matrix[i][j+1] != 2){
-                            matrix[i][j+1] = 0;
+                        if ((a || matrix[i-1][j] == 'H') && matrix[i][j+1] != 'H'){
+                            matrix[i][j+1] = ' ';
                         }
                         else{
-                            matrix[i-1][j] = 0;
+                            matrix[i-1][j] = ' ';
                         }
                     }
                     else{
                         int a = rand()%2;
-                        if ((a || matrix[i-1][j] == 2) && matrix[i][j-1] != 2){
-                            matrix[i][j-1] = 0;
+                        if ((a || matrix[i-1][j] == 'H') && matrix[i][j-1] != 'H'){
+                            matrix[i][j-1] = ' ';
                         }
                         else{
-                            matrix[i-1][j] = 0;
+                            matrix[i-1][j] = ' ';
                         }
                     }
                 }
             }
             
-            matrix[sX-2][sY-2] = -1;
-            matrix[0][1] = 2;
+            //matrix[Col-2][Row-2] = -1;
+            matrix[0][1] = 'H';
         };
         void set_Sidewinder_alg(){
             srand(time(0));
-            for(int i = 1; i<sX-1; i+=2){
+            for(int i = 1; i<Row-1; i+=2){
                 if (i == 1){
-                    for (int j = 1; j<sY-1; j+=2){
-                        matrix[i][j+1] = 0;
+                    for (int j = 1; j<Col-1; j+=2){
+                        matrix[i][j+1] = ' ';
                     }
                 }
                 else{
                     int start = 1;
-                    while(start<sY){
+                    while(start<Col){
                         
                         int c = 1 + rand()%4;
                         int _c = 1 + rand()%c;
                         if(start>1){
-                            matrix[i-1][start] = 0;
+                            matrix[i-1][start] = ' ';
                         }
                         for (int j = start; j < start + c; j+=2){
-                            matrix[i][j+1] = 0;
+                            matrix[i][j+1] = ' ';
                             if (j == start + _c){
-                                matrix[i-1][j] = 0;
-                                matrix[i-2][j] = 0;
+                                matrix[i-1][j] = ' ';
+                                matrix[i-2][j] = ' ';
                             }
                         }
                         start+=c;
                     }   
                 }
             }
-            for(int i = 1; i<sX; i++){
-                for (int j = 1; j<sY; j++){
-                    if (i == 0 || j == 0 || i == sX-1 || j == sY-1)
-                        matrix[i][j] = 2;
+            for(int i = 1; i<Row; i++){
+                for (int j = 1; j<Col; j++){
+                    if (i == 0 || j == 0 || i == Col-1 || j == Row-1)
+                        matrix[i][j] = 'H';
                 }
             }
         };
 
-        //Решение лабиринта
-        void A_star(){
-            int f = 1;
-            //Начальные x y:
-            int x = 1;
-            int y = 1;
-            int cost = 0;
-            cout<<"("<<x<<","<<y<<")\n";
-            while(f){
-                if (matrix[y][x] == 9){
-                    cout<<"Путь найден.\n";
-                    break;
-                }
-                
-                else {
-                    for (int i = 0; i<3; i++){
-                        for (int j = 0; j<3; j++){
-                            cout<<i;
-                            if (matrix[i+y][j+x] == 0){
-                                matrix[i+y][j+x] = cost;
-                                cost++;
-                                x +=j;
-                                y +=i;
-                            }
-                        }
-                    }
-                }
-            }
+
+
+        //РЕШЕНИЯ
+
+        int heuristic(const Point& a, const Point& b) {
+            return abs(a.x - b.x) + abs(a.y - b.y);
         }
-        void DFS(){
-            int f = 1;
-            //Начальные x y:
-            int x = 1;
-            int y = 1;
-            int cost = 0;
-            cout<<"("<<x<<","<<y<<")\n";
-            while(f){
-                if (matrix[y][x] == 9){
-                    cout<<"Путь найден.\n";
+
+        void A_star() {
+            Point start(1, 1);
+            Point end(Col - 2, Row - 2);
+            int rows = Row;
+            int cols = Col;
+            int visitedCount = 0;
+            // Массивы для хранения посещенных вершин и расстояний
+            vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+            vector<vector<int>> distance(rows, vector<int>(cols, INT_MAX));
+
+            // Приоритетная очередь для выполнения A* (минимальная куча)
+            priority_queue<pair<int, Point>, vector<pair<int, Point>>, greater<pair<int, Point>>> pq;
+
+            // Начальная точка
+            pq.push({0, start});
+            visited[start.x][start.y] = true;
+            distance[start.x][start.y] = 0;
+
+            // Массивы для определения направлений движения: вверх, вниз, влево, вправо
+            int dx[] = {-1, 1, 0, 0};
+            int dy[] = {0, 0, -1, 1};
+
+            // A* поиск
+            while (!pq.empty()) {
+                // Извлекаем текущую точку с минимальной стоимостью
+                auto current = pq.top();
+                pq.pop();
+                matrix[current.second.x][current.second.y] = distance[current.second.x][current.second.y]%10 + '0';
+                // Проверяем, достигли ли мы конечной точки
+                if (current.second.x == end.x && current.second.y == end.y) {
+                    // Выводим расстояние до конечной точки
+                    //cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
+                    // Восстанавливаем путь
+                    Point pathPoint = end;
+                    while (pathPoint.x != start.x || pathPoint.y != start.y) {
+                        matrix[pathPoint.x][pathPoint.y] = '$';
+                        for (int i = 0; i < 4; i++) {
+                            int newX = pathPoint.x + dx[i];
+                            int newY = pathPoint.y + dy[i];
+                            if (isValid(newX, newY) && distance[newX][newY] == distance[pathPoint.x][pathPoint.y] - 1) {
+                                pathPoint = Point(newX, newY);
+                                break;
+                            }
+                        }
+                    }
                     break;
                 }
-                
-                else {
-                    for (int i = 0; i<3; i++){
-                        for (int j = 0; j<3; j++){
-                            cout<<i;
-                            if (matrix[i+y][j+x] == 0){
-                                matrix[i+y][j+x] = cost;
-                                cost++;
-                                x +=j;
-                                y +=i;
-                            }
+
+                // Помечаем текущую точку как посещенную
+                visited[current.second.x][current.second.y] = true;
+                visitedCount++;
+                // Проверяем соседей текущей точки
+                for (int i = 0; i < 4; i++) {
+                    int newX = current.second.x + dx[i];
+                    int newY = current.second.y + dy[i];
+
+                    // Проверка на допустимость новой точки
+                    if (isValid(newX, newY) && !visited[newX][newY]) {
+                        // Вычисляем новую стоимость пути
+                        int newCost = distance[current.second.x][current.second.y] + 1;
+
+                        // Если новая стоимость меньше текущей, обновляем информацию и добавляем точку в очередь
+                        if (newCost < distance[newX][newY]) {
+                            distance[newX][newY] = newCost;
+                            pq.push({newCost + heuristic(Point(newX, newY), end), Point(newX, newY)});
                         }
                     }
                 }
             }
-        };
+            cout<<"Посещено: "<<visitedCount<<"\n";
+        }
 
-        void BFS() {
-            cout<<"!\n";
+
+
+        void DFS(){
+            Point start(1, 1);
+            Point end(Col - 2, Row - 2);
+            int rows = Row;
+            int cols = Col;
+            int visitedCount = 0;
+            // Массив для хранения посещенных вершин
+            vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+            // Массив для хранения расстояний до каждой вершины
+            vector<vector<int>> distance(rows, vector<int>(cols, 0));
+
+            // Стек для выполнения DFS
+            stack<Point> stk;
+
+            // Начальная вершина
+            stk.push(start);
+            visited[start.x][start.y] = true;
+
+            // Массивы для определения направлений движения: вверх, вниз, влево, вправо
+            int dx[] = {-1, 1, 0, 0};
+            int dy[] = {0, 0, -1, 1};
+
+            // DFS
+            while (!stk.empty()) {
+                Point current = stk.top();
+                stk.pop();
+                matrix[current.x][current.y] = distance[current.x][current.y]%10 + '0';
+
+                // Проверяем, достигли ли конечной вершины
+                if (current.x == end.x && current.y == end.y) {
+                    break;
+                }
+
+                // Проверяем соседей текущей вершины
+                for (int i = 0; i < 4; i++) {
+                    int newX = current.x + dx[i];
+                    int newY = current.y + dy[i];
+
+                    // Проверка на допустимость новой вершины
+                    if (isValid(newX, newY) && !visited[newX][newY]) {
+                        // Помечаем вершину как посещенную
+                        visited[newX][newY] = true;
+
+                        // Устанавливаем расстояние до новой вершины
+                        distance[newX][newY] = distance[current.x][current.y] + 1;
+
+                        // Добавляем новую вершину в стек
+                        stk.push(Point(newX, newY));
+                        visitedCount++;
+                    }
+                }
+            }
+
+            // Выводим расстояние до конечной вершины
+            cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
+
+            // Восстанавливаем путь
+            int x = end.x, y = end.y;
+            while (x != start.x || y != start.y) {
+                matrix[x][y] = '$'; // Пример обозначения пути
+                bool found = false;
+                for (int i = 0; i < 4; i++) {
+                    int newX = x + dx[i];
+                    int newY = y + dy[i];
+                    if (isValid(newX, newY) && distance[newX][newY] == distance[x][y] - 1) {
+                        x = newX;
+                        y = newY;
+                        found = true;
+                        break;
+                    }
+                }
+                // Проверка наличия подходящего направления
+                if (!found) {
+                    cout << "Ошибка: Нет подходящего направления!" << endl;
+                    break;
+                }
+            }
+            cout<<"Посещено: "<<visitedCount<<"\n";
+        }
+
+
+
+        int BFS() {
             Point start(1,1);
-            Point end(sX-2,sY-2);
-            int rows = sY;
-            int cols = sX;
+            Point end(Col-2,Row-2);
+            int rows = Row;
+            int cols = Col;
+            int visitedCount = 0;
             // Массивы для хранения посещенных вершин и расстояний
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
             vector<vector<int>> distance(rows, vector<int>(cols, 0));
@@ -274,43 +399,41 @@ class maze{
             while (!q.empty()) {
                 // Извлекаем вершину из очереди
                 Point current = q.front();
-                matrix[current.x][current.y] = 3;
+                //пока не будут просмотрены новые в старые не идём
+                matrix[current.y][current.x] = distance[current.y][current.x] % 10 + '0';
                 q.pop();
                 currentX = current.x;
                 currentY = current.y;
 
                 // Проверяем соседей текущей вершины
                 for (int i = 0; i < 4; i++) {
-                    int newX = currentX + dx[i];
                     int newY = currentY + dy[i];
+                    int newX = currentX + dx[i];
 
                     // Проверка на допустимость новой вершины
-                    if (isValid(newX, newY) && !visited[newX][newY]) {
+                    if (isValid(newX, newY) && !visited[newY][newX]) {
                         // Помечаем вершину как посещенную
-                        visited[newX][newY] = true;
+                        visited[newY][newX] = true;
                         // Устанавливаем расстояние до новой вершины
-                        distance[newX][newY] = distance[currentX][currentY] + 1;
+                        distance[newY][newX] = distance[currentY][currentX] + 1;
                         // Добавляем новую вершину в очередь
-                        q.push(Point(newX, newY));
+                        q.push(Point(newY, newX));
+                        visitedCount++;
                     }
                 }
             }
-            get(cout);
             // Выводим расстояние до конечной вершины
-            cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
-
+            //cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
             // Восстанавливаем путь
-            cout << "Путь от начальной точки до конечной точки:" << endl;
+            //cout << "Путь от начальной точки до конечной точки:" << endl;
             int x = end.x, y = end.y;
             while (x != start.x || y != start.y) {
-                cout << "(" << x << ", " << y << ")" << endl;
-                matrix[x][y] = -5;
+                matrix[x][y] = '$';
                 bool found = false;
                 for (int i = 0; i < 4; i++) {
                     int newX = x + dx[i];
                     int newY = y + dy[i];
                     bool a = isValid(newX, newY);
-                    cout<<newX<<"_"<<newY<<":"<<a<<"\n";
                     if (a && distance[newX][newY] == distance[x][y] - 1) {
                         x = newX;
                         y = newY;
@@ -324,12 +447,13 @@ class maze{
                     break;
                 }
             }
-            cout << "(" << start.x << ", " << start.y << ")" << endl;
+            cout<<"Посещено: "<<visitedCount<<"\n";
+            return visitedCount;
         }
 
 
         bool isValid(int _x, int _y) {
-            return (_x >= 0 && _x < sX && _y >= 0 && _y < sY && (matrix[_x][_y] !=1 && matrix[_x][_y] !=2)); //!visited[_x][_y]);
+            return (_x >= 0 && _x < Col && _y >= 0 && _y < Row && (matrix[_x][_y] !='X' && matrix[_x][_y] !='H')); //!visited[_x][_y]);
         }
 
 };

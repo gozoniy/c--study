@@ -1,2 +1,18 @@
-Moscow	SU123	737	1230	Monday
-New York	SU123	737	1200	Monday
+ColoredLine|9.0   black
+PolyLine|8.1   1.334 4.9421 0.131
+Line|1.99
+ColoredLine|56.0   255 20 240
+Line|55.0
+PolyLine|8.2   9.1
+ColoredLine|520.0   black
+PolyLine|8.1   7.0 2.0 
+Line|123.99
+ColoredLine|300.0   255 20 240
+Line|29.0
+PolyLine|8.2   9.1
+ColoredLine|962.0   black
+PolyLine|8.1   7.0 1.0 9.1 2.0 4.9421
+Line|81.99
+ColoredLine|0.0231   255 20 240
+Line|12.0
+PolyLine|8.2   9.1

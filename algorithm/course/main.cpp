@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <vector>
 #include <queue>
+#include <stack>
+
 using namespace std;
 
 #include "maze.h"
@@ -18,69 +20,80 @@ int main(void){
                 << "2) Накопление статистических данных\n"
                 << "0) <<<< Выход\n";
         int sw;
+        bool ff = true;
         cin >> sw;
         switch (sw){
+            while(ff){
             case 1:{
                 bool f2 = true;
                 int x, y;
-                cout << "Укажите размеры лабиринта _x _y:\n";
+                cout << "Укажите размер лабиринта:\n";
                 cin >> x >> y;
+                cout << "1) Построить лабиринт по алгоритму северо-восточного смещения\n"
+                    << "2) Построить лабиринт по комб. алгоритму северо-восточного смещения\n"
+                    << "3) Построить лабиринт по алгоритму Sidewinder\n";
+                int sw2;
+                cin >> sw2;
                 maze A(x, y);
+                switch (sw2){
+                            case 1:{
+                                A.set_Northeast_alg();
+                                break;
+                            }
+                            case 2:{
+                                A.set_Westeast_alg();
+                                break;
+                            }
+                            case 3:{
+                                A.set_Sidewinder_alg();
+                                break;
+                            }
+                        }
+                maze B(A);
                 while (f2){
-                    cout << "1) Построить лабиринт\n"
-                        << "2) Найти путь в лабиринте\n"
-                        << "3) Вывести лабиринт на экран\n"
+                    cout<< "1) Найти путь в лабиринте\n"
+                        << "2) Вывести лабиринт на экран\n"
+                        << "3) Пересоздать\n"
+                        << "4) Задать координату\n"
                         << "0) <<<\n";
                     int sw1;
                     cin >> sw1;
                     switch (sw1){
+
                         case 1:{
-                            cout << "1) Построить лабиринт по алгоритму северо-восточного смещения\n"
-                                << "2) Построить лабиринт по комб. алгоритму северо-восточного смещения\n"
-                                << "3) Построить лабиринт по алгоритму Sidewinder\n";
-                            int sw2;
-                            cin >> sw2;
-                            switch (sw2){
-                                case 1:{
-                                    A.set_Northeast_alg();
-                                    break;
-                                }
-                                case 2:{
-                                    A.set_Westeast_alg();
-                                    break;
-                                }
-                                case 3:{
-                                    A.set_Sidewinder_alg();
-                                    break;
-                                }
-                            }
-                            cout<<A.isValid(1,5)<<"\n";
-                            break;
-                        }
-                        case 2:{
+                            B = A;
                             cout << "1) Поиск пути по алгоритму A*\n"
                                 << "2) Поиск пути по алгоритму DFS\n"
                                 << "3) Поиск пути по алгоритму BFS\n";
                             int sw3;
                             cin >> sw3;
+                            int t_1 = clock();
                             switch (sw3){
                                 case 1:{
-                                    A.A_star();
+                                    B.A_star();
                                     break;
                                 }
                                 case 2:{
-                                    A.DFS();
+                                    B.DFS();
                                     break;
                                 }
-                                case 3:{
-                                    A.BFS();
+                                case 3:{                            
+                                    B.BFS();
+                                    cout<<"2\n";
                                     break;
                                 }
                             }
+                            int t_2 = clock();
+                            int ans = t_2 - t_1;
+                            cout<<"Завершено за "<<ans<<"ms\n";
+                            break;
+                        }
+                        case 2:{
+                            B.get(cout);
                             break;
                         }
                         case 3:{
-                            A.get(cout);
+                            f2 = false;
                             break;
                         }
                         case 4:{
@@ -92,10 +105,12 @@ int main(void){
                         }
                         case 0:{
                             f2 = false;
+                            ff = false;
                             break;
                         }
                     }
                 }
+            }
             }
             case 2:{
                 cout << "1) Построить лабиринты по алгоритму северо-восточного смещения\n"
