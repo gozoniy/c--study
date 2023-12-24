@@ -4,7 +4,8 @@
 struct Point {
     public:
     int x, y;
-    Point(int _y, int _x) : x(_x), y(_y) {}
+    Point(): x(0),y(0){}
+    Point(int _x, int _y) : x(_x), y(_y) {}
     bool operator<(const Point& other) const {
         // В данном случае, сравниваем по x, а затем по y
         if (x == other.x) {
@@ -12,26 +13,50 @@ struct Point {
         }
         return x < other.x;
     }
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
+    void set(int _x,int _y){
+        x = _x;
+        y = _y;
+    }
+    Point& operator=(const Point& B) {
+            x = B.x;
+            y = B.y;
+            return *this;
+        }
 };
 
 class maze{
-        int Col,Row;
+        int sX,sY;
         char **matrix;   //2 - Внешняя стена, 1 - Внутренняя стена, 0 - Пустая клетка
+        Point start, end;
     public:
-        maze() : Col(0), Row(0), matrix(nullptr){}
-        maze(int X,int Y) : Col(X),Row(Y),matrix(new char * [Row]){
-            for (int i = 0; i<Row; i++){
-                matrix[i] = new char [Col];
+        maze() : sX(0), sY(0), matrix(nullptr){}
+        maze(int X,int Y){
+            if (X%2!=1){
+                sX = X+1;
+                sY = X+1;
+            }
+            else{
+                sX = X;
+                sY = Y;
+            }
+            matrix = new char * [sX];
+            start.set(1,1);
+            end.set(sX-2,sY-2);
+            for (int i = 0; i<sX; i++){
+                matrix[i] = new char [sY];
             }
             //Поле внутренних стен
-            for(int i = 0; i<Row; i++){
-                for (int j = 0; j<Col; j++){
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
                     matrix[i][j] = 'H'; 
                 }
             }
             //Создание внутренних стен
-            for(int i = 1; i<Row-1; i++){
-                for (int j = 1; j<Col-1; j++){
+            for(int i = 1; i<sX-1; i++){
+                for (int j = 1; j<sY-1; j++){
                     if (i%2 == 0 || j%2 == 0){
                         matrix[i][j] = 'X';
                     }
@@ -47,14 +72,16 @@ class maze{
             copy(B);
         };
         void copy(const maze& B){
-            Col = B.Col;
-            Row = B.Row;
-            matrix = new char * [Row];
-            for (int i = 0; i<Row; i++){
-                matrix[i] = new char [Col];
+            sX = B.sX;
+            sY = B.sY;
+            start = B.start;
+            end = B.end;
+            matrix = new char * [sX];
+            for (int i = 0; i<sX; i++){
+                matrix[i] = new char [sY];
             }
-            for(int i = 0; i<Row; i++){
-                for (int j = 0; j<Col; j++){
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
                     matrix[i][j] = B.matrix[i][j];
                 }
             }
@@ -65,44 +92,64 @@ class maze{
         }
         ~maze(){Clear();}
         void Clear(){
-            for (int i = 0; i<Row; i++){
+            for (int i = 0; i<sX; i++){
                 delete[] matrix[i];
             }
             delete[] matrix;
             matrix=nullptr;
-            Col = Row = 0;
+            sX = sY = 0;
         }
 
         void get(ostream& out){
-            out<<"Лабиринт размером "<<Col<<" x "<<Row<<":\n";
-            for(int i = 0; i<Row; i++){
-                for (int j = 0; j<Col; j++){
-                    if (isdigit(matrix[i][j]))
+            out<<"Лабиринт размером "<<sX<<" x "<<sY<<":\n";
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
+                    if (Point(i,j) == start)
+                        cout<<"\033[1;32m"<<'S'<<"\033[0m ";
+                    else if (Point(i,j) == end)
+                        cout<<"\033[1;32m"<<'E'<<"\033[0m ";
+                    else if (isdigit(matrix[i][j]))
                         cout<< "\033[;90m"<<matrix[i][j]<< "\033[0m"<<" ";
                     else if ((matrix[i][j]) == '$')
                         cout<< "\033[33m"<<matrix[i][j]<< "\033[0m"<<" ";
+                    
                     else
                         cout<<matrix[i][j]<<" ";
                 }
                 cout<<"\n";
             }
         };
+        //Начало и конец лабиринта
+        void dest(int x1,int y1,int x2, int y2){
+            start.set(y1,x1);
+            end.set(y2,x2);
+
+        }
+        //Задать размер
         void setS(int _x,int _y){
-            Col = _x;
-            Row = _y;
-            matrix = new char * [Row];
-            for (int i = 0; i<Row; i++){
-                matrix[i] = new char [Col];
+            if (_x%2!=1){
+                sX = _x+1;
+                sY = _y+1;
+            }
+            else{
+                sX = _x;
+                sY = _y;
+            }
+            start.set(1,1);
+            end.set(sX-2,sY-2);
+            matrix = new char * [sX];
+            for (int i = 0; i<sX; i++){
+                matrix[i] = new char [sY];
             }
             //Поле внутренних стен
-            for(int i = 0; i<Row; i++){
-                for (int j = 0; j<Col; j++){
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
                     matrix[i][j] = 'H'; 
                 }
             }
             //Создание внутренних стен
-            for(int i = 1; i<Row-1; i++){
-                for (int j = 1; j<Col-1; j++){
+            for(int i = 1; i<sX-1; i++){
+                for (int j = 1; j<sY-1; j++){
                     if (i%2 == 0 || j%2 == 0){
                         matrix[i][j] = 'X';
                     }
@@ -112,20 +159,21 @@ class maze{
                 }
             }
         }
-        void setCords(){
-            for(int i = 1; i<Row-1; i++){
-                for (int j = 1; j<Col-1; j++){
-                    cin>>matrix[i][j];
-                }
-            }
+        int getS(){
+            return sX;
         }
-        //void getS(){return Col;}
-        //Создание лабиринта
-        void set_Northeast_alg(){
+        //Задать значение координаты
+        void setCords(int a, int b, char val){
+            matrix[a][b] = val;
+            cout<<"|"<<matrix[a][b]<<"|\n";
+        }
 
+        //Создание лабиринта
+        //Метод северо-восточного смещения
+        void set_Northeast_alg(){
             srand(time(0));
-            for(int i = 1; i<Row-1; i+=2){
-                for (int j = 1; j<Col-1; j+=2){
+            for(int i = 1; i<sX; i+=2){
+                for (int j = 1; j<sY; j+=2){
                     int a = rand()%2;
                     if ((a || matrix[i-1][j] == 'H') && matrix[i][j+1] != 'H'){
                         matrix[i][j+1] = ' ';
@@ -135,17 +183,19 @@ class maze{
                     }
                 }
             }
-            for(int i = 1; i<Row; i++){
-                for (int j = 1; j<Col; j++){
-                    if (i == 0 || j == 0 || i == Col-1 || j == Row-1)
+            //Восстановление рамки
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
+                    if (i == 0 || j == 0 || i == sX-1 || j == sY-1)
                         matrix[i][j] = 'H';
                 }
             }
         };
+
         void set_Westeast_alg(){
             srand(time(0));
-            for(int i = 1; i<Row-1; i+=2){
-                for (int j = 1; j<Col-1; j+=2){
+            for(int i = 1; i<sX; i+=2){
+                for (int j = 1; j<sY; j+=2){
                     if (i%16 > 8){
                         int a = rand()%2;
                         if ((a || matrix[i-1][j] == 'H') && matrix[i][j+1] != 'H'){
@@ -167,20 +217,26 @@ class maze{
                 }
             }
             
-            //matrix[Col-2][Row-2] = -1;
-            matrix[0][1] = 'H';
+            //Восстановление рамки
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
+                    if (i == 0 || j == 0 || i == sX-1 || j == sY-1)
+                        matrix[i][j] = 'H';
+                }
+            }
         };
+
         void set_Sidewinder_alg(){
             srand(time(0));
-            for(int i = 1; i<Row-1; i+=2){
+            for(int i = 1; i<sX-1; i+=2){
                 if (i == 1){
-                    for (int j = 1; j<Col-1; j+=2){
+                    for (int j = 1; j<sY-1; j+=2){
                         matrix[i][j+1] = ' ';
                     }
                 }
                 else{
                     int start = 1;
-                    while(start<Col){
+                    while(start<sY){
                         
                         int c = 1 + rand()%4;
                         int _c = 1 + rand()%c;
@@ -198,27 +254,23 @@ class maze{
                     }   
                 }
             }
-            for(int i = 1; i<Row; i++){
-                for (int j = 1; j<Col; j++){
-                    if (i == 0 || j == 0 || i == Col-1 || j == Row-1)
+            //Восстановление рамки
+            for(int i = 0; i<sX; i++){
+                for (int j = 0; j<sY; j++){
+                    if (i == 0 || j == 0 || i == sX-1 || j == sY-1)
                         matrix[i][j] = 'H';
                 }
             }
         };
 
-
-
         //РЕШЕНИЯ
-
         int heuristic(const Point& a, const Point& b) {
+            //Manhattan distance
             return abs(a.x - b.x) + abs(a.y - b.y);
         }
-
-        void A_star() {
-            Point start(1, 1);
-            Point end(Col - 2, Row - 2);
-            int rows = Row;
-            int cols = Col;
+        int A_star() {
+            int rows = sY;
+            int cols = sX;
             int visitedCount = 0;
             // Массивы для хранения посещенных вершин и расстояний
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
@@ -284,15 +336,14 @@ class maze{
                 }
             }
             cout<<"Посещено: "<<visitedCount<<"\n";
+            return visitedCount;
         }
 
 
 
-        void DFS(){
-            Point start(1, 1);
-            Point end(Col - 2, Row - 2);
-            int rows = Row;
-            int cols = Col;
+        int DFS(){
+            int rows = sY;
+            int cols = sX;
             int visitedCount = 0;
             // Массив для хранения посещенных вершин
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
@@ -366,15 +417,14 @@ class maze{
                 }
             }
             cout<<"Посещено: "<<visitedCount<<"\n";
+            return visitedCount;
         }
 
 
 
         int BFS() {
-            Point start(1,1);
-            Point end(Col-2,Row-2);
-            int rows = Row;
-            int cols = Col;
+            int rows = sY;
+            int cols = sX;
             int visitedCount = 0;
             // Массивы для хранения посещенных вершин и расстояний
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
@@ -400,24 +450,24 @@ class maze{
                 // Извлекаем вершину из очереди
                 Point current = q.front();
                 //пока не будут просмотрены новые в старые не идём
-                matrix[current.y][current.x] = distance[current.y][current.x] % 10 + '0';
+                matrix[current.x][current.y] = distance[current.x][current.y]%10 + '0';
                 q.pop();
                 currentX = current.x;
                 currentY = current.y;
 
                 // Проверяем соседей текущей вершины
                 for (int i = 0; i < 4; i++) {
-                    int newY = currentY + dy[i];
                     int newX = currentX + dx[i];
+                    int newY = currentY + dy[i];
 
                     // Проверка на допустимость новой вершины
-                    if (isValid(newX, newY) && !visited[newY][newX]) {
+                    if (isValid(newX, newY) && !visited[newX][newY]) {
                         // Помечаем вершину как посещенную
-                        visited[newY][newX] = true;
+                        visited[newX][newY] = true;
                         // Устанавливаем расстояние до новой вершины
-                        distance[newY][newX] = distance[currentY][currentX] + 1;
+                        distance[newX][newY] = distance[currentX][currentY] + 1;
                         // Добавляем новую вершину в очередь
-                        q.push(Point(newY, newX));
+                        q.push(Point(newX, newY));
                         visitedCount++;
                     }
                 }
@@ -453,7 +503,7 @@ class maze{
 
 
         bool isValid(int _x, int _y) {
-            return (_x >= 0 && _x < Col && _y >= 0 && _y < Row && (matrix[_x][_y] !='X' && matrix[_x][_y] !='H')); //!visited[_x][_y]);
+            return (_x >= 0 && _x < sX && _y >= 0 && _y < sY && ((matrix[_x][_y] !='X' && matrix[_x][_y] !='H')||(Point(_x,_y) == start || Point(_x,_y) == end))); //!visited[_x][_y]);
         }
 
 };

@@ -63,6 +63,7 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "xutility": "cpp"
     }
 }
