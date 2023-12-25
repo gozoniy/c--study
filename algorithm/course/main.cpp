@@ -142,7 +142,7 @@ int main(void){
                         for (int i = 0; i < N-1; i++){
                             B[i].setS(((i)*l)+a1,((i)*l)+a1);
                             B[i].set_Northeast_alg();
-                            B[i].dest(1,1,1,((i)*l)+a1-2);
+                            //B[i].dest(1,1,1,((i)*l)+a1-2);
                         }
                         break;
                     }
@@ -150,7 +150,7 @@ int main(void){
                         for (int i = 0; i < N-1; i++){
                             B[i].setS(((i)*l)+a1,((i)*l)+a1);
                             B[i].set_Westeast_alg();
-                            B[i].dest(1,1,1,((i)*l)+a1-2);
+                            //B[i].dest(1,1,1,((i)*l)+a1-2);
                         }
                         break;
                     }
@@ -158,7 +158,7 @@ int main(void){
                         for (int i = 0; i < N-1; i++){
                             B[i].setS(((i)*l)+a1,((i)*l)+a1);
                             B[i].set_Sidewinder_alg();
-                            B[i].dest(1,1,1,((i)*l)+a1-2);
+                            //B[i].dest(1,1,1,((i)*l)+a1-2);
                         }
                         break;
                     }
