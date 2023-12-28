@@ -1,6 +1,6 @@
 #ifndef MAZE_H
 #define MAZE_H
-
+//Класс точка
 struct Point {
     public:
     int x, y;
@@ -26,10 +26,10 @@ struct Point {
             return *this;
         }
 };
-
+//Класс лабиринт
 class maze{
         int sX,sY;
-        char **matrix;   //2 - Внешняя стена, 1 - Внутренняя стена, 0 - Пустая клетка
+        char **matrix;   //H - Внешняя стена, X - Внутренняя стена
         Point start, end;
     public:
         maze() : sX(0), sY(0), matrix(nullptr){}
@@ -66,7 +66,6 @@ class maze{
                 }
             }
         }
-
         //Копирование
         maze(const maze& B){
             copy(B);
@@ -90,6 +89,7 @@ class maze{
             copy(B);
             return *this;
         }
+        //Деструктор
         ~maze(){Clear();}
         void Clear(){
             for (int i = 0; i<sX; i++){
@@ -99,7 +99,7 @@ class maze{
             matrix=nullptr;
             sX = sY = 0;
         }
-
+        //Вывод в поток с форматированием
         void get(ostream& out){
             out<<"Лабиринт размером "<<sX<<" x "<<sY<<":\n";
             for(int i = 0; i<sX; i++){
@@ -123,7 +123,6 @@ class maze{
         void dest(int x1,int y1,int x2, int y2){
             start.set(y1,x1);
             end.set(y2,x2);
-
         }
         //Задать размер
         void setS(int _x,int _y){
@@ -167,7 +166,6 @@ class maze{
             matrix[a][b] = val;
             cout<<"|"<<matrix[a][b]<<"|\n";
         }
-
         //Создание лабиринта
         //Метод северо-восточного смещения
         void set_Northeast_alg(){
@@ -191,7 +189,7 @@ class maze{
                 }
             }
         };
-
+        //Метод комбинированного северо-восточного смещения
         void set_Westeast_alg(){
             srand(time(0));
             for(int i = 1; i<sX; i+=2){
@@ -216,7 +214,6 @@ class maze{
                     }
                 }
             }
-            
             //Восстановление рамки
             for(int i = 0; i<sX; i++){
                 for (int j = 0; j<sY; j++){
@@ -225,7 +222,7 @@ class maze{
                 }
             }
         };
-
+        //Метод Sidewinder
         void set_Sidewinder_alg(){
             srand(time(0));
             for(int i = 1; i<sX-1; i+=2){
@@ -262,12 +259,13 @@ class maze{
                 }
             }
         };
-
         //РЕШЕНИЯ
+        //Эвристика A star
         int heuristic(const Point& a, const Point& b) {
             //Manhattan distance
             return abs(a.x - b.x) + abs(a.y - b.y);
         }
+        //Решение A star
         int A_star() {
             int rows = sY;
             int cols = sX;
@@ -275,19 +273,15 @@ class maze{
             // Массивы для хранения посещенных вершин и расстояний
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
             vector<vector<int>> distance(rows, vector<int>(cols, INT_MAX));
-
             // Приоритетная очередь для выполнения A* (минимальная куча)
             priority_queue<pair<int, Point>, vector<pair<int, Point>>, greater<pair<int, Point>>> pq;
-
             // Начальная точка
             pq.push({0, start});
             visited[start.x][start.y] = true;
             distance[start.x][start.y] = 0;
-
             // Массивы для определения направлений движения: вверх, вниз, влево, вправо
             int dx[] = {-1, 1, 0, 0};
             int dy[] = {0, 0, -1, 1};
-
             // A* поиск
             while (!pq.empty()) {
                 // Извлекаем текущую точку с минимальной стоимостью
@@ -313,7 +307,6 @@ class maze{
                     }
                     break;
                 }
-
                 // Помечаем текущую точку как посещенную
                 visited[current.second.x][current.second.y] = true;
                 visitedCount++;
@@ -321,12 +314,10 @@ class maze{
                 for (int i = 0; i < 4; i++) {
                     int newX = current.second.x + dx[i];
                     int newY = current.second.y + dy[i];
-
                     // Проверка на допустимость новой точки
                     if (isValid(newX, newY) && !visited[newX][newY]) {
                         // Вычисляем новую стоимость пути
                         int newCost = distance[current.second.x][current.second.y] + 1;
-
                         // Если новая стоимость меньше текущей, обновляем информацию и добавляем точку в очередь
                         if (newCost < distance[newX][newY]) {
                             distance[newX][newY] = newCost;
@@ -338,9 +329,7 @@ class maze{
             cout<<"Посещено: "<<visitedCount<<"\n";
             return visitedCount;
         }
-
-
-
+        //Решение DFS
         int DFS(){
             int rows = sY;
             int cols = sX;
@@ -349,52 +338,41 @@ class maze{
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
             // Массив для хранения расстояний до каждой вершины
             vector<vector<int>> distance(rows, vector<int>(cols, 0));
-
             // Стек для выполнения DFS
             stack<Point> stk;
-
             // Начальная вершина
             stk.push(start);
             visited[start.x][start.y] = true;
-
             // Массивы для определения направлений движения: вверх, вниз, влево, вправо
             int dx[] = {-1, 1, 0, 0};
             int dy[] = {0, 0, -1, 1};
-
             // DFS
             while (!stk.empty()) {
                 Point current = stk.top();
                 stk.pop();
                 matrix[current.x][current.y] = distance[current.x][current.y]%10 + '0';
-
                 // Проверяем, достигли ли конечной вершины
                 if (current.x == end.x && current.y == end.y) {
                     break;
                 }
-
                 // Проверяем соседей текущей вершины
                 for (int i = 0; i < 4; i++) {
                     int newX = current.x + dx[i];
                     int newY = current.y + dy[i];
-
                     // Проверка на допустимость новой вершины
                     if (isValid(newX, newY) && !visited[newX][newY]) {
                         // Помечаем вершину как посещенную
                         visited[newX][newY] = true;
-
                         // Устанавливаем расстояние до новой вершины
                         distance[newX][newY] = distance[current.x][current.y] + 1;
-
                         // Добавляем новую вершину в стек
                         stk.push(Point(newX, newY));
                         visitedCount++;
                     }
                 }
             }
-
             // Выводим расстояние до конечной вершины
             cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
-
             // Восстанавливаем путь
             int x = end.x, y = end.y;
             while (x != start.x || y != start.y) {
@@ -419,9 +397,7 @@ class maze{
             cout<<"Посещено: "<<visitedCount<<"\n";
             return visitedCount;
         }
-
-
-
+        //Решение BFS
         int BFS() {
             int rows = sY;
             int cols = sX;
@@ -429,22 +405,17 @@ class maze{
             // Массивы для хранения посещенных вершин и расстояний
             vector<vector<bool>> visited(rows, vector<bool>(cols, false));
             vector<vector<int>> distance(rows, vector<int>(cols, 0));
-
             // Переменные для хранения координат текущей вершины
             int currentX, currentY;
-
             // Очередь для выполнения BFS
             queue<Point> q;
-
             // Начальная вершина
             q.push(start);
             visited[start.x][start.y] = true;
             distance[start.x][start.y] = 0;
-
             // Массивы для определения направлений движения: вверх, вниз, влево, вправо
             int dx[] = {-1, 1, 0, 0};
             int dy[] = {0, 0, -1, 1};
-
             // BFS
             while (!q.empty()) {
                 // Извлекаем вершину из очереди
@@ -454,12 +425,10 @@ class maze{
                 q.pop();
                 currentX = current.x;
                 currentY = current.y;
-
                 // Проверяем соседей текущей вершины
                 for (int i = 0; i < 4; i++) {
                     int newX = currentX + dx[i];
                     int newY = currentY + dy[i];
-
                     // Проверка на допустимость новой вершины
                     if (isValid(newX, newY) && !visited[newX][newY]) {
                         // Помечаем вершину как посещенную
@@ -472,10 +441,7 @@ class maze{
                     }
                 }
             }
-            // Выводим расстояние до конечной вершины
-            //cout << "Минимальное расстояние до конечной точки: " << distance[end.x][end.y] << endl;
             // Восстанавливаем путь
-            //cout << "Путь от начальной точки до конечной точки:" << endl;
             int x = end.x, y = end.y;
             while (x != start.x || y != start.y) {
                 matrix[x][y] = '$';
@@ -500,12 +466,9 @@ class maze{
             cout<<"Посещено: "<<visitedCount<<"\n";
             return visitedCount;
         }
-
-
+        //Проверка точки на возможность в ней находиться
         bool isValid(int _x, int _y) {
             return (_x >= 0 && _x < sX && _y >= 0 && _y < sY && ((matrix[_x][_y] !='X' && matrix[_x][_y] !='H')||(Point(_x,_y) == start || Point(_x,_y) == end))); //!visited[_x][_y]);
         }
-
 };
-
 #endif //MAZE_H

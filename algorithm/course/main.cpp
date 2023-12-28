@@ -6,11 +6,8 @@
 #include <vector>
 #include <queue>
 #include <stack>
-
 using namespace std;
-
 #include "maze.h"
-
 int main(void){
     system("chcp 1251");
     bool f = true;
@@ -20,7 +17,6 @@ int main(void){
                 << "2) Накопление статистических данных\n"
                 << "0) <<<< Выход\n";
         int sw;
-        
         bool ff = true;
         cin >> sw;
         switch (sw){
@@ -53,6 +49,7 @@ int main(void){
                                 break;
                             }
                         }
+                //Решение будет записываться в копию
                 B = A;
                 while (f2){
                     cout<< "1) Найти путь в лабиринте\n"
@@ -170,7 +167,6 @@ int main(void){
                     for (int i = 0; i < N; i++){
                         C[i] = B[i];
                     }
-                    
                     cout << "1) Поиск пути по алгоритму A*\n"
                         << "2) Поиск пути по алгоритму DFS\n"
                         << "3) Поиск пути по алгоритму BFS\n"
@@ -223,7 +219,6 @@ int main(void){
                     }
                     fout.close();
                 }
-
                 break;
             }
         }
