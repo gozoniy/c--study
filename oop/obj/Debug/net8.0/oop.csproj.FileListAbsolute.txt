@@ -1,0 +1,15 @@
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.AssemblyInfoInputs.cache
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.AssemblyInfo.cs
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.csproj.CoreCompileInputs.cache
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.sourcelink.json
+c:\Users\user\Desktop\c--study\oop\bin\Debug\net8.0\oop.exe
+c:\Users\user\Desktop\c--study\oop\bin\Debug\net8.0\oop.deps.json
+c:\Users\user\Desktop\c--study\oop\bin\Debug\net8.0\oop.runtimeconfig.json
+c:\Users\user\Desktop\c--study\oop\bin\Debug\net8.0\oop.dll
+c:\Users\user\Desktop\c--study\oop\bin\Debug\net8.0\oop.pdb
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.dll
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\refint\oop.dll
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.pdb
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\oop.genruntimeconfig.cache
+c:\Users\user\Desktop\c--study\oop\obj\Debug\net8.0\ref\oop.dll
