@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
-
+import math
 # Определим функцию f(t, u)
 def f(t, u):
     return 0.5 * (t + 1) * (2.718281828459045**(-1)) * u**2 - t * u
+    return (u**(2))*math.log(t)
 
 # Точное решение (для сравнения)
 def exact_solution(t):
@@ -63,7 +64,7 @@ def runge_kutta_method(a, T, u0, f, epsilon):
         N *= 2
 
 # Параметры задачи
-a, T, u0, epsilon = 0, 2, 2, 1e-3
+a, T, u0, epsilon = 1, 5, 0.5, 1e-3
 
 # Решение методом Эйлера
 t_values_euler, u_values_euler, N_euler = euler_method(a, T, u0, f, epsilon)
